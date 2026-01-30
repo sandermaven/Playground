@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { QuizProvider } from './context/QuizContext';
 import HomePage from './pages/HomePage';
 import ConfiguratorPage from './pages/ConfiguratorPage';
@@ -9,7 +9,7 @@ import QuizPage from './pages/QuizPage';
 function App() {
   return (
     <QuizProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/configurator" element={<ConfiguratorPage />} />
@@ -17,7 +17,7 @@ function App() {
           <Route path="/bedankt" element={<ThankYouPage />} />
           <Route path="/quiz/:quizId" element={<QuizPage />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </QuizProvider>
   );
 }
