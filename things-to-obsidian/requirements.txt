@@ -1,0 +1,6 @@
+# Things 3 to Obsidian Migration Tool
+#
+# Core dependencies (none - uses only Python standard library)
+#
+# Optional: Install things.py for alternative API-based reading
+# things.py>=0.0.15
