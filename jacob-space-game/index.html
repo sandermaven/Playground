@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JACOB Space Invaders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background: linear-gradient(to bottom, #0a0a2e 0%, #1a1a4e 100%);
+            border: 3px solid #0ff;
+            box-shadow: 0 0 20px #0ff, inset 0 0 50px rgba(0, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        #player {
+            position: absolute;
+            bottom: 30px;
+            width: 50px;
+            height: 30px;
+            background: linear-gradient(to top, #0f0, #0a0);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transition: left 0.05s linear;
+            box-shadow: 0 0 10px #0f0;
+        }
+
+        .bullet {
+            position: absolute;
+            width: 4px;
+            height: 15px;
+            background: #0ff;
+            box-shadow: 0 0 10px #0ff;
+            border-radius: 2px;
+        }
+
+        .enemy-bullet {
+            position: absolute;
+            width: 4px;
+            height: 15px;
+            background: #f00;
+            box-shadow: 0 0 10px #f00;
+            border-radius: 2px;
+        }
+
+        .letter {
+            position: absolute;
+            font-size: 48px;
+            font-weight: bold;
+            color: #f0f;
+            text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+            cursor: default;
+            transition: transform 0.1s;
+        }
+
+        .letter.hit {
+            animation: explode 0.3s forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; color: #ff0; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            color: #0ff;
+            font-size: 20px;
+            text-shadow: 0 0 5px #0ff;
+        }
+
+        #gameOver, #victory {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            display: none;
+            z-index: 100;
+        }
+
+        #gameOver h1 {
+            font-size: 48px;
+            color: #f00;
+            text-shadow: 0 0 20px #f00;
+            margin-bottom: 20px;
+        }
+
+        #victory h1 {
+            font-size: 48px;
+            color: #0f0;
+            text-shadow: 0 0 20px #0f0;
+            margin-bottom: 20px;
+        }
+
+        #gameOver p, #victory p {
+            font-size: 24px;
+            color: #0ff;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: transparent;
+            color: #0ff;
+            border: 2px solid #0ff;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 20px #0ff;
+        }
+
+        #startScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            z-index: 100;
+        }
+
+        #startScreen h1 {
+            font-size: 60px;
+            color: #f0f;
+            text-shadow: 0 0 20px #f0f;
+            margin-bottom: 10px;
+            letter-spacing: 15px;
+        }
+
+        #startScreen h2 {
+            font-size: 24px;
+            color: #0ff;
+            margin-bottom: 40px;
+        }
+
+        #startScreen .controls {
+            font-size: 16px;
+            color: #888;
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+
+        #lives {
+            display: flex;
+            gap: 10px;
+        }
+
+        .life {
+            width: 20px;
+            height: 15px;
+            background: linear-gradient(to top, #0f0, #0a0);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="hud">
+            <div>SCORE: <span id="score">0</span></div>
+            <div id="lives"></div>
+            <div>WAVE: <span id="wave">1</span></div>
+        </div>
+
+        <div id="startScreen">
+            <h1>JACOB</h1>
+            <h2>SPACE INVADERS</h2>
+            <button onclick="startGame()">START GAME</button>
+            <div class="controls">
+                <p>Arrow Keys or A/D to move</p>
+                <p>SPACE to shoot</p>
+            </div>
+        </div>
+
+        <div id="gameOver">
+            <h1>GAME OVER</h1>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button onclick="startGame()">PLAY AGAIN</button>
+        </div>
+
+        <div id="victory">
+            <h1>VICTORY!</h1>
+            <p>You destroyed JACOB!</p>
+            <p>Score: <span id="victoryScore">0</span></p>
+            <button onclick="startGame()">PLAY AGAIN</button>
+        </div>
+
+        <div id="player"></div>
+    </div>
+
+    <script>
+        // Game state
+        const game = {
+            running: false,
+            score: 0,
+            lives: 3,
+            wave: 1,
+            playerX: 375,
+            playerSpeed: 8,
+            bullets: [],
+            enemyBullets: [],
+            letters: [],
+            letterDirection: 1,
+            letterSpeed: 1,
+            dropAmount: 30,
+            lastShot: 0,
+            shootCooldown: 250,
+            keys: {}
+        };
+
+        const container = document.getElementById('gameContainer');
+        const player = document.getElementById('player');
+        const scoreEl = document.getElementById('score');
+        const livesEl = document.getElementById('lives');
+        const waveEl = document.getElementById('wave');
+
+        // Create stars background
+        function createStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 800 + 'px';
+                star.style.top = Math.random() * 600 + 'px';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // Initialize letters
+        function createLetters() {
+            const word = 'JACOB';
+            const colors = ['#ff0080', '#ff00ff', '#8000ff', '#0080ff', '#00ffff'];
+            const startX = 150;
+            const spacing = 100;
+
+            game.letters = [];
+
+            for (let row = 0; row < 3; row++) {
+                for (let i = 0; i < word.length; i++) {
+                    const letter = document.createElement('div');
+                    letter.className = 'letter';
+                    letter.textContent = word[i];
+                    letter.style.color = colors[i];
+                    letter.style.textShadow = `0 0 10px ${colors[i]}, 0 0 20px ${colors[i]}`;
+
+                    const x = startX + i * spacing;
+                    const y = 80 + row * 60;
+
+                    letter.style.left = x + 'px';
+                    letter.style.top = y + 'px';
+
+                    container.appendChild(letter);
+
+                    game.letters.push({
+                        element: letter,
+                        x: x,
+                        y: y,
+                        width: 40,
+                        height: 48,
+                        alive: true,
+                        char: word[i]
+                    });
+                }
+            }
+        }
+
+        // Update lives display
+        function updateLives() {
+            livesEl.innerHTML = '';
+            for (let i = 0; i < game.lives; i++) {
+                const life = document.createElement('div');
+                life.className = 'life';
+                livesEl.appendChild(life);
+            }
+        }
+
+        // Player movement
+        function updatePlayer() {
+            if (game.keys['ArrowLeft'] || game.keys['KeyA']) {
+                game.playerX = Math.max(0, game.playerX - game.playerSpeed);
+            }
+            if (game.keys['ArrowRight'] || game.keys['KeyD']) {
+                game.playerX = Math.min(750, game.playerX + game.playerSpeed);
+            }
+            player.style.left = game.playerX + 'px';
+        }
+
+        // Shooting
+        function shoot() {
+            const now = Date.now();
+            if (now - game.lastShot < game.shootCooldown) return;
+
+            game.lastShot = now;
+
+            const bullet = document.createElement('div');
+            bullet.className = 'bullet';
+            bullet.style.left = (game.playerX + 23) + 'px';
+            bullet.style.bottom = '60px';
+            container.appendChild(bullet);
+
+            game.bullets.push({
+                element: bullet,
+                x: game.playerX + 23,
+                y: 540
+            });
+        }
+
+        // Update bullets
+        function updateBullets() {
+            game.bullets = game.bullets.filter(bullet => {
+                bullet.y -= 10;
+                bullet.element.style.bottom = (600 - bullet.y) + 'px';
+
+                if (bullet.y < 0) {
+                    bullet.element.remove();
+                    return false;
+                }
+
+                // Check collision with letters
+                for (const letter of game.letters) {
+                    if (!letter.alive) continue;
+
+                    if (bullet.x > letter.x &&
+                        bullet.x < letter.x + letter.width &&
+                        bullet.y > letter.y &&
+                        bullet.y < letter.y + letter.height) {
+
+                        letter.alive = false;
+                        letter.element.classList.add('hit');
+                        setTimeout(() => letter.element.remove(), 300);
+
+                        bullet.element.remove();
+                        game.score += 100;
+                        scoreEl.textContent = game.score;
+
+                        // Check for victory
+                        if (game.letters.every(l => !l.alive)) {
+                            victory();
+                        }
+
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+        }
+
+        // Update enemy bullets
+        function updateEnemyBullets() {
+            game.enemyBullets = game.enemyBullets.filter(bullet => {
+                bullet.y += 6;
+                bullet.element.style.top = bullet.y + 'px';
+
+                if (bullet.y > 600) {
+                    bullet.element.remove();
+                    return false;
+                }
+
+                // Check collision with player
+                if (bullet.y > 540 &&
+                    bullet.x > game.playerX &&
+                    bullet.x < game.playerX + 50) {
+
+                    bullet.element.remove();
+                    game.lives--;
+                    updateLives();
+
+                    if (game.lives <= 0) {
+                        gameOver();
+                    }
+
+                    return false;
+                }
+
+                return true;
+            });
+        }
+
+        // Enemy shooting
+        function enemyShoot() {
+            const aliveLetters = game.letters.filter(l => l.alive);
+            if (aliveLetters.length === 0) return;
+
+            if (Math.random() < 0.02) {
+                const shooter = aliveLetters[Math.floor(Math.random() * aliveLetters.length)];
+
+                const bullet = document.createElement('div');
+                bullet.className = 'enemy-bullet';
+                bullet.style.left = (shooter.x + 20) + 'px';
+                bullet.style.top = (shooter.y + 48) + 'px';
+                container.appendChild(bullet);
+
+                game.enemyBullets.push({
+                    element: bullet,
+                    x: shooter.x + 20,
+                    y: shooter.y + 48
+                });
+            }
+        }
+
+        // Update letters movement
+        function updateLetters() {
+            let hitEdge = false;
+            let hitBottom = false;
+
+            for (const letter of game.letters) {
+                if (!letter.alive) continue;
+
+                letter.x += game.letterSpeed * game.letterDirection;
+
+                if (letter.x <= 10 || letter.x >= 750) {
+                    hitEdge = true;
+                }
+
+                if (letter.y >= 500) {
+                    hitBottom = true;
+                }
+            }
+
+            if (hitEdge) {
+                game.letterDirection *= -1;
+                for (const letter of game.letters) {
+                    if (!letter.alive) continue;
+                    letter.y += game.dropAmount;
+                    letter.element.style.top = letter.y + 'px';
+                }
+            }
+
+            for (const letter of game.letters) {
+                if (!letter.alive) continue;
+                letter.element.style.left = letter.x + 'px';
+            }
+
+            if (hitBottom) {
+                gameOver();
+            }
+        }
+
+        // Game over
+        function gameOver() {
+            game.running = false;
+            document.getElementById('finalScore').textContent = game.score;
+            document.getElementById('gameOver').style.display = 'block';
+        }
+
+        // Victory
+        function victory() {
+            game.running = false;
+            document.getElementById('victoryScore').textContent = game.score;
+            document.getElementById('victory').style.display = 'block';
+        }
+
+        // Start game
+        function startGame() {
+            // Reset game state
+            game.running = true;
+            game.score = 0;
+            game.lives = 3;
+            game.wave = 1;
+            game.playerX = 375;
+            game.letterDirection = 1;
+            game.letterSpeed = 1;
+
+            scoreEl.textContent = '0';
+            waveEl.textContent = '1';
+            updateLives();
+
+            // Clear existing elements
+            game.bullets.forEach(b => b.element.remove());
+            game.enemyBullets.forEach(b => b.element.remove());
+            game.letters.forEach(l => l.element.remove());
+            game.bullets = [];
+            game.enemyBullets = [];
+
+            // Hide screens
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('victory').style.display = 'none';
+
+            // Create new letters
+            createLetters();
+
+            // Start game loop
+            if (!game.loopStarted) {
+                game.loopStarted = true;
+                gameLoop();
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (game.running) {
+                updatePlayer();
+                updateBullets();
+                updateEnemyBullets();
+                updateLetters();
+                enemyShoot();
+
+                if (game.keys['Space']) {
+                    shoot();
+                }
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            game.keys[e.code] = true;
+            if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            game.keys[e.code] = false;
+        });
+
+        // Initialize
+        createStars();
+    </script>
+</body>
+</html>
