@@ -373,6 +373,145 @@
     </div>
 
     <script>
+        // 70s Retro Sound System using Web Audio API
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        const sounds = {
+            // Laser shoot sound - classic pew pew
+            shoot: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.1);
+            },
+
+            // Enemy hit/explosion - descending noise burst
+            hit: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const filter = audioCtx.createBiquadFilter();
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sawtooth';
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2000, audioCtx.currentTime);
+                filter.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.2);
+            },
+
+            // Player hit - alarm sound
+            playerHit: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                // Alternating frequencies for alarm effect
+                for (let i = 0; i < 4; i++) {
+                    osc.frequency.setValueAtTime(200, audioCtx.currentTime + i * 0.1);
+                    osc.frequency.setValueAtTime(300, audioCtx.currentTime + i * 0.1 + 0.05);
+                }
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.4);
+            },
+
+            // Enemy shoot
+            enemyShoot: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.15);
+            },
+
+            // Game over - descending doom sound
+            gameOver: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 1.5);
+                gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 1.5);
+            },
+
+            // Victory fanfare - ascending arpeggio
+            victory: () => {
+                if (!audioCtx) return;
+                const notes = [523, 659, 784, 1047]; // C5, E5, G5, C6
+                notes.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.15);
+                    gain.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + i * 0.15 + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i * 0.15 + 0.3);
+                    osc.start(audioCtx.currentTime + i * 0.15);
+                    osc.stop(audioCtx.currentTime + i * 0.15 + 0.3);
+                });
+            },
+
+            // Start game beep
+            start: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.2);
+            }
+        };
+
         // Game state
         const game = {
             running: false,
@@ -497,6 +636,7 @@
             if (now - game.lastShot < game.shootCooldown) return;
 
             game.lastShot = now;
+            sounds.shoot();
 
             const bullet = document.createElement('div');
             bullet.className = 'bullet';
@@ -533,6 +673,7 @@
 
                         letter.alive = false;
                         letter.element.classList.add('hit');
+                        sounds.hit();
                         setTimeout(() => letter.element.remove(), 300);
 
                         bullet.element.remove();
@@ -570,6 +711,7 @@
 
                     bullet.element.remove();
                     game.lives--;
+                    sounds.playerHit();
                     updateLives();
 
                     if (game.lives <= 0) {
@@ -590,6 +732,7 @@
 
             if (Math.random() < 0.02) {
                 const shooter = aliveLetters[Math.floor(Math.random() * aliveLetters.length)];
+                sounds.enemyShoot();
 
                 const bullet = document.createElement('div');
                 bullet.className = 'enemy-bullet';
@@ -646,6 +789,7 @@
         // Game over
         function gameOver() {
             game.running = false;
+            sounds.gameOver();
             document.getElementById('finalScore').textContent = game.score;
             document.getElementById('gameOver').style.display = 'block';
         }
@@ -653,12 +797,17 @@
         // Victory
         function victory() {
             game.running = false;
+            sounds.victory();
             document.getElementById('victoryScore').textContent = game.score;
             document.getElementById('victory').style.display = 'block';
         }
 
         // Start game
         function startGame() {
+            // Initialize audio on user interaction
+            initAudio();
+            sounds.start();
+
             // Reset game state
             game.running = true;
             game.score = 0;
