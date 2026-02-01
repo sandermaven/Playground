@@ -1,0 +1,1238 @@
+/* ==========================================
+   CORDUROY APPRECIATION SOCIETY
+   (A perfectly normal textile appreciation website)
+   ========================================== */
+
+:root {
+    /* Corduroy-inspired color palette */
+    --cord-brown: #8B6914;
+    --cord-tan: #C4A35A;
+    --cord-cream: #F5F0E6;
+    --cord-olive: #4A5D23;
+    --cord-burgundy: #722F37;
+    --cord-navy: #1C2841;
+    --cord-forest: #2D4739;
+
+    /* Text colors */
+    --text-primary: #2C2416;
+    --text-secondary: #5C4D3C;
+    --text-light: #8B7355;
+
+    /* Secret plaid colors */
+    --plaid-red: #C41E3A;
+    --plaid-green: #228B22;
+    --plaid-blue: #1E4D8C;
+    --plaid-gold: #DAA520;
+
+    /* Spacing */
+    --section-padding: 5rem 0;
+    --container-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--cord-cream);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ==========================================
+   CORDUROY TEXTURE BACKGROUNDS
+   ========================================== */
+
+/* Subtle vertical ridges pattern */
+.corduroy-texture {
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.main-header {
+    background: var(--cord-brown);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        rgba(255, 255, 255, 0.05) 3px,
+        rgba(255, 255, 255, 0.05) 6px
+    );
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.logo-lines {
+    display: flex;
+    gap: 3px;
+    transition: all 0.5s ease;
+}
+
+.logo-lines span {
+    width: 4px;
+    height: 30px;
+    background: var(--cord-cream);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Secret: Logo transforms to plaid grid on rebellion reveal */
+.rebellion-mode .logo-lines span:nth-child(odd) {
+    transform: rotate(90deg);
+    background: var(--plaid-red);
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: var(--cord-cream);
+    letter-spacing: 0.5px;
+}
+
+.logo .tagline {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.25rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    color: var(--cord-cream);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--cord-tan);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--cord-tan);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.btn-join {
+    background: var(--cord-cream);
+    color: var(--cord-brown) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.btn-join:hover {
+    background: var(--cord-tan) !important;
+    color: var(--text-primary) !important;
+}
+
+.btn-join::after {
+    display: none;
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+
+.hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--cord-brown) 0%, var(--cord-burgundy) 100%);
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 8px,
+            rgba(255, 255, 255, 0.03) 8px,
+            rgba(255, 255, 255, 0.03) 16px
+        ),
+        linear-gradient(135deg, var(--cord-brown) 0%, var(--cord-burgundy) 100%);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Secret plaid pattern overlay - visible on hover */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 20px,
+            rgba(255, 0, 0, 0.1) 20px,
+            rgba(255, 0, 0, 0.1) 22px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 20px,
+            rgba(0, 100, 0, 0.1) 20px,
+            rgba(0, 100, 0, 0.1) 22px
+        );
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+}
+
+.hero:hover::before {
+    opacity: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h2 {
+    font-size: 4rem;
+    color: var(--cord-cream);
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ridge-text {
+    font-style: italic;
+    position: relative;
+}
+
+.ridge-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--cord-tan),
+        var(--cord-tan) 3px,
+        transparent 3px,
+        transparent 6px
+    );
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--cord-cream);
+    color: var(--cord-brown);
+    padding: 1rem 2.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: var(--cord-tan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   ABOUT SECTION
+   ========================================== */
+
+.about-section {
+    padding: var(--section-padding);
+    background: var(--cord-cream);
+}
+
+.about-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--cord-brown);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.secret-paragraph {
+    font-style: italic;
+    color: var(--text-light);
+    border-left: 3px solid var(--cord-tan);
+    padding-left: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.secret-paragraph:hover {
+    opacity: 1;
+    border-left-color: var(--plaid-red);
+}
+
+.about-image {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.5s ease;
+}
+
+/* Plaid overlay on image hover */
+.image-overlay-plaid {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 15px,
+            rgba(200, 0, 0, 0.2) 15px,
+            rgba(200, 0, 0, 0.2) 17px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 15px,
+            rgba(0, 100, 50, 0.2) 15px,
+            rgba(0, 100, 50, 0.2) 17px
+        );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.about-image:hover .image-overlay-plaid {
+    opacity: 1;
+}
+
+/* Hover reveal for secret text */
+.hover-reveal {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--text-light);
+}
+
+.hover-reveal::after {
+    content: attr(data-secret);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cord-navy);
+    color: var(--cord-cream);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.hover-reveal:hover::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: 120%;
+}
+
+/* ==========================================
+   BENEFITS SECTION
+   ========================================== */
+
+.benefits-section {
+    padding: var(--section-padding);
+    background: var(--cord-brown);
+    color: var(--cord-cream);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(255, 255, 255, 0.02) 4px,
+        rgba(255, 255, 255, 0.02) 8px
+    );
+}
+
+.benefits-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 10px,
+            rgba(200, 0, 0, 0.15) 10px,
+            rgba(200, 0, 0, 0.15) 12px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 100, 50, 0.15) 10px,
+            rgba(0, 100, 50, 0.15) 12px
+        );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.benefit-card:hover::before {
+    opacity: 1;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    position: relative;
+    z-index: 1;
+}
+
+/* First letter styling (spells PLAID RULES) */
+.first-letter {
+    color: var(--cord-tan);
+    font-weight: 700;
+}
+
+.secret-benefit {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.secret-benefit:hover {
+    border-color: var(--plaid-red);
+}
+
+.benefits-hint {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* ==========================================
+   QUIZ SECTION
+   ========================================== */
+
+.quiz-section {
+    padding: var(--section-padding);
+    background: var(--cord-cream);
+}
+
+.quiz-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--cord-brown);
+}
+
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-step {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.quiz-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quiz-step h3 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.quiz-hint {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.quiz-option {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.quiz-option:hover {
+    border-color: var(--cord-tan);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-option.selected {
+    border-color: var(--cord-brown);
+    background: var(--cord-tan);
+}
+
+.quiz-option span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quiz-option small {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+/* Color swatches */
+.color-swatch {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.color-swatch.earth {
+    background: linear-gradient(135deg, #8B6914 0%, #4A5D23 50%, #C4A35A 100%);
+}
+
+.color-swatch.jewel {
+    background: linear-gradient(135deg, #722F37 0%, #2D4739 50%, #1C2841 100%);
+}
+
+.color-swatch.neutral {
+    background: linear-gradient(135deg, #2C2416 0%, #8B7355 50%, #F5F0E6 100%);
+}
+
+.color-swatch.bold {
+    background: linear-gradient(135deg, #DAA520 0%, #E07050 50%, #008080 100%);
+}
+
+/* Wale preview */
+.wale-preview {
+    width: 80px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.wale-preview.wide {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--cord-brown),
+        var(--cord-brown) 8px,
+        var(--cord-tan) 8px,
+        var(--cord-tan) 10px
+    );
+}
+
+.wale-preview.standard {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--cord-brown),
+        var(--cord-brown) 5px,
+        var(--cord-tan) 5px,
+        var(--cord-tan) 6px
+    );
+}
+
+.wale-preview.pinwale {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--cord-brown),
+        var(--cord-brown) 3px,
+        var(--cord-tan) 3px,
+        var(--cord-tan) 4px
+    );
+}
+
+.wale-preview.needlecord {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--cord-brown),
+        var(--cord-brown) 2px,
+        var(--cord-tan) 2px,
+        var(--cord-tan) 2.5px
+    );
+}
+
+.weight-icon, .stretch-icon, .finish-icon, .purpose-icon, .climate-icon {
+    font-size: 2.5rem;
+}
+
+/* Secret quiz step */
+.secret-step {
+    background: linear-gradient(135deg, rgba(30, 77, 140, 0.05) 0%, rgba(196, 30, 58, 0.05) 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px dashed var(--cord-brown);
+}
+
+.secret-hint {
+    color: var(--cord-burgundy);
+}
+
+.secret-option:hover {
+    border-color: var(--plaid-red) !important;
+    background: linear-gradient(135deg, rgba(196, 30, 58, 0.1) 0%, rgba(30, 77, 140, 0.1) 100%) !important;
+}
+
+/* Quiz progress */
+.quiz-progress {
+    max-width: 400px;
+    margin: 2rem auto 0;
+    text-align: center;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--cord-brown);
+    width: 0%;
+    transition: width 0.3s ease;
+    background-image: repeating-linear-gradient(
+        90deg,
+        var(--cord-brown),
+        var(--cord-brown) 3px,
+        var(--cord-tan) 3px,
+        var(--cord-tan) 4px
+    );
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Quiz results */
+.quiz-results {
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.quiz-results.hidden {
+    display: none;
+}
+
+.quiz-results h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--cord-brown);
+}
+
+.result-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.result-card h4 {
+    font-size: 1.5rem;
+    color: var(--cord-brown);
+    margin-bottom: 1rem;
+}
+
+.result-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.spec-item {
+    background: var(--cord-cream);
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.spec-item strong {
+    display: block;
+    color: var(--cord-brown);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.result-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.secret-result {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--plaid-red);
+    color: var(--plaid-red);
+    font-style: italic;
+}
+
+#retakeQuiz {
+    margin-top: 1rem;
+}
+
+/* ==========================================
+   JOIN SECTION
+   ========================================== */
+
+.join-section {
+    padding: var(--section-padding);
+    background: var(--cord-navy);
+    color: var(--cord-cream);
+}
+
+.join-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.member-count {
+    color: var(--cord-tan);
+    font-weight: 700;
+}
+
+.join-form {
+    max-width: 500px;
+    margin: 2rem auto 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--cord-cream);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--cord-tan);
+}
+
+.form-group select option {
+    background: var(--cord-navy);
+    color: var(--cord-cream);
+}
+
+.secret-field {
+    animation: fadeIn 0.5s ease;
+}
+
+.secret-field.hidden {
+    display: none;
+}
+
+.join-form .cta-button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form-note {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* ==========================================
+   REBELLION SECTION (HIDDEN)
+   ========================================== */
+
+.rebellion-section {
+    padding: var(--section-padding);
+    background: var(--cord-navy);
+    color: var(--cord-cream);
+    position: relative;
+    overflow: hidden;
+}
+
+.rebellion-section.hidden {
+    display: none;
+}
+
+.plaid-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 30px,
+            rgba(196, 30, 58, 0.3) 30px,
+            rgba(196, 30, 58, 0.3) 32px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 30px,
+            rgba(34, 139, 34, 0.3) 30px,
+            rgba(34, 139, 34, 0.3) 32px
+        );
+    animation: plaidShift 20s linear infinite;
+}
+
+@keyframes plaidShift {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(32px, 32px);
+    }
+}
+
+.rebellion-section .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.rebellion-section h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.rebellion-intro {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.rebellion-manifesto {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    text-align: left;
+    border: 2px solid var(--plaid-red);
+}
+
+.rebellion-manifesto h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--plaid-gold);
+}
+
+.rebellion-manifesto ul {
+    list-style: none;
+}
+
+.rebellion-manifesto li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 2rem;
+    position: relative;
+}
+
+.rebellion-manifesto li::before {
+    content: '🏴';
+    position: absolute;
+    left: 0;
+}
+
+.rebellion-manifesto li:last-child {
+    border-bottom: none;
+}
+
+.rebellion-actions {
+    margin-top: 2rem;
+}
+
+.rebellion-actions p {
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.rebellion-btn {
+    background: var(--plaid-red);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rebellion-btn:hover {
+    background: var(--plaid-gold);
+    color: var(--cord-navy);
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.main-footer {
+    background: var(--text-primary);
+    color: var(--cord-cream);
+    padding: 3rem 0 1.5rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-brand h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.footer-secret {
+    font-size: 0.8rem;
+    opacity: 0.4;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.footer-links h5,
+.footer-contact h5 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--cord-tan);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--cord-cream);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+.secret-link {
+    cursor: pointer;
+}
+
+.secret-link:hover {
+    color: var(--plaid-red) !important;
+}
+
+.footer-contact p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-hint {
+    font-size: 0.75rem;
+    opacity: 0.4;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+.easter-egg {
+    letter-spacing: -2px;
+    opacity: 0.3;
+    transition: all 0.5s ease;
+    cursor: default;
+}
+
+.easter-egg:hover {
+    letter-spacing: 2px;
+    opacity: 1;
+    color: var(--plaid-red);
+}
+
+/* ==========================================
+   REBELLION MODE OVERRIDES
+   ========================================== */
+
+body.rebellion-mode .main-header {
+    background: linear-gradient(90deg, var(--plaid-red), var(--cord-navy));
+}
+
+body.rebellion-mode .logo h1::after {
+    content: ' (PRA)';
+    font-size: 0.6em;
+    opacity: 0.7;
+}
+
+body.rebellion-mode .hero::before {
+    opacity: 0.5;
+}
+
+body.rebellion-mode .benefit-card::before {
+    opacity: 0.3;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Hidden message reveal animation */
+@keyframes revealMessage {
+    0% {
+        filter: blur(4px);
+        opacity: 0.5;
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.revealing {
+    animation: revealMessage 0.5s ease forwards;
+}
