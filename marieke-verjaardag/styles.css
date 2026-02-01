@@ -74,28 +74,35 @@ h1, h2, h3, h4 {
 
 .note {
     position: absolute;
-    font-size: 24px;
+    font-size: 32px;
     color: var(--gold-color);
-    opacity: 0.15;
+    opacity: 0.4;
     animation: float-note 15s infinite ease-in-out;
+    text-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
 }
 
 .note:nth-child(1) { left: 5%; animation-delay: 0s; }
-.note:nth-child(2) { left: 25%; animation-delay: 3s; }
-.note:nth-child(3) { left: 50%; animation-delay: 6s; }
-.note:nth-child(4) { left: 75%; animation-delay: 9s; }
-.note:nth-child(5) { left: 90%; animation-delay: 12s; }
+.note:nth-child(2) { left: 20%; animation-delay: 2s; }
+.note:nth-child(3) { left: 35%; animation-delay: 5s; }
+.note:nth-child(4) { left: 50%; animation-delay: 8s; }
+.note:nth-child(5) { left: 65%; animation-delay: 11s; }
+.note:nth-child(6) { left: 80%; animation-delay: 4s; font-size: 28px; }
+.note:nth-child(7) { left: 92%; animation-delay: 7s; }
+.note:nth-child(8) { left: 10%; animation-delay: 13s; }
 
 @keyframes float-note {
-    0%, 100% {
+    0% {
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
     }
     10% {
-        opacity: 0.15;
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.6;
     }
     90% {
-        opacity: 0.15;
+        opacity: 0.5;
     }
     100% {
         transform: translateY(-100px) rotate(360deg);
