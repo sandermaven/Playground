@@ -68,7 +68,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -149,109 +149,89 @@ h1, h2, h3, h4 {
         -4px 18px 0 -1px var(--gold-color);
 }
 
-/* Positioning - spread across screen with varied timing */
-.float-icon:nth-child(1)  { left: 2%;  animation: floatUp1 18s infinite ease-in-out; animation-delay: 0s; }
-.float-icon:nth-child(2)  { left: 8%;  animation: floatUp2 22s infinite ease-in-out; animation-delay: 2s; }
-.float-icon:nth-child(3)  { left: 14%; animation: floatUp3 20s infinite ease-in-out; animation-delay: 4s; }
-.float-icon:nth-child(4)  { left: 20%; animation: floatUp1 24s infinite ease-in-out; animation-delay: 1s; }
-.float-icon:nth-child(5)  { left: 26%; animation: floatUp2 19s infinite ease-in-out; animation-delay: 6s; }
-.float-icon:nth-child(6)  { left: 32%; animation: floatUp3 21s infinite ease-in-out; animation-delay: 3s; }
-.float-icon:nth-child(7)  { left: 40%; animation: floatUp1 23s infinite ease-in-out; animation-delay: 8s; }
-.float-icon:nth-child(8)  { left: 48%; animation: floatUp2 17s infinite ease-in-out; animation-delay: 5s; }
-.float-icon:nth-child(9)  { left: 55%; animation: floatUp3 25s infinite ease-in-out; animation-delay: 10s; }
-.float-icon:nth-child(10) { left: 62%; animation: floatUp1 20s infinite ease-in-out; animation-delay: 7s; }
-.float-icon:nth-child(11) { left: 70%; animation: floatUp2 22s infinite ease-in-out; animation-delay: 12s; }
-.float-icon:nth-child(12) { left: 76%; animation: floatUp3 18s infinite ease-in-out; animation-delay: 9s; }
-.float-icon:nth-child(13) { left: 82%; animation: floatUp1 21s infinite ease-in-out; animation-delay: 14s; }
-.float-icon:nth-child(14) { left: 88%; animation: floatUp2 24s infinite ease-in-out; animation-delay: 11s; }
-.float-icon:nth-child(15) { left: 94%; animation: floatUp3 19s infinite ease-in-out; animation-delay: 16s; }
-.float-icon:nth-child(16) { left: 5%;  animation: floatUp1 23s infinite ease-in-out; animation-delay: 13s; }
-.float-icon:nth-child(17) { left: 45%; animation: floatUp2 20s infinite ease-in-out; animation-delay: 15s; }
-.float-icon:nth-child(18) { left: 78%; animation: floatUp3 22s infinite ease-in-out; animation-delay: 17s; }
+/* Positioning - spread across screen with varied timing, linear for constant speed */
+.float-icon:nth-child(1)  { left: 2%;  animation: floatUp1 16s infinite linear; animation-delay: 0s; }
+.float-icon:nth-child(2)  { left: 8%;  animation: floatUp2 18s infinite linear; animation-delay: 1s; }
+.float-icon:nth-child(3)  { left: 14%; animation: floatUp3 15s infinite linear; animation-delay: 3s; }
+.float-icon:nth-child(4)  { left: 20%; animation: floatUp1 19s infinite linear; animation-delay: 0.5s; }
+.float-icon:nth-child(5)  { left: 26%; animation: floatUp2 14s infinite linear; animation-delay: 4s; }
+.float-icon:nth-child(6)  { left: 32%; animation: floatUp3 17s infinite linear; animation-delay: 2s; }
+.float-icon:nth-child(7)  { left: 40%; animation: floatUp1 20s infinite linear; animation-delay: 6s; }
+.float-icon:nth-child(8)  { left: 48%; animation: floatUp2 15s infinite linear; animation-delay: 3.5s; }
+.float-icon:nth-child(9)  { left: 55%; animation: floatUp3 18s infinite linear; animation-delay: 7s; }
+.float-icon:nth-child(10) { left: 62%; animation: floatUp1 16s infinite linear; animation-delay: 5s; }
+.float-icon:nth-child(11) { left: 70%; animation: floatUp2 19s infinite linear; animation-delay: 8s; }
+.float-icon:nth-child(12) { left: 76%; animation: floatUp3 14s infinite linear; animation-delay: 6.5s; }
+.float-icon:nth-child(13) { left: 82%; animation: floatUp1 17s infinite linear; animation-delay: 9s; }
+.float-icon:nth-child(14) { left: 88%; animation: floatUp2 20s infinite linear; animation-delay: 7.5s; }
+.float-icon:nth-child(15) { left: 94%; animation: floatUp3 15s infinite linear; animation-delay: 10s; }
+.float-icon:nth-child(16) { left: 5%;  animation: floatUp1 18s infinite linear; animation-delay: 8.5s; }
+.float-icon:nth-child(17) { left: 45%; animation: floatUp2 16s infinite linear; animation-delay: 11s; }
+.float-icon:nth-child(18) { left: 78%; animation: floatUp3 19s infinite linear; animation-delay: 12s; }
 
-/* Three different float animations for variety */
+/* Three different float animations - linear speed, gentle sway */
 @keyframes floatUp1 {
     0% {
-        transform: translateY(110vh) translateX(0);
+        transform: translateY(105vh) translateX(0);
         opacity: 0;
     }
-    5% {
-        opacity: 0.5;
-    }
-    25% {
-        transform: translateY(75vh) translateX(15px);
-    }
-    50% {
-        opacity: 0.65;
-        transform: translateY(50vh) translateX(-10px);
-    }
-    75% {
-        transform: translateY(25vh) translateX(20px);
-    }
-    95% {
-        opacity: 0.5;
-    }
+    3% { opacity: 0.7; }
+    10% { transform: translateY(90vh) translateX(8px); }
+    20% { transform: translateY(80vh) translateX(-5px); }
+    30% { transform: translateY(70vh) translateX(10px); }
+    40% { transform: translateY(60vh) translateX(-8px); }
+    50% { transform: translateY(50vh) translateX(6px); opacity: 0.75; }
+    60% { transform: translateY(40vh) translateX(-10px); }
+    70% { transform: translateY(30vh) translateX(8px); }
+    80% { transform: translateY(20vh) translateX(-6px); }
+    90% { transform: translateY(10vh) translateX(5px); }
+    97% { opacity: 0.7; }
     100% {
-        transform: translateY(-10vh) translateX(5px);
+        transform: translateY(-5vh) translateX(0);
         opacity: 0;
     }
 }
 
 @keyframes floatUp2 {
     0% {
-        transform: translateY(110vh) translateX(0);
+        transform: translateY(105vh) translateX(0);
         opacity: 0;
     }
-    5% {
-        opacity: 0.45;
-    }
-    30% {
-        transform: translateY(70vh) translateX(-20px);
-    }
-    50% {
-        opacity: 0.6;
-        transform: translateY(45vh) translateX(10px);
-    }
-    70% {
-        transform: translateY(25vh) translateX(-15px);
-    }
-    95% {
-        opacity: 0.45;
-    }
+    3% { opacity: 0.65; }
+    10% { transform: translateY(90vh) translateX(-10px); }
+    20% { transform: translateY(80vh) translateX(6px); }
+    30% { transform: translateY(70vh) translateX(-8px); }
+    40% { transform: translateY(60vh) translateX(12px); }
+    50% { transform: translateY(50vh) translateX(-6px); opacity: 0.7; }
+    60% { transform: translateY(40vh) translateX(8px); }
+    70% { transform: translateY(30vh) translateX(-10px); }
+    80% { transform: translateY(20vh) translateX(5px); }
+    90% { transform: translateY(10vh) translateX(-8px); }
+    97% { opacity: 0.65; }
     100% {
-        transform: translateY(-10vh) translateX(-5px);
+        transform: translateY(-5vh) translateX(0);
         opacity: 0;
     }
 }
 
 @keyframes floatUp3 {
     0% {
-        transform: translateY(110vh) translateX(0);
+        transform: translateY(105vh) translateX(0);
         opacity: 0;
     }
-    5% {
-        opacity: 0.55;
-    }
-    20% {
-        transform: translateY(80vh) translateX(10px);
-    }
-    40% {
-        transform: translateY(55vh) translateX(-25px);
-    }
-    50% {
-        opacity: 0.7;
-    }
-    60% {
-        transform: translateY(40vh) translateX(5px);
-    }
-    80% {
-        transform: translateY(20vh) translateX(-10px);
-    }
-    95% {
-        opacity: 0.55;
-    }
+    3% { opacity: 0.7; }
+    10% { transform: translateY(90vh) translateX(6px); }
+    20% { transform: translateY(80vh) translateX(-12px); }
+    30% { transform: translateY(70vh) translateX(5px); }
+    40% { transform: translateY(60vh) translateX(-7px); }
+    50% { transform: translateY(50vh) translateX(10px); opacity: 0.75; }
+    60% { transform: translateY(40vh) translateX(-5px); }
+    70% { transform: translateY(30vh) translateX(12px); }
+    80% { transform: translateY(20vh) translateX(-8px); }
+    90% { transform: translateY(10vh) translateX(6px); }
+    97% { opacity: 0.7; }
     100% {
-        transform: translateY(-10vh) translateX(15px);
+        transform: translateY(-5vh) translateX(0);
         opacity: 0;
     }
 }
