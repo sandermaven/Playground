@@ -60,62 +60,198 @@ h1, h2, h3, h4 {
     line-height: 1.3;
 }
 
-/* Floating Musical Notes */
-.floating-notes {
+/* Floating Background Icons */
+.floating-icons {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
     overflow: hidden;
 }
 
-.note {
+.float-icon {
     position: absolute;
-    font-size: 42px;
     color: var(--gold-color);
-    opacity: 0.7;
-    animation: float-note 12s infinite ease-in-out;
-    text-shadow: 0 0 20px rgba(212, 165, 116, 0.5);
+    opacity: 0;
 }
 
-/* Position and timing for all 16 notes - staggered for continuous effect */
-.note:nth-child(1)  { left: 3%;  animation-delay: 0s; font-size: 38px; }
-.note:nth-child(2)  { left: 12%; animation-delay: 0.8s; font-size: 36px; }
-.note:nth-child(3)  { left: 20%; animation-delay: 1.5s; }
-.note:nth-child(4)  { left: 28%; animation-delay: 2.2s; font-size: 35px; }
-.note:nth-child(5)  { left: 36%; animation-delay: 3s; font-size: 38px; }
-.note:nth-child(6)  { left: 44%; animation-delay: 3.8s; }
-.note:nth-child(7)  { left: 52%; animation-delay: 4.5s; font-size: 36px; }
-.note:nth-child(8)  { left: 60%; animation-delay: 5.2s; }
-.note:nth-child(9)  { left: 68%; animation-delay: 6s; font-size: 38px; }
-.note:nth-child(10) { left: 76%; animation-delay: 6.8s; font-size: 35px; }
-.note:nth-child(11) { left: 84%; animation-delay: 7.5s; }
-.note:nth-child(12) { left: 92%; animation-delay: 8.2s; font-size: 36px; }
-.note:nth-child(13) { left: 8%;  animation-delay: 9s; }
-.note:nth-child(14) { left: 40%; animation-delay: 9.8s; font-size: 38px; }
-.note:nth-child(15) { left: 72%; animation-delay: 10.5s; font-size: 40px; }
-.note:nth-child(16) { left: 56%; animation-delay: 11.2s; }
+/* Musical notes */
+.float-icon.note {
+    font-size: 36px;
+}
 
-@keyframes float-note {
+/* Key icon (Leiden = sleutelstad) */
+.float-icon.key {
+    width: 28px;
+    height: 28px;
+}
+.float-icon.key::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 3px solid var(--gold-color);
+    border-radius: 50%;
+    top: 0;
+    left: 8px;
+}
+.float-icon.key::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 18px;
+    background: var(--gold-color);
+    top: 10px;
+    left: 12px;
+    box-shadow:
+        6px 12px 0 0 var(--gold-color),
+        6px 6px 0 0 var(--gold-color);
+}
+
+/* Kangaroo silhouette */
+.float-icon.kangaroo {
+    width: 32px;
+    height: 32px;
+}
+.float-icon.kangaroo::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 14px;
+    background: var(--gold-color);
+    border-radius: 50% 50% 40% 40%;
+    top: 8px;
+    left: 4px;
+}
+.float-icon.kangaroo::after {
+    content: '';
+    position: absolute;
+    /* Head */
+    width: 8px;
+    height: 8px;
+    background: var(--gold-color);
+    border-radius: 50%;
+    top: 4px;
+    left: 16px;
+    /* Tail using box-shadow */
+    box-shadow:
+        -18px 14px 0 0 var(--gold-color),
+        -16px 16px 0 0 var(--gold-color),
+        -14px 17px 0 0 var(--gold-color),
+        /* Ears */
+        2px -4px 0 -2px var(--gold-color),
+        5px -3px 0 -2px var(--gold-color),
+        /* Legs */
+        -8px 16px 0 -1px var(--gold-color),
+        -4px 18px 0 -1px var(--gold-color);
+}
+
+/* Positioning - spread across screen with varied timing */
+.float-icon:nth-child(1)  { left: 2%;  animation: floatUp1 18s infinite ease-in-out; animation-delay: 0s; }
+.float-icon:nth-child(2)  { left: 8%;  animation: floatUp2 22s infinite ease-in-out; animation-delay: 2s; }
+.float-icon:nth-child(3)  { left: 14%; animation: floatUp3 20s infinite ease-in-out; animation-delay: 4s; }
+.float-icon:nth-child(4)  { left: 20%; animation: floatUp1 24s infinite ease-in-out; animation-delay: 1s; }
+.float-icon:nth-child(5)  { left: 26%; animation: floatUp2 19s infinite ease-in-out; animation-delay: 6s; }
+.float-icon:nth-child(6)  { left: 32%; animation: floatUp3 21s infinite ease-in-out; animation-delay: 3s; }
+.float-icon:nth-child(7)  { left: 40%; animation: floatUp1 23s infinite ease-in-out; animation-delay: 8s; }
+.float-icon:nth-child(8)  { left: 48%; animation: floatUp2 17s infinite ease-in-out; animation-delay: 5s; }
+.float-icon:nth-child(9)  { left: 55%; animation: floatUp3 25s infinite ease-in-out; animation-delay: 10s; }
+.float-icon:nth-child(10) { left: 62%; animation: floatUp1 20s infinite ease-in-out; animation-delay: 7s; }
+.float-icon:nth-child(11) { left: 70%; animation: floatUp2 22s infinite ease-in-out; animation-delay: 12s; }
+.float-icon:nth-child(12) { left: 76%; animation: floatUp3 18s infinite ease-in-out; animation-delay: 9s; }
+.float-icon:nth-child(13) { left: 82%; animation: floatUp1 21s infinite ease-in-out; animation-delay: 14s; }
+.float-icon:nth-child(14) { left: 88%; animation: floatUp2 24s infinite ease-in-out; animation-delay: 11s; }
+.float-icon:nth-child(15) { left: 94%; animation: floatUp3 19s infinite ease-in-out; animation-delay: 16s; }
+.float-icon:nth-child(16) { left: 5%;  animation: floatUp1 23s infinite ease-in-out; animation-delay: 13s; }
+.float-icon:nth-child(17) { left: 45%; animation: floatUp2 20s infinite ease-in-out; animation-delay: 15s; }
+.float-icon:nth-child(18) { left: 78%; animation: floatUp3 22s infinite ease-in-out; animation-delay: 17s; }
+
+/* Three different float animations for variety */
+@keyframes floatUp1 {
     0% {
-        transform: translateY(100vh) rotate(0deg) scale(0.8);
+        transform: translateY(110vh) translateX(0);
         opacity: 0;
     }
     5% {
-        opacity: 0.7;
+        opacity: 0.5;
+    }
+    25% {
+        transform: translateY(75vh) translateX(15px);
     }
     50% {
-        opacity: 0.85;
-        transform: translateY(50vh) rotate(180deg) scale(1);
+        opacity: 0.65;
+        transform: translateY(50vh) translateX(-10px);
+    }
+    75% {
+        transform: translateY(25vh) translateX(20px);
     }
     95% {
-        opacity: 0.7;
+        opacity: 0.5;
     }
     100% {
-        transform: translateY(-100px) rotate(360deg) scale(0.8);
+        transform: translateY(-10vh) translateX(5px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUp2 {
+    0% {
+        transform: translateY(110vh) translateX(0);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.45;
+    }
+    30% {
+        transform: translateY(70vh) translateX(-20px);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translateY(45vh) translateX(10px);
+    }
+    70% {
+        transform: translateY(25vh) translateX(-15px);
+    }
+    95% {
+        opacity: 0.45;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(-5px);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUp3 {
+    0% {
+        transform: translateY(110vh) translateX(0);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.55;
+    }
+    20% {
+        transform: translateY(80vh) translateX(10px);
+    }
+    40% {
+        transform: translateY(55vh) translateX(-25px);
+    }
+    50% {
+        opacity: 0.7;
+    }
+    60% {
+        transform: translateY(40vh) translateX(5px);
+    }
+    80% {
+        transform: translateY(20vh) translateX(-10px);
+    }
+    95% {
+        opacity: 0.55;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(15px);
         opacity: 0;
     }
 }
