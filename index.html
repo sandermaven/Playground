@@ -836,8 +836,18 @@
             const bubble = document.createElement('div');
             bubble.className = 'speech-bubble';
             bubble.textContent = message;
-            bubble.style.left = toPercent(speaker.x - 30, 800);
-            bubble.style.top = toPercent(speaker.y - 50, 600);
+
+            // Calculate position and clamp to screen bounds
+            let bubbleX = speaker.x - 30;
+            let bubbleY = speaker.y - 60;
+
+            // Clamp X to keep bubble on screen (0 to 800 minus bubble width ~150)
+            bubbleX = Math.max(10, Math.min(bubbleX, 640));
+            // Clamp Y to keep bubble on screen
+            bubbleY = Math.max(10, Math.min(bubbleY, 500));
+
+            bubble.style.left = toPercent(bubbleX, 800);
+            bubble.style.top = toPercent(bubbleY, 600);
             container.appendChild(bubble);
 
             game.speechBubbles.push(bubble);
