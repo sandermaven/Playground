@@ -2,7 +2,11 @@
 // Marieke's Verjaardag - Interactive Scripts
 // ========================================
 
-// Pitstop Database - Echte plekken in Leiden!
+// User location state
+let userLocation = null;
+let locationStatus = 'unknown'; // 'unknown', 'requesting', 'granted', 'denied'
+
+// Pitstop Database - Echte plekken in Leiden met GPS coördinaten!
 const pitstops = [
     // Koffie
     {
@@ -11,7 +15,8 @@ const pitstops = [
         categories: ["koffie", "honger", "rust"],
         emoji: "☕",
         address: "Nieuwe Rijn 19",
-        distance: 150,
+        lat: 52.1583,
+        lng: 4.4897,
         urgencyMin: 1
     },
     {
@@ -20,7 +25,8 @@ const pitstops = [
         categories: ["koffie", "zoet", "rust"],
         emoji: "🍰",
         address: "Kaiserstraat 13",
-        distance: 300,
+        lat: 52.1572,
+        lng: 4.4856,
         urgencyMin: 1
     },
     {
@@ -29,7 +35,8 @@ const pitstops = [
         categories: ["koffie", "warm"],
         emoji: "☕",
         address: "Breestraat 123",
-        distance: 200,
+        lat: 52.1601,
+        lng: 4.4891,
         urgencyMin: 2
     },
     {
@@ -38,7 +45,8 @@ const pitstops = [
         categories: ["koffie"],
         emoji: "☕",
         address: "Stationsweg 23",
-        distance: 450,
+        lat: 52.1660,
+        lng: 4.4815,
         urgencyMin: 1
     },
 
@@ -49,7 +57,8 @@ const pitstops = [
         categories: ["honger", "dorst", "rust", "warm"],
         emoji: "🍽️",
         address: "Rembrandtstraat 27",
-        distance: 250,
+        lat: 52.1568,
+        lng: 4.4823,
         urgencyMin: 1
     },
     {
@@ -58,7 +67,8 @@ const pitstops = [
         categories: ["honger", "rust", "cultuur"],
         emoji: "🏰",
         address: "Steenstraat 51",
-        distance: 350,
+        lat: 52.1594,
+        lng: 4.4876,
         urgencyMin: 1
     },
     {
@@ -67,7 +77,8 @@ const pitstops = [
         categories: ["honger", "rust", "warm"],
         emoji: "🍝",
         address: "Lange Mare 78",
-        distance: 280,
+        lat: 52.1623,
+        lng: 4.4912,
         urgencyMin: 2
     },
     {
@@ -76,7 +87,8 @@ const pitstops = [
         categories: ["honger", "koffie"],
         emoji: "🥗",
         address: "Apothekersdijk 11",
-        distance: 320,
+        lat: 52.1612,
+        lng: 4.4935,
         urgencyMin: 1
     },
     {
@@ -85,7 +97,8 @@ const pitstops = [
         categories: ["honger", "dorst", "cultuur"],
         emoji: "⚖️",
         address: "Aalmarkt 21",
-        distance: 180,
+        lat: 52.1590,
+        lng: 4.4893,
         urgencyMin: 1
     },
     {
@@ -94,7 +107,8 @@ const pitstops = [
         categories: ["honger"],
         emoji: "🍟",
         address: "Haarlemmerstraat 75",
-        distance: 220,
+        lat: 52.1618,
+        lng: 4.4872,
         urgencyMin: 3
     },
 
@@ -105,7 +119,8 @@ const pitstops = [
         categories: ["dorst", "rust", "warm"],
         emoji: "🍺",
         address: "Nieuwe Rijn 52",
-        distance: 120,
+        lat: 52.1585,
+        lng: 4.4905,
         urgencyMin: 1
     },
     {
@@ -114,7 +129,8 @@ const pitstops = [
         categories: ["dorst", "cultuur", "rust"],
         emoji: "🍻",
         address: "Turfmarkt 1",
-        distance: 280,
+        lat: 52.1578,
+        lng: 4.4888,
         urgencyMin: 1
     },
     {
@@ -123,7 +139,8 @@ const pitstops = [
         categories: ["dorst", "cultuur"],
         emoji: "⛪",
         address: "Hooglandse Kerkgracht 18",
-        distance: 350,
+        lat: 52.1604,
+        lng: 4.4862,
         urgencyMin: 1
     },
     {
@@ -132,7 +149,8 @@ const pitstops = [
         categories: ["dorst", "rust", "koffie"],
         emoji: "🧠",
         address: "Nieuwe Rijn 19",
-        distance: 160,
+        lat: 52.1583,
+        lng: 4.4898,
         urgencyMin: 2
     },
 
@@ -143,7 +161,8 @@ const pitstops = [
         categories: ["zoet", "warm"],
         emoji: "🥨",
         address: "Haarlemmerstraat 160",
-        distance: 380,
+        lat: 52.1632,
+        lng: 4.4855,
         urgencyMin: 1
     },
     {
@@ -152,7 +171,8 @@ const pitstops = [
         categories: ["zoet"],
         emoji: "🍦",
         address: "Pieterskerkgracht 9",
-        distance: 290,
+        lat: 52.1575,
+        lng: 4.4851,
         urgencyMin: 2
     },
     {
@@ -161,7 +181,8 @@ const pitstops = [
         categories: ["zoet", "koffie"],
         emoji: "🍪",
         address: "Steenstraat 31",
-        distance: 260,
+        lat: 52.1592,
+        lng: 4.4871,
         urgencyMin: 1
     },
     {
@@ -170,7 +191,8 @@ const pitstops = [
         categories: ["zoet", "honger", "koffie"],
         emoji: "🥞",
         address: "Diefsteeg 8",
-        distance: 200,
+        lat: 52.1598,
+        lng: 4.4884,
         urgencyMin: 2
     },
 
@@ -181,7 +203,8 @@ const pitstops = [
         categories: ["wc"],
         emoji: "🚻",
         address: "Haarlemmerstraat 170",
-        distance: 150,
+        lat: 52.1635,
+        lng: 4.4852,
         urgencyMin: 4
     },
     {
@@ -190,16 +213,18 @@ const pitstops = [
         categories: ["wc", "honger"],
         emoji: "🍔",
         address: "Stationsplein 6",
-        distance: 420,
+        lat: 52.1663,
+        lng: 4.4818,
         urgencyMin: 5
     },
     {
-        name: "V&D (voorheen)",
-        description: "Nu Hudson's Bay - nog steeds goede sanitaire voorzieningen.",
+        name: "Hudson's Bay",
+        description: "Voorheen V&D - nog steeds goede sanitaire voorzieningen.",
         categories: ["wc", "rust"],
         emoji: "🏬",
         address: "Breestraat 100",
-        distance: 180,
+        lat: 52.1598,
+        lng: 4.4885,
         urgencyMin: 3
     },
     {
@@ -208,7 +233,8 @@ const pitstops = [
         categories: ["wc"],
         emoji: "🚂",
         address: "Stationsplein",
-        distance: 500,
+        lat: 52.1664,
+        lng: 4.4820,
         urgencyMin: 4
     },
 
@@ -219,7 +245,8 @@ const pitstops = [
         categories: ["rust", "cultuur"],
         emoji: "🌿",
         address: "Rapenburg 73",
-        distance: 320,
+        lat: 52.1573,
+        lng: 4.4890,
         urgencyMin: 1
     },
     {
@@ -228,7 +255,8 @@ const pitstops = [
         categories: ["rust"],
         emoji: "🌳",
         address: "Van der Werffstraat",
-        distance: 800,
+        lat: 52.1510,
+        lng: 4.4720,
         urgencyMin: 1
     },
     {
@@ -237,7 +265,8 @@ const pitstops = [
         categories: ["rust", "cultuur", "warm"],
         emoji: "⛪",
         address: "Pieterskerkhof 1",
-        distance: 240,
+        lat: 52.1572,
+        lng: 4.4856,
         urgencyMin: 1
     },
     {
@@ -246,7 +275,8 @@ const pitstops = [
         categories: ["rust", "cultuur"],
         emoji: "🏰",
         address: "Van der Sterrepad",
-        distance: 220,
+        lat: 52.1587,
+        lng: 4.4918,
         urgencyMin: 1
     },
 
@@ -257,7 +287,8 @@ const pitstops = [
         categories: ["cultuur", "rust", "warm"],
         emoji: "🖼️",
         address: "Oude Singel 32",
-        distance: 350,
+        lat: 52.1610,
+        lng: 4.4932,
         urgencyMin: 1
     },
     {
@@ -266,7 +297,8 @@ const pitstops = [
         categories: ["cultuur", "rust", "warm"],
         emoji: "🏛️",
         address: "Rapenburg 28",
-        distance: 280,
+        lat: 52.1585,
+        lng: 4.4883,
         urgencyMin: 1
     },
     {
@@ -275,7 +307,8 @@ const pitstops = [
         categories: ["cultuur", "rust", "warm"],
         emoji: "🦕",
         address: "Darwinweg 2",
-        distance: 1200,
+        lat: 52.1688,
+        lng: 4.4713,
         urgencyMin: 1
     },
     {
@@ -284,7 +317,8 @@ const pitstops = [
         categories: ["cultuur"],
         emoji: "🌬️",
         address: "2e Binnenvestgracht 1",
-        distance: 400,
+        lat: 52.1620,
+        lng: 4.4807,
         urgencyMin: 1
     },
 
@@ -295,7 +329,8 @@ const pitstops = [
         categories: ["warm", "rust", "wc"],
         emoji: "📚",
         address: "Nieuwstraat 4",
-        distance: 230,
+        lat: 52.1607,
+        lng: 4.4905,
         urgencyMin: 2
     },
     {
@@ -304,7 +339,8 @@ const pitstops = [
         categories: ["warm"],
         emoji: "🧤",
         address: "Haarlemmerstraat 168",
-        distance: 190,
+        lat: 52.1634,
+        lng: 4.4853,
         urgencyMin: 3
     }
 ];
@@ -329,7 +365,225 @@ document.addEventListener('DOMContentLoaded', () => {
     initUrgencySlider();
     initFindButton();
     initSmoothScroll();
+    initLocationButton();
 });
+
+// ========================================
+// Geolocation Functions
+// ========================================
+
+// Calculate distance between two points using Haversine formula
+function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371000; // Earth's radius in meters
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return Math.round(R * c);
+}
+
+function toRad(deg) {
+    return deg * (Math.PI / 180);
+}
+
+// Request user location
+function requestLocation() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            reject(new Error('Geolocation wordt niet ondersteund door je browser'));
+            return;
+        }
+
+        locationStatus = 'requesting';
+        updateLocationUI();
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                locationStatus = 'granted';
+                updateLocationUI();
+                resolve(userLocation);
+            },
+            (error) => {
+                locationStatus = 'denied';
+                updateLocationUI();
+                let message;
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        message = 'Je hebt locatietoegang geweigerd. We gebruiken een standaardlocatie.';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        message = 'Locatie niet beschikbaar. We gebruiken een standaardlocatie.';
+                        break;
+                    case error.TIMEOUT:
+                        message = 'Locatieverzoek duurde te lang. We gebruiken een standaardlocatie.';
+                        break;
+                    default:
+                        message = 'Onbekende fout. We gebruiken een standaardlocatie.';
+                }
+                reject(new Error(message));
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 60000
+            }
+        );
+    });
+}
+
+// Default location (centrum Leiden - Burcht)
+function getDefaultLocation() {
+    return { lat: 52.1587, lng: 4.4900 };
+}
+
+// Get distance to a pitstop
+function getDistanceToPitstop(pitstop) {
+    const location = userLocation || getDefaultLocation();
+    return calculateDistance(location.lat, location.lng, pitstop.lat, pitstop.lng);
+}
+
+// Update location UI
+function updateLocationUI() {
+    const locationIndicator = document.getElementById('location-indicator');
+    if (!locationIndicator) return;
+
+    switch (locationStatus) {
+        case 'requesting':
+            locationIndicator.innerHTML = '<span class="location-dot requesting"></span> Locatie ophalen...';
+            break;
+        case 'granted':
+            locationIndicator.innerHTML = '<span class="location-dot granted"></span> Locatie actief';
+            break;
+        case 'denied':
+            locationIndicator.innerHTML = '<span class="location-dot denied"></span> Standaardlocatie (centrum)';
+            break;
+        default:
+            locationIndicator.innerHTML = '<span class="location-dot"></span> Klik om locatie te delen';
+    }
+}
+
+// Initialize location button
+function initLocationButton() {
+    // Add location indicator to the noodstop app
+    const noodstopApp = document.querySelector('.noodstop-filters');
+    if (noodstopApp) {
+        const locationDiv = document.createElement('div');
+        locationDiv.className = 'location-request';
+        locationDiv.innerHTML = `
+            <button id="request-location-btn" class="location-btn">
+                <span class="location-icon">📍</span>
+                <span>Deel je locatie voor echte afstanden</span>
+            </button>
+            <p id="location-indicator" class="location-indicator">
+                <span class="location-dot"></span> Klik om locatie te delen
+            </p>
+        `;
+        noodstopApp.insertBefore(locationDiv, noodstopApp.firstChild);
+
+        // Add event listener
+        document.getElementById('request-location-btn').addEventListener('click', async () => {
+            try {
+                await requestLocation();
+            } catch (error) {
+                console.log(error.message);
+                // Use default location, already set in the error handler
+            }
+        });
+    }
+
+    // Add CSS for location elements
+    const style = document.createElement('style');
+    style.textContent = `
+        .location-request {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .location-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .location-icon {
+            font-size: 1.3rem;
+        }
+
+        .location-indicator {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .location-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .location-dot.requesting {
+            background: #fdcb6e;
+            animation: pulse 1s infinite;
+        }
+
+        .location-dot.granted {
+            background: #00b894;
+        }
+
+        .location-dot.denied {
+            background: #e17055;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .distance-live {
+            position: relative;
+        }
+
+        .distance-live::after {
+            content: '📍';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 0.7rem;
+        }
+    `;
+    document.head.appendChild(style);
+}
 
 // ========================================
 // Scroll Animations
@@ -341,8 +595,6 @@ function initScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
-                // Optional: unobserve after animation
-                // observer.unobserve(entry.target);
             }
         });
     }, {
@@ -361,14 +613,10 @@ function initFilters() {
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active state
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            // Update current filter
             currentFilter = btn.dataset.filter;
 
-            // Add click animation
             btn.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 btn.style.transform = '';
@@ -388,7 +636,6 @@ function initUrgencySlider() {
         currentUrgency = parseInt(slider.value);
         urgencyText.textContent = urgencyTexts[currentUrgency - 1];
 
-        // Change color based on urgency
         const colors = ['#00b894', '#00cec9', '#fdcb6e', '#e17055', '#d63031'];
         urgencyText.style.color = colors[currentUrgency - 1];
     });
@@ -401,20 +648,27 @@ function initFindButton() {
     const findBtn = document.getElementById('find-pitstop');
     const resultsContainer = document.getElementById('results');
 
-    findBtn.addEventListener('click', () => {
-        // Add loading animation
+    findBtn.addEventListener('click', async () => {
         resultsContainer.innerHTML = '<div class="loading"></div>';
 
-        // Simulate search delay for effect
+        // Try to get location if we don't have it yet
+        if (!userLocation && locationStatus === 'unknown') {
+            try {
+                await requestLocation();
+            } catch (error) {
+                console.log('Gebruikt standaardlocatie:', error.message);
+            }
+        }
+
+        // Small delay for effect
         setTimeout(() => {
             const results = findPitstops(currentFilter, currentUrgency);
             displayResults(results, resultsContainer);
-        }, 800);
+        }, 600);
 
-        // Scroll to results
         setTimeout(() => {
             resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 1000);
+        }, 800);
     });
 }
 
@@ -422,31 +676,40 @@ function initFindButton() {
 // Find Matching Pitstops
 // ========================================
 function findPitstops(filter, urgency) {
-    let matches = pitstops.filter(place => {
-        // Filter by category
-        if (filter !== 'all' && !place.categories.includes(filter)) {
-            return false;
-        }
+    // Calculate distances for all pitstops
+    let matches = pitstops.map(place => ({
+        ...place,
+        distance: getDistanceToPitstop(place)
+    }));
 
-        // Filter by urgency (higher urgency = closer places)
-        if (urgency >= 4 && place.distance > 300) {
-            return false;
-        }
-        if (urgency >= 5 && place.distance > 200) {
-            return false;
-        }
-
-        return true;
-    });
-
-    // Sort by distance if urgent, otherwise randomize a bit
-    if (urgency >= 4) {
-        matches.sort((a, b) => a.distance - b.distance);
-    } else {
-        matches.sort(() => Math.random() - 0.5);
+    // Filter by category
+    if (filter !== 'all') {
+        matches = matches.filter(place => place.categories.includes(filter));
     }
 
-    // Return top 3
+    // Filter by urgency (higher urgency = closer places)
+    if (urgency >= 4) {
+        matches = matches.filter(place => place.distance <= 400);
+    }
+    if (urgency >= 5) {
+        matches = matches.filter(place => place.distance <= 250);
+    }
+
+    // Always sort by distance
+    matches.sort((a, b) => a.distance - b.distance);
+
+    // If not urgent, add some randomization to top results
+    if (urgency < 3) {
+        const topN = Math.min(6, matches.length);
+        const top = matches.slice(0, topN);
+        const rest = matches.slice(topN);
+        for (let i = top.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [top[i], top[j]] = [top[j], top[i]];
+        }
+        matches = [...top, ...rest];
+    }
+
     return matches.slice(0, 3);
 }
 
@@ -477,12 +740,36 @@ function displayResults(results, container) {
         warm: 'Warmte'
     };
 
-    let html = '<h3 class="results-title">🎯 Jouw reddingsboeien:</h3>';
+    const isLiveLocation = userLocation !== null;
+    const locationNote = isLiveLocation
+        ? '📍 Afstanden gebaseerd op jouw locatie'
+        : '📍 Afstanden vanaf centrum Leiden';
+
+    let html = `
+        <h3 class="results-title">🎯 Jouw reddingsboeien:</h3>
+        <p class="results-location-note" style="font-size: 0.85rem; color: #666; margin-bottom: 20px; text-align: center;">
+            ${locationNote}
+        </p>
+    `;
 
     results.forEach(place => {
         const tags = place.categories.map(cat =>
             `<span class="result-tag">${categoryLabels[cat] || cat}</span>`
         ).join('');
+
+        // Format distance nicely
+        const distanceDisplay = place.distance >= 1000
+            ? `${(place.distance / 1000).toFixed(1)} km`
+            : `${place.distance} m`;
+
+        // Walking time estimate (assuming 5 km/h = 83m per minute)
+        const walkingMinutes = Math.ceil(place.distance / 83);
+        const walkingTime = walkingMinutes <= 1 ? '< 1 min' : `~${walkingMinutes} min`;
+
+        const distanceClass = isLiveLocation ? 'distance-live' : '';
+
+        // Google Maps link for navigation
+        const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}&travelmode=walking`;
 
         html += `
             <div class="result-card">
@@ -493,9 +780,12 @@ function displayResults(results, container) {
                     <p style="font-size: 0.85rem; color: #666;">📍 ${place.address}</p>
                     <div class="result-tags">${tags}</div>
                 </div>
-                <div class="result-distance">
-                    <div class="distance-value">${place.distance}m</div>
-                    <div class="distance-label">afstand</div>
+                <div class="result-distance ${distanceClass}">
+                    <div class="distance-value">${distanceDisplay}</div>
+                    <div class="distance-label">🚶 ${walkingTime}</div>
+                    <a href="${mapsUrl}" target="_blank" rel="noopener" class="navigate-link" style="font-size: 0.75rem; color: #667eea; text-decoration: none; margin-top: 8px; display: block;">
+                        Navigeer →
+                    </a>
                 </div>
             </div>
         `;
@@ -531,10 +821,8 @@ window.addEventListener('scroll', () => {
     const heroContent = document.querySelector('.hero-content');
 
     if (hero && scrolled < window.innerHeight) {
-        // Parallax for hero background
         hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
 
-        // Fade out hero content on scroll
         if (heroContent) {
             heroContent.style.opacity = 1 - (scrolled / 600);
             heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
@@ -553,7 +841,6 @@ document.addEventListener('keydown', (e) => {
     konamiCode = konamiCode.slice(-10);
 
     if (konamiCode.join(',') === konamiPattern.join(',')) {
-        // Easter egg activated!
         document.body.style.animation = 'rainbow 2s linear';
         setTimeout(() => {
             alert('🎉 G\'day Marieke! 🦘🎷 Gefeliciteerd van je geheime bewonderaars!');
