@@ -45,9 +45,9 @@
 
         #player {
             position: absolute;
-            bottom: 30px;
-            width: 50px;
-            height: 30px;
+            bottom: 5%;
+            width: 6.25%;
+            height: 5%;
             background: linear-gradient(to top, #0f0, #0a0);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
             transition: left 0.05s linear;
@@ -194,6 +194,139 @@
             background: linear-gradient(to top, #0f0, #0a0);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
         }
+
+        /* Mobile Controls */
+        #mobileControls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            padding: 0 20px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .mobile-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.2);
+            border: 3px solid #0ff;
+            color: #0ff;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .mobile-btn:active, .mobile-btn.active {
+            background: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .move-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        #fireBtn {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 0, 100, 0.2);
+            border-color: #f06;
+            color: #f06;
+            box-shadow: 0 0 15px rgba(255, 0, 100, 0.3);
+        }
+
+        #fireBtn:active, #fireBtn.active {
+            background: rgba(255, 0, 100, 0.5);
+            box-shadow: 0 0 25px rgba(255, 0, 100, 0.6);
+        }
+
+        /* Responsive scaling */
+        @media (max-width: 850px) {
+            body {
+                flex-direction: column;
+                padding-bottom: 120px;
+            }
+
+            #gameContainer {
+                width: 95vw;
+                max-width: 800px;
+                height: calc(95vw * 0.75);
+                max-height: 600px;
+                transform-origin: top center;
+            }
+
+            #mobileControls {
+                display: flex;
+            }
+
+            #startScreen .controls {
+                display: none;
+            }
+
+            #startScreen h1 {
+                font-size: 10vw;
+                letter-spacing: 2vw;
+            }
+
+            #startScreen h2 {
+                font-size: 4vw;
+            }
+
+            .letter {
+                font-size: 6vw !important;
+            }
+
+            #hud {
+                font-size: 3vw;
+            }
+
+            #gameOver h1, #victory h1 {
+                font-size: 8vw;
+            }
+
+            #gameOver p, #victory p {
+                font-size: 4vw;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 4vw;
+            }
+
+            #player {
+                width: 6vw !important;
+                height: 4vw !important;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .mobile-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            #fireBtn {
+                width: 75px;
+                height: 75px;
+            }
+        }
+
+        @media (max-height: 700px) and (max-width: 850px) {
+            #gameContainer {
+                height: 55vh;
+                width: calc(55vh * 1.33);
+            }
+        }
     </style>
 </head>
 <body>
@@ -230,6 +363,15 @@
         <div id="player"></div>
     </div>
 
+    <!-- Mobile Controls -->
+    <div id="mobileControls">
+        <div class="move-buttons">
+            <div class="mobile-btn" id="leftBtn">&#9664;</div>
+            <div class="mobile-btn" id="rightBtn">&#9654;</div>
+        </div>
+        <div class="mobile-btn" id="fireBtn">FIRE</div>
+    </div>
+
     <script>
         // Game state
         const game = {
@@ -256,18 +398,38 @@
         const livesEl = document.getElementById('lives');
         const waveEl = document.getElementById('wave');
 
+        // Responsive scaling
+        function getScale() {
+            const containerWidth = container.offsetWidth;
+            return containerWidth / 800;
+        }
+
+        function scaleX(val) {
+            return val * getScale();
+        }
+
+        function scaleY(val) {
+            const containerHeight = container.offsetHeight;
+            return val * (containerHeight / 600);
+        }
+
         // Create stars background
         function createStars() {
             for (let i = 0; i < 100; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                star.style.left = Math.random() * 800 + 'px';
-                star.style.top = Math.random() * 600 + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
                 star.style.width = Math.random() * 3 + 1 + 'px';
                 star.style.height = star.style.width;
                 star.style.animationDelay = Math.random() * 2 + 's';
                 container.appendChild(star);
             }
+        }
+
+        // Convert game coordinates to percentage
+        function toPercent(val, max) {
+            return (val / max * 100) + '%';
         }
 
         // Initialize letters
@@ -290,8 +452,8 @@
                     const x = startX + i * spacing;
                     const y = 80 + row * 60;
 
-                    letter.style.left = x + 'px';
-                    letter.style.top = y + 'px';
+                    letter.style.left = toPercent(x, 800);
+                    letter.style.top = toPercent(y, 600);
 
                     container.appendChild(letter);
 
@@ -326,7 +488,7 @@
             if (game.keys['ArrowRight'] || game.keys['KeyD']) {
                 game.playerX = Math.min(750, game.playerX + game.playerSpeed);
             }
-            player.style.left = game.playerX + 'px';
+            player.style.left = toPercent(game.playerX, 800);
         }
 
         // Shooting
@@ -338,8 +500,8 @@
 
             const bullet = document.createElement('div');
             bullet.className = 'bullet';
-            bullet.style.left = (game.playerX + 23) + 'px';
-            bullet.style.bottom = '60px';
+            bullet.style.left = toPercent(game.playerX + 23, 800);
+            bullet.style.bottom = '10%';
             container.appendChild(bullet);
 
             game.bullets.push({
@@ -353,7 +515,7 @@
         function updateBullets() {
             game.bullets = game.bullets.filter(bullet => {
                 bullet.y -= 10;
-                bullet.element.style.bottom = (600 - bullet.y) + 'px';
+                bullet.element.style.bottom = toPercent(600 - bullet.y, 600);
 
                 if (bullet.y < 0) {
                     bullet.element.remove();
@@ -394,7 +556,7 @@
         function updateEnemyBullets() {
             game.enemyBullets = game.enemyBullets.filter(bullet => {
                 bullet.y += 6;
-                bullet.element.style.top = bullet.y + 'px';
+                bullet.element.style.top = toPercent(bullet.y, 600);
 
                 if (bullet.y > 600) {
                     bullet.element.remove();
@@ -431,8 +593,8 @@
 
                 const bullet = document.createElement('div');
                 bullet.className = 'enemy-bullet';
-                bullet.style.left = (shooter.x + 20) + 'px';
-                bullet.style.top = (shooter.y + 48) + 'px';
+                bullet.style.left = toPercent(shooter.x + 20, 800);
+                bullet.style.top = toPercent(shooter.y + 48, 600);
                 container.appendChild(bullet);
 
                 game.enemyBullets.push({
@@ -467,13 +629,13 @@
                 for (const letter of game.letters) {
                     if (!letter.alive) continue;
                     letter.y += game.dropAmount;
-                    letter.element.style.top = letter.y + 'px';
+                    letter.element.style.top = toPercent(letter.y, 600);
                 }
             }
 
             for (const letter of game.letters) {
                 if (!letter.alive) continue;
-                letter.element.style.left = letter.x + 'px';
+                letter.element.style.left = toPercent(letter.x, 800);
             }
 
             if (hitBottom) {
@@ -560,6 +722,47 @@
         document.addEventListener('keyup', (e) => {
             game.keys[e.code] = false;
         });
+
+        // Mobile touch controls
+        const leftBtn = document.getElementById('leftBtn');
+        const rightBtn = document.getElementById('rightBtn');
+        const fireBtn = document.getElementById('fireBtn');
+
+        function handleTouchStart(key, btn) {
+            return function(e) {
+                e.preventDefault();
+                game.keys[key] = true;
+                btn.classList.add('active');
+            };
+        }
+
+        function handleTouchEnd(key, btn) {
+            return function(e) {
+                e.preventDefault();
+                game.keys[key] = false;
+                btn.classList.remove('active');
+            };
+        }
+
+        // Left button
+        leftBtn.addEventListener('touchstart', handleTouchStart('ArrowLeft', leftBtn));
+        leftBtn.addEventListener('touchend', handleTouchEnd('ArrowLeft', leftBtn));
+        leftBtn.addEventListener('touchcancel', handleTouchEnd('ArrowLeft', leftBtn));
+
+        // Right button
+        rightBtn.addEventListener('touchstart', handleTouchStart('ArrowRight', rightBtn));
+        rightBtn.addEventListener('touchend', handleTouchEnd('ArrowRight', rightBtn));
+        rightBtn.addEventListener('touchcancel', handleTouchEnd('ArrowRight', rightBtn));
+
+        // Fire button
+        fireBtn.addEventListener('touchstart', handleTouchStart('Space', fireBtn));
+        fireBtn.addEventListener('touchend', handleTouchEnd('Space', fireBtn));
+        fireBtn.addEventListener('touchcancel', handleTouchEnd('Space', fireBtn));
+
+        // Prevent scrolling/zooming on mobile
+        document.addEventListener('touchmove', (e) => {
+            if (game.running) e.preventDefault();
+        }, { passive: false });
 
         // Initialize
         createStars();
