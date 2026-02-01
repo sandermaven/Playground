@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakespeare's Sonnet 18</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fdf6e3 0%, #fff5f5 50%, #f5fff5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .container {
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 60px 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floral corner decorations */
+        .flower {
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.6;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .flower-top-left {
+            top: -10px;
+            left: -10px;
+            transform: rotate(-30deg);
+        }
+
+        .flower-top-right {
+            top: -10px;
+            right: -10px;
+            transform: rotate(30deg);
+        }
+
+        .flower-bottom-left {
+            bottom: -10px;
+            left: -10px;
+            transform: rotate(-150deg);
+        }
+
+        .flower-bottom-right {
+            bottom: -10px;
+            right: -10px;
+            transform: rotate(150deg);
+        }
+
+        .flower-accent {
+            font-size: 40px;
+            opacity: 0.4;
+        }
+
+        .flower-mid-left {
+            top: 50%;
+            left: -5px;
+            transform: translateY(-50%);
+        }
+
+        .flower-mid-right {
+            top: 50%;
+            right: -5px;
+            transform: translateY(-50%);
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: #8b4d6b;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(139, 77, 107, 0.2);
+        }
+
+        .author {
+            text-align: center;
+            font-style: italic;
+            color: #a0736d;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .divider {
+            text-align: center;
+            font-size: 2rem;
+            color: #d4a5a5;
+            margin-bottom: 30px;
+            letter-spacing: 10px;
+        }
+
+        .poem {
+            position: relative;
+            z-index: 1;
+        }
+
+        .poem p {
+            font-size: 1.25rem;
+            line-height: 2;
+            color: #4a4a4a;
+            text-align: center;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .poem p:hover {
+            color: #8b4d6b;
+        }
+
+        .stanza {
+            margin-bottom: 25px;
+        }
+
+        .couplet {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #d4a5a5;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #b88b8b;
+            font-style: italic;
+        }
+
+        .footer-flowers {
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            margin-top: 10px;
+        }
+
+        /* Floating animation for flowers */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
+            50% { transform: translateY(-10px) rotate(var(--rotation)); }
+        }
+
+        .flower {
+            --rotation: 0deg;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .flower-top-left { --rotation: -30deg; animation-delay: 0s; }
+        .flower-top-right { --rotation: 30deg; animation-delay: 1s; }
+        .flower-bottom-left { --rotation: -150deg; animation-delay: 2s; }
+        .flower-bottom-right { --rotation: 150deg; animation-delay: 3s; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .poem p {
+                font-size: 1.1rem;
+            }
+            .flower {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Decorative flowers -->
+        <span class="flower flower-top-left">🌸</span>
+        <span class="flower flower-top-right">🌺</span>
+        <span class="flower flower-bottom-left">🌷</span>
+        <span class="flower flower-bottom-right">🌹</span>
+        <span class="flower flower-accent flower-mid-left">🌼</span>
+        <span class="flower flower-accent flower-mid-right">🌻</span>
+
+        <h1>Sonnet 18</h1>
+        <p class="author">William Shakespeare</p>
+
+        <div class="divider">❧ ❧ ❧</div>
+
+        <div class="poem">
+            <div class="stanza">
+                <p>Shall I compare thee to a summer's day?</p>
+                <p>Thou art more lovely and more temperate:</p>
+                <p>Rough winds do shake the darling buds of May,</p>
+                <p>And summer's lease hath all too short a date.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Sometime too hot the eye of heaven shines,</p>
+                <p>And often is his gold complexion dimm'd;</p>
+                <p>And every fair from fair sometime declines,</p>
+                <p>By chance, or nature's changing course, untrimm'd;</p>
+            </div>
+
+            <div class="stanza">
+                <p>But thy eternal summer shall not fade,</p>
+                <p>Nor lose possession of that fair thou ow'st;</p>
+                <p>Nor shall death brag thou wander'st in his shade,</p>
+                <p>When in eternal lines to time thou grow'st:</p>
+            </div>
+
+            <div class="couplet">
+                <p>So long as men can breathe or eyes can see,</p>
+                <p>So long lives this, and this gives life to thee.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>~ Anno Domini 1609 ~</p>
+            <div class="footer-flowers">🌿 🌸 🦋 🌸 🌿</div>
+        </div>
+    </div>
+</body>
+</html>
