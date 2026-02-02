@@ -19,10 +19,12 @@ This repository serves as a flexible workspace where developers can:
 ```
 Playground/
 ├── CLAUDE.md          # AI assistant guidelines (this file)
+├── docs/              # Documentation
+│   └── skills/        # AI assistant skill definitions
 └── .git/              # Git version control
 ```
 
-*Note: This is a fresh repository. Structure will evolve as projects are added.*
+*Note: Structure will evolve as projects are added.*
 
 ### Recommended Directory Organization
 
@@ -31,12 +33,14 @@ When adding content to this repository, follow these conventions:
 ```
 Playground/
 ├── CLAUDE.md
+├── docs/
+│   ├── skills/        # AI assistant skill definitions
+│   └── ...            # Other documentation
 ├── experiments/       # Short-lived experimental code
 ├── prototypes/        # Feature prototypes and POCs
 ├── learning/          # Tutorial code and learning exercises
 ├── scripts/           # Utility scripts
-├── sandbox/           # Temporary scratch space
-└── docs/              # Documentation for experiments
+└── sandbox/           # Temporary scratch space
 ```
 
 ## Development Workflow
@@ -144,16 +148,35 @@ git clone <repository-url>
 cd Playground
 ```
 
+## Skills
+
+Skills are predefined workflows for common tasks. When a user request matches a skill trigger, follow the documented workflow.
+
+### Available Skills
+
+| Skill | Trigger | Documentation |
+|-------|---------|---------------|
+| Single-Shot Website | "build a website", "create a landing page", "make a portfolio" | [docs/skills/single-shot-website.md](docs/skills/single-shot-website.md) |
+
+### Adding New Skills
+
+Create new skill documents in `docs/skills/` following the existing format:
+- Clear trigger conditions
+- Step-by-step workflow
+- Quality checklist
+
 ## Notes for Claude
 
 When assisting with this repository:
 
-1. **Ask for context:** Since this is a playground, clarify what the user wants to experiment with
-2. **Suggest structure:** Help organize experiments in a clean, maintainable way
-3. **Be experimental:** This is a safe space to try new approaches
-4. **Document learnings:** Help capture insights from experiments
-5. **Keep it clean:** Remind users to clean up old experiments periodically
+1. **Check skills first:** When a user request matches a skill trigger, follow that skill's workflow
+2. **Ask for context:** Since this is a playground, clarify what the user wants to experiment with
+3. **Suggest structure:** Help organize experiments in a clean, maintainable way
+4. **Be experimental:** This is a safe space to try new approaches
+5. **Document learnings:** Help capture insights from experiments
+6. **Keep it clean:** Remind users to clean up old experiments periodically
 
 ## Changelog
 
+- **2026-02-02:** Added Skills section and single-shot-website skill
 - **2026-01-25:** Initial CLAUDE.md created for empty Playground repository
