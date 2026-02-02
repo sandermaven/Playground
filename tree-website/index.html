@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tree</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 60%, #90EE90 60%, #228B22 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+        }
+
+        h1 {
+            position: absolute;
+            top: 30px;
+            color: #2d5016;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            font-size: 2.5rem;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .tree {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .tree:hover {
+            transform: scale(1.02);
+        }
+
+        /* Trunk */
+        .trunk {
+            width: 60px;
+            height: 180px;
+            background: linear-gradient(90deg, #4a3728 0%, #8B4513 50%, #4a3728 100%);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px 5px 0 0;
+            z-index: 1;
+        }
+
+        .trunk::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 40px;
+            background: linear-gradient(90deg, #3d2d1f 0%, #6b4423 50%, #3d2d1f 100%);
+            top: 60px;
+            left: -10px;
+            border-radius: 5px 0 0 5px;
+            transform: rotate(-20deg);
+        }
+
+        .trunk::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 30px;
+            background: linear-gradient(90deg, #3d2d1f 0%, #6b4423 50%, #3d2d1f 100%);
+            top: 100px;
+            right: -8px;
+            border-radius: 0 5px 5px 0;
+            transform: rotate(15deg);
+        }
+
+        /* Foliage layers */
+        .foliage {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .leaves {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #90EE90, #228B22 60%, #006400);
+            box-shadow:
+                inset -10px -10px 20px rgba(0,0,0,0.2),
+                5px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .leaves-1 {
+            width: 200px;
+            height: 180px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .leaves-2 {
+            width: 160px;
+            height: 150px;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .leaves-3 {
+            width: 120px;
+            height: 120px;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .leaves-4 {
+            width: 80px;
+            height: 80px;
+            bottom: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .leaves-5 {
+            width: 50px;
+            height: 50px;
+            bottom: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Side foliage */
+        .leaves-left {
+            width: 100px;
+            height: 90px;
+            bottom: 50px;
+            left: calc(50% - 120px);
+        }
+
+        .leaves-right {
+            width: 110px;
+            height: 100px;
+            bottom: 40px;
+            left: calc(50% + 40px);
+        }
+
+        /* Apples */
+        .apple {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc0000);
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .apple::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 8px;
+            background: #4a3728;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .apple::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 6px;
+            background: #228B22;
+            top: -8px;
+            left: 50%;
+            border-radius: 50%;
+            transform: translateX(-20%) rotate(-30deg);
+        }
+
+        .apple:nth-child(1) { top: 80px; left: 30px; animation-delay: 0s; }
+        .apple:nth-child(2) { top: 120px; left: 150px; animation-delay: 0.5s; }
+        .apple:nth-child(3) { top: 180px; left: 60px; animation-delay: 1s; }
+        .apple:nth-child(4) { top: 200px; left: 130px; animation-delay: 1.5s; }
+        .apple:nth-child(5) { top: 150px; left: 100px; animation-delay: 2s; }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* Ground */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to bottom, #228B22, #1a6b1a);
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 60px;
+            right: 100px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #FFD700, #FFA500);
+            border-radius: 50%;
+            box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 60px #FFD700, 0 0 100px #FFA500; }
+            50% { box-shadow: 0 0 80px #FFD700, 0 0 120px #FFA500; }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+        }
+
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .cloud-1 {
+            width: 80px;
+            height: 40px;
+            top: 80px;
+            left: -100px;
+        }
+
+        .cloud-1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud-1::after {
+            width: 60px;
+            height: 35px;
+            top: -15px;
+            left: 35px;
+        }
+
+        .cloud-2 {
+            width: 100px;
+            height: 50px;
+            top: 120px;
+            left: -200px;
+            animation-delay: -10s;
+        }
+
+        .cloud-2::before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+        }
+
+        .cloud-2::after {
+            width: 70px;
+            height: 40px;
+            top: -20px;
+            left: 45px;
+        }
+
+        @keyframes float {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 200px)); }
+        }
+
+        /* Birds */
+        .bird {
+            position: absolute;
+            font-size: 20px;
+            animation: fly 15s linear infinite;
+        }
+
+        .bird-1 { top: 100px; left: -50px; animation-delay: 0s; }
+        .bird-2 { top: 150px; left: -50px; animation-delay: -5s; }
+
+        @keyframes fly {
+            from { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(25vw) translateY(-20px); }
+            50% { transform: translateX(50vw) translateY(0); }
+            75% { transform: translateX(75vw) translateY(-15px); }
+            to { transform: translateX(calc(100vw + 50px)) translateY(0); }
+        }
+
+        /* Message */
+        .message {
+            position: absolute;
+            bottom: 60px;
+            color: #2d5016;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .tree:hover + .message,
+        .message:hover {
+            opacity: 1;
+        }
+
+        /* Falling leaves animation */
+        .falling-leaf {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, #90EE90, #228B22);
+            border-radius: 0 50% 50% 50%;
+            transform: rotate(45deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: rotate(45deg) translateY(0) translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(405deg) translateY(300px) translateX(100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🌳 The Majestic Tree 🌳</h1>
+
+    <div class="sun"></div>
+
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+
+    <div class="bird bird-1">🐦</div>
+    <div class="bird bird-2">🐦</div>
+
+    <div class="scene">
+        <div class="tree" onclick="dropLeaves(event)">
+            <div class="trunk"></div>
+            <div class="foliage">
+                <div class="leaves leaves-1"></div>
+                <div class="leaves leaves-2"></div>
+                <div class="leaves leaves-3"></div>
+                <div class="leaves leaves-4"></div>
+                <div class="leaves leaves-5"></div>
+                <div class="leaves leaves-left"></div>
+                <div class="leaves leaves-right"></div>
+
+                <div class="apple"></div>
+                <div class="apple"></div>
+                <div class="apple"></div>
+                <div class="apple"></div>
+                <div class="apple"></div>
+            </div>
+        </div>
+        <p class="message">Click the tree to watch leaves fall...</p>
+    </div>
+
+    <div class="ground"></div>
+
+    <script>
+        function dropLeaves(event) {
+            const tree = event.currentTarget;
+            const rect = tree.getBoundingClientRect();
+
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const leaf = document.createElement('div');
+                    leaf.className = 'falling-leaf';
+                    leaf.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                    leaf.style.top = (rect.top + 50 + Math.random() * 100) + 'px';
+                    leaf.style.animation = `fall ${2 + Math.random() * 2}s ease-in forwards`;
+                    document.body.appendChild(leaf);
+
+                    setTimeout(() => leaf.remove(), 4000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
