@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Car</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #e94560;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(233, 69, 96, 0.5); }
+            to { text-shadow: 0 0 40px rgba(233, 69, 96, 0.8), 0 0 60px rgba(233, 69, 96, 0.4); }
+        }
+
+        .tagline {
+            color: #a0a0a0;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .track {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(to bottom,
+                transparent 0%,
+                transparent 45%,
+                #333 45%,
+                #333 55%,
+                transparent 55%);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .track::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                #fff 0px,
+                #fff 30px,
+                transparent 30px,
+                transparent 60px
+            );
+            transform: translateY(-50%);
+            animation: roadMove 0.5s linear infinite;
+        }
+
+        @keyframes roadMove {
+            from { background-position: 0 0; }
+            to { background-position: -60px 0; }
+        }
+
+        .car {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: carBounce 0.3s ease-in-out infinite;
+        }
+
+        @keyframes carBounce {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-3px); }
+        }
+
+        .car-body {
+            position: relative;
+            width: 200px;
+            height: 60px;
+        }
+
+        .car-top {
+            position: absolute;
+            top: -25px;
+            left: 50px;
+            width: 80px;
+            height: 30px;
+            background: linear-gradient(to bottom, #e94560 0%, #c73e54 100%);
+            border-radius: 20px 20px 0 0;
+            box-shadow: inset 0 5px 10px rgba(255,255,255,0.2);
+        }
+
+        .car-top::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 25px;
+            height: 20px;
+            background: linear-gradient(135deg, #87ceeb 0%, #4a9eda 100%);
+            border-radius: 5px 5px 0 0;
+            transform: skewX(-10deg);
+        }
+
+        .car-top::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: 25px;
+            height: 20px;
+            background: linear-gradient(135deg, #87ceeb 0%, #4a9eda 100%);
+            border-radius: 5px 5px 0 0;
+            transform: skewX(10deg);
+        }
+
+        .car-main {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 45px;
+            background: linear-gradient(to bottom, #e94560 0%, #c73e54 100%);
+            border-radius: 30px 50px 10px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        .car-main::before {
+            content: '42';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .headlight {
+            position: absolute;
+            top: 15px;
+            right: -5px;
+            width: 15px;
+            height: 15px;
+            background: radial-gradient(circle, #fff 0%, #ffeb3b 50%, #ffc107 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ffc107;
+            animation: headlightPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes headlightPulse {
+            0%, 100% { box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ffc107; }
+            50% { box-shadow: 0 0 30px #ffeb3b, 0 0 60px #ffc107, 20px 0 80px rgba(255,235,59,0.3); }
+        }
+
+        .taillight {
+            position: absolute;
+            top: 15px;
+            left: 5px;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ff0000 0%, #cc0000 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        .wheel {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #222 0%, #444 50%, #222 100%);
+            border-radius: 50%;
+            border: 4px solid #555;
+            bottom: -20px;
+            animation: wheelSpin 0.3s linear infinite;
+        }
+
+        .wheel::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px;
+            height: 15px;
+            background: radial-gradient(circle, #888 0%, #666 100%);
+            border-radius: 50%;
+        }
+
+        .wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 4px;
+            background: #666;
+        }
+
+        @keyframes wheelSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wheel-front {
+            right: 15px;
+        }
+
+        .wheel-back {
+            left: 25px;
+        }
+
+        .exhaust {
+            position: absolute;
+            left: -30px;
+            top: 25px;
+        }
+
+        .smoke {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(150, 150, 150, 0.6);
+            border-radius: 50%;
+            animation: smokeRise 0.8s ease-out infinite;
+        }
+
+        .smoke:nth-child(2) { animation-delay: 0.2s; left: -10px; }
+        .smoke:nth-child(3) { animation-delay: 0.4s; left: -20px; }
+        .smoke:nth-child(4) { animation-delay: 0.6s; left: -30px; }
+
+        @keyframes smokeRise {
+            0% {
+                opacity: 0.8;
+                transform: translateX(0) translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50px) translateY(-20px) scale(2);
+            }
+        }
+
+        .spoiler {
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            width: 30px;
+            height: 8px;
+            background: #c73e54;
+            border-radius: 2px;
+            transform: rotate(-15deg);
+        }
+
+        .spoiler::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 10px;
+            background: #c73e54;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            min-width: 180px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e94560;
+            display: block;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #e94560 0%, #c73e54 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .checkered-flag {
+            display: inline-block;
+            width: 30px;
+            height: 20px;
+            background: repeating-conic-gradient(#fff 0% 25%, #000 0% 50%) 50% / 10px 10px;
+            margin: 0 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speed Demon</h1>
+        <p class="tagline">Born to race, built to win</p>
+
+        <div class="track">
+            <div class="car">
+                <div class="car-body">
+                    <div class="spoiler"></div>
+                    <div class="car-top"></div>
+                    <div class="car-main">
+                        <div class="headlight"></div>
+                        <div class="taillight"></div>
+                    </div>
+                    <div class="wheel wheel-front"></div>
+                    <div class="wheel wheel-back"></div>
+                    <div class="exhaust">
+                        <div class="smoke"></div>
+                        <div class="smoke"></div>
+                        <div class="smoke"></div>
+                        <div class="smoke"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-value">320</span>
+                <span class="stat-label">Top Speed (mph)</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">2.4s</span>
+                <span class="stat-label">0-60 mph</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">1,200</span>
+                <span class="stat-label">Horsepower</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value">V12</span>
+                <span class="stat-label">Engine</span>
+            </div>
+        </div>
+
+        <button class="cta-button" onclick="alert('Start your engines!')">
+            Start Your Engine
+        </button>
+
+        <footer>
+            <span class="checkered-flag"></span>
+            Race Car Website
+            <span class="checkered-flag"></span>
+        </footer>
+    </div>
+</body>
+</html>
