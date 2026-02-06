@@ -350,6 +350,26 @@
     100% { opacity: 1; }
   }
 
+  /* DUPARC name on shirt */
+  .dave-name {
+    position: absolute;
+    top: 185px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px var(--gold), 0 0 15px var(--pink);
+    animation: nameGlow 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes nameGlow {
+    0% { text-shadow: 0 0 8px var(--gold), 0 0 15px var(--pink); }
+    100% { text-shadow: 0 0 12px var(--cyan), 0 0 25px var(--gold); }
+  }
+
   /* Gold chain */
   .dave-chain {
     position: absolute;
@@ -781,12 +801,12 @@
     100% { transform: scaleX(1); }
   }
 
-  .bar-fill.groove { background: linear-gradient(90deg, var(--pink), var(--purple)); width: 98%; }
-  .bar-fill.style { background: linear-gradient(90deg, var(--gold), var(--orange)); width: 100%; }
-  .bar-fill.moves { background: linear-gradient(90deg, var(--cyan), var(--green)); width: 95%; }
-  .bar-fill.charisma { background: linear-gradient(90deg, var(--purple), var(--pink)); width: 92%; }
-  .bar-fill.stamina { background: linear-gradient(90deg, var(--orange), var(--gold)); width: 88%; }
-  .bar-fill.funk { background: linear-gradient(90deg, var(--green), var(--cyan)); width: 110%; }
+  .bar-fill.rhythm { background: linear-gradient(90deg, var(--pink), var(--purple)); width: 12%; }
+  .bar-fill.confidence { background: linear-gradient(90deg, var(--gold), var(--orange)); width: 150%; }
+  .bar-fill.awareness { background: linear-gradient(90deg, var(--cyan), var(--green)); width: 8%; }
+  .bar-fill.attitude { background: linear-gradient(90deg, var(--purple), var(--pink)); width: 200%; }
+  .bar-fill.hockey { background: linear-gradient(90deg, var(--orange), var(--gold)); width: 85%; }
+  .bar-fill.presence { background: linear-gradient(90deg, var(--green), var(--cyan)); width: 175%; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -931,7 +951,7 @@
 <!-- ===== HEADER ===== -->
 <header class="header">
   <h1>Dave the<br>Disco Dancer</h1>
-  <p class="subtitle">Groovin' since '77</p>
+  <p class="subtitle">Faking it since '76</p>
 
   <div class="equalizer">
     <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
@@ -951,8 +971,9 @@
       <div class="sunglasses-bridge"></div>
     </div>
     <div class="dave-smile"></div>
-    <div class="dave-chain">&#x1F4BF;</div>
+    <div class="dave-chain">&#x1F3D2;</div>
     <div class="dave-body"></div>
+    <div class="dave-name">DUPARC</div>
     <div class="dave-arm left"><div class="dave-hand"><div class="finger"></div></div></div>
     <div class="dave-arm right"><div class="dave-hand"><div class="finger"></div></div></div>
     <div class="dave-leg left"><div class="thigh"></div><div class="boot"></div></div>
@@ -965,88 +986,89 @@
 <section class="section reveal">
   <h2>Who Is Dave?</h2>
   <p style="text-align:center; margin-bottom:25px;">
-    Born under a mirror ball in the summer of love, Dave emerged from the womb doing the hustle.
-    By age 3, he had already been banned from two roller rinks for "excessive funkiness."
-    Today, he is widely regarded as the most electrifying disco dancer the world has ever witnessed.
+    Born in the frozen wilderness of Canada, David Duparc emerged into this world holding an invisible hockey stick in one hand and pointing at the sky with the other.
+    Despite having the rhythmic coordination of a newborn moose on ice, Dave discovered early on that dancing isn't about skill &mdash; it's about <em>commitment</em>.
+    Today, he is widely regarded as the most enthusiastically terrible disco dancer the world has ever witnessed. And he wouldn't have it any other way.
   </p>
   <div class="bio-grid">
     <div class="bio-card">
       <span class="icon">&#x1F3B5;</span>
       <h3>Real Name</h3>
-      <p>David "Dynamite" Discowitz</p>
+      <p>David "The Duparc" Duparc</p>
     </div>
     <div class="bio-card">
       <span class="icon">&#x1F382;</span>
       <h3>Born</h3>
-      <p>July 12, 1954<br>Studio 54 Maternity Ward</p>
+      <p>1976<br>Somewhere in Canada<br>(Near a hockey rink, obviously)</p>
     </div>
     <div class="bio-card">
-      <span class="icon">&#x1F30D;</span>
-      <h3>Hometown</h3>
-      <p>Funkadelphia, PA<br>(Now touring worldwide)</p>
+      <span class="icon">&#x1F1E8;&#x1F1E6;</span>
+      <h3>Origin</h3>
+      <p>Canada &rarr; Netherlands<br>Trading pucks for platforms</p>
     </div>
     <div class="bio-card">
-      <span class="icon">&#x2728;</span>
-      <h3>Nickname</h3>
-      <p>"The Human Disco Ball"</p>
+      <span class="icon">&#x1F3D2;</span>
+      <h3>Former Career</h3>
+      <p>Ice Hockey Player<br>(Better on skates than on feet)</p>
     </div>
     <div class="bio-card">
-      <span class="icon">&#x1F457;</span>
-      <h3>Signature Look</h3>
-      <p>Purple sequin jumpsuit,<br>gold platform boots</p>
+      <span class="icon">&#x1F4A1;</span>
+      <h3>Current Affiliation</h3>
+      <p>Headlights Student Decor<br>Leiden, Netherlands</p>
     </div>
     <div class="bio-card">
       <span class="icon">&#x1F3C6;</span>
       <h3>Awards</h3>
-      <p>7x Funk Champion<br>Lifetime Groove Medal</p>
+      <p>"Most Confident Bad Dancer"<br>"Best Attitude On The Floor"</p>
     </div>
   </div>
 </section>
 
 <!-- ===== SIGNATURE MOVES ===== -->
 <section class="section reveal">
-  <h2>Signature Moves</h2>
+  <h2>"Signature" Moves</h2>
+  <p style="text-align:center; margin-bottom:20px; color: var(--pink); font-style: italic;">(Technically these are all just the same move with different names)</p>
   <ul class="moves-list">
     <li>
-      <span class="move-icon">&#x1F4AB;</span>
+      <span class="move-icon">&#x1F3D2;</span>
       <div>
-        <div class="move-name">The Supernova Spin</div>
-        <div class="move-desc">12 consecutive rotations ending in a full split - rumored to have caused a blackout in '79</div>
+        <div class="move-name">The Hockey Shuffle</div>
+        <div class="move-desc">It's just skating footwork. On a dance floor. Without skates. People have called ambulances thinking he was having a medical episode.</div>
       </div>
     </li>
     <li>
       <span class="move-icon">&#x26A1;</span>
       <div>
-        <div class="move-name">Electric Slide Evolved</div>
-        <div class="move-desc">The classic, but Dave does it on roller skates. Backwards. While juggling.</div>
+        <div class="move-name">The Confident Flail</div>
+        <div class="move-desc">Arms moving in ways that defy both rhythm AND physics. But he maintains eye contact the whole time. Terrifying. Inspiring.</div>
       </div>
     </li>
     <li>
       <span class="move-icon">&#x1F525;</span>
       <div>
-        <div class="move-name">The Floor Inferno</div>
-        <div class="move-desc">A breakdance-disco fusion that literally heated dance floors by 3 degrees</div>
+        <div class="move-name">The Leiden Lunge</div>
+        <div class="move-desc">A move he invented at Headlights. It's just a regular lunge, but he does it while pointing at the DJ with both fingers. Every. Single. Time.</div>
       </div>
     </li>
     <li>
       <span class="move-icon">&#x1F30A;</span>
       <div>
-        <div class="move-name">Tidal Wave</div>
-        <div class="move-desc">A rippling body wave so smooth it once made a statue weep with joy</div>
+        <div class="move-name">The Canadian Apology</div>
+        <div class="move-desc">When Dave accidentally bumps into someone while dancing (which is constantly), he does a little bow. This has been incorporated into the routine.</div>
       </div>
     </li>
     <li>
       <span class="move-icon">&#x1F680;</span>
       <div>
-        <div class="move-name">The Launchpad</div>
-        <div class="move-desc">Dave's legendary vertical leap - confirmed 4.2 feet of pure disco airtime</div>
+        <div class="move-name">The Vertical Enthusiasm</div>
+        <div class="move-desc">Dave jumps. That's it. That's the move. But he jumps with such CONVICTION that people assume it must be intentional.</div>
       </div>
     </li>
     <li>
       <span class="move-icon">&#x1F48E;</span>
       <div>
-        <div class="move-name">Diamond Freeze</div>
-        <div class="move-desc">A pose so perfect, audiences have mistaken Dave for a glitter sculpture</div>
+        <div class="move-name">The Duparc Freeze</div>
+        <div class="move-desc">When the music stops, Dave freezes in whatever position he's in. Once he was stuck pointing at the ceiling for 47 seconds. Legendary.</div>
       </div>
     </li>
   </ul>
@@ -1057,39 +1079,34 @@
   <h2>The Legend Begins</h2>
   <div class="timeline">
     <div class="timeline-event">
-      <span class="year">1954</span>
-      <h3>A Star Is Born (Literally Glowing)</h3>
-      <p>Born during a thunderstorm directly above a discotheque. The doctor noted he came out doing jazz hands.</p>
-    </div>
-    <div class="timeline-event">
-      <span class="year">1962</span>
-      <h3>First Dance Battle Victory</h3>
-      <p>At age 8, Dave defeated a 35-year-old dance instructor in a neighborhood competition. Prize: a pair of gold-plated platform shoes.</p>
-    </div>
-    <div class="timeline-event">
-      <span class="year">1971</span>
-      <h3>The Afro Arrives</h3>
-      <p>Dave's iconic afro reaches peak magnificence. Scientists later classify it as its own gravitational field.</p>
-    </div>
-    <div class="timeline-event">
-      <span class="year">1977</span>
-      <h3>Saturday Night Fever? No. Saturday Night DAVE.</h3>
-      <p>Dave walks into Studio 54 and doesn't leave for 72 hours straight. Sets the all-time dance floor endurance record.</p>
+      <span class="year">1976</span>
+      <h3>Born in the Great White North</h3>
+      <p>David Duparc enters the world in Canada. The nurses note he was born with an unusual amount of confidence and a complete lack of rhythm. A prophetic combination.</p>
     </div>
     <div class="timeline-event">
       <span class="year">1982</span>
-      <h3>The Disco Preservation Movement</h3>
-      <p>When the world tries to cancel disco, Dave launches the "Funk Never Dies" campaign. He is arrested twice for illegal grooviness.</p>
+      <h3>Discovers Ice Hockey</h3>
+      <p>Young Dave straps on his first pair of skates. Finally, a sport where moving awkwardly at high speeds is ENCOURAGED. He thrives.</p>
     </div>
     <div class="timeline-event">
-      <span class="year">1995</span>
-      <h3>Dave Goes Global</h3>
-      <p>World tour across 47 countries. Credited with causing a nationwide dance revolution in at least 12 of them.</p>
+      <span class="year">1994</span>
+      <h3>First Dance Attempt</h3>
+      <p>At a school dance, Dave tries to apply hockey strategies to the dance floor. "If I just skate around everyone really fast, they'll think I'm good." They did not.</p>
     </div>
     <div class="timeline-event">
-      <span class="year">2024</span>
-      <h3>Still Groovin'</h3>
-      <p>At 70 years young, Dave shows no signs of slowing. His latest move, "The Time Warp Hustle," has gone viral with 200M views.</p>
+      <span class="year">Early 2000s</span>
+      <h3>The Great Migration</h3>
+      <p>Dave moves from Canada to the Netherlands. The Dutch, famously direct, immediately tell him his dancing is terrible. Dave interprets this as a challenge.</p>
+    </div>
+    <div class="timeline-event">
+      <span class="year">The Leiden Era</span>
+      <h3>Headlights Student Decor</h3>
+      <p>Dave discovers Headlights, the legendary student association in Leiden. Here, among fellow enthusiasts, he learns the sacred truth: it's not about dancing WELL, it's about dancing WITH CONVICTION.</p>
+    </div>
+    <div class="timeline-event">
+      <span class="year">Present Day</span>
+      <h3>The Attitude Era</h3>
+      <p>At nearly 50, Dave has achieved something few dancers ever do: complete immunity to embarrassment. His moves haven't improved. His attitude is immaculate. The dance floor is his kingdom.</p>
     </div>
   </div>
 </section>
@@ -1097,30 +1114,31 @@
 <!-- ===== STATS ===== -->
 <section class="section reveal">
   <h2>Dave's Stats</h2>
+  <p style="text-align:center; margin-bottom:20px; color: var(--cyan); font-style: italic;">(Brutally honest edition)</p>
   <div class="stat-bars">
     <div class="stat-bar">
-      <span class="stat-label">Groove Factor</span>
-      <div class="bar-track"><div class="bar-fill groove"></div></div>
+      <span class="stat-label">Actual Rhythm</span>
+      <div class="bar-track"><div class="bar-fill rhythm"></div></div>
     </div>
     <div class="stat-bar">
-      <span class="stat-label">Style Points</span>
-      <div class="bar-track"><div class="bar-fill style"></div></div>
+      <span class="stat-label">Confidence</span>
+      <div class="bar-track"><div class="bar-fill confidence"></div></div>
     </div>
     <div class="stat-bar">
-      <span class="stat-label">Dance Moves</span>
-      <div class="bar-track"><div class="bar-fill moves"></div></div>
+      <span class="stat-label">Self-Awareness</span>
+      <div class="bar-track"><div class="bar-fill awareness"></div></div>
     </div>
     <div class="stat-bar">
-      <span class="stat-label">Charisma</span>
-      <div class="bar-track"><div class="bar-fill charisma"></div></div>
+      <span class="stat-label">Attitude</span>
+      <div class="bar-track"><div class="bar-fill attitude"></div></div>
     </div>
     <div class="stat-bar">
-      <span class="stat-label">Stamina</span>
-      <div class="bar-track"><div class="bar-fill stamina"></div></div>
+      <span class="stat-label">Hockey Skills</span>
+      <div class="bar-track"><div class="bar-fill hockey"></div></div>
     </div>
     <div class="stat-bar">
-      <span class="stat-label">Pure Funk</span>
-      <div class="bar-track"><div class="bar-fill funk"></div></div>
+      <span class="stat-label">Dance Floor Presence</span>
+      <div class="bar-track"><div class="bar-fill presence"></div></div>
     </div>
   </div>
 </section>
@@ -1185,30 +1203,30 @@
 <section class="section reveal">
   <h2>Dave's Disco Philosophy</h2>
   <div class="quote-box">
-    <p>Life is a dance floor. Some people stand by the wall. Some people sway gently. But legends? Legends do the splits under a mirror ball at 2 AM on a Tuesday.</p>
-    <p class="attribution">&mdash; Dave "Dynamite" Discowitz</p>
+    <p>They told me I couldn't dance. They were right. But they never said I had to stop.</p>
+    <p class="attribution">&mdash; David Duparc, Leiden, after being asked to leave a dance circle (2019)</p>
   </div>
 
   <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
     <div>
-      <div style="font-size: 3rem;">&#x1F483;</div>
+      <div style="font-size: 3rem;">&#x1F3D2;</div>
       <h3 style="color: var(--pink); margin: 8px 0;">Rule #1</h3>
-      <p>Never turn down an invitation to dance. Even if it's just you and the refrigerator at 3 AM.</p>
+      <p>Dance like you're on ice. This works for Dave because he literally thinks he's always on ice.</p>
     </div>
     <div>
       <div style="font-size: 3rem;">&#x2728;</div>
       <h3 style="color: var(--cyan); margin: 8px 0;">Rule #2</h3>
-      <p>Sequins are not optional. They are a way of life. Your body is a disco ball &mdash; dress accordingly.</p>
+      <p>If you can't be good, be memorable. Anyone can dance well. It takes a special person to dance badly with style.</p>
     </div>
     <div>
-      <div style="font-size: 3rem;">&#x1F3B6;</div>
+      <div style="font-size: 3rem;">&#x1F1E8;&#x1F1E6;</div>
       <h3 style="color: var(--gold); margin: 8px 0;">Rule #3</h3>
-      <p>The bass line is the heartbeat of the universe. If you can't feel it, check your pulse.</p>
+      <p>Always apologize. It's the Canadian way. "Sorry" is just part of the choreography.</p>
     </div>
     <div>
-      <div style="font-size: 3rem;">&#x1F49C;</div>
+      <div style="font-size: 3rem;">&#x1F4A1;</div>
       <h3 style="color: var(--purple); margin: 8px 0;">Rule #4</h3>
-      <p>Disco never died. It just went underground, put on better shoes, and came back stronger.</p>
+      <p>Headlights taught me: the dance floor doesn't judge. And if it does, you can't hear it over the music anyway.</p>
     </div>
   </div>
 </section>
@@ -1218,28 +1236,28 @@
   <h2>Fun Facts About Dave</h2>
   <div class="bio-grid">
     <div class="bio-card">
+      <span class="icon">&#x1F3D2;</span>
+      <p>Dave still wears hockey pads under his disco suit. "For the vibes," he says. Nobody has asked what vibes.</p>
+    </div>
+    <div class="bio-card">
+      <span class="icon">&#x1F1F3;&#x1F1F1;</span>
+      <p>He learned Dutch specifically to understand when people were roasting his dancing. Now he just ignores it in two languages.</p>
+    </div>
+    <div class="bio-card">
+      <span class="icon">&#x1F341;</span>
+      <p>Still apologizes to people he bumped into on the dance floor 15 years ago. It's a Canadian thing.</p>
+    </div>
+    <div class="bio-card">
       <span class="icon">&#x1F4A1;</span>
-      <p>Dave's afro has been registered as a national landmark in 3 countries</p>
+      <p>At Headlights, he once danced for 4 hours straight. Nobody asked him to. The DJ tried to go home. Dave didn't notice.</p>
     </div>
     <div class="bio-card">
-      <span class="icon">&#x1F45F;</span>
-      <p>He owns 247 pairs of platform shoes. The tallest pair adds 8 inches to his height.</p>
-    </div>
-    <div class="bio-card">
-      <span class="icon">&#x1F355;</span>
-      <p>Dave's post-dance meal is always the same: pepperoni pizza, a strawberry milkshake, and a single olive</p>
-    </div>
-    <div class="bio-card">
-      <span class="icon">&#x1F431;</span>
-      <p>His cat, "Donna Summer," also has a small afro. Nobody knows how.</p>
-    </div>
-    <div class="bio-card">
-      <span class="icon">&#x1F30C;</span>
-      <p>NASA named an asteroid after him: 1977-DAVEGROOVE. It orbits to a 120 BPM rhythm.</p>
+      <span class="icon">&#x1F9CA;</span>
+      <p>Claims his dancing is better on actual ice. This has never been tested because everyone is too scared of the outcome.</p>
     </div>
     <div class="bio-card">
       <span class="icon">&#x1F4AA;</span>
-      <p>Dave's resting heart rate is exactly 120 BPM &mdash; the perfect disco tempo</p>
+      <p>His confidence regenerates faster than his actual dance ability could ever improve. Scientists are baffled.</p>
     </div>
   </div>
 </section>
@@ -1251,11 +1269,11 @@
     <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
     <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
   </div>
-  <p>Keep the groove alive.</p>
-  <div class="hearts">&#x1F483; &#x1F570; &#x1F483;</div>
-  <p style="font-size: 0.9rem;">Follow Dave on the dance floor &mdash; he's the one with the spotlight.</p>
+  <p>Keep the groove alive (even if it's technically wrong).</p>
+  <div class="hearts">&#x1F3D2; &#x1F483; &#x1F1E8;&#x1F1E6;</div>
+  <p style="font-size: 0.9rem;">Follow Dave on the dance floor &mdash; he's the one everyone is staring at. Not in a good way. But also not in a bad way?</p>
   <br>
-  <small>&copy; 2026 Dave "Dynamite" Discowitz Fan Club &bull; Designed with pure funk</small>
+  <small>&copy; 2026 The David Duparc Appreciation Society &bull; Headlights Alumni &bull; Designed with attitude over ability</small>
 </footer>
 
 <!-- ===== JAVASCRIPT ===== -->
@@ -1373,7 +1391,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-console.log('%c DAVE SAYS: Keep on groovin! ', 'background: linear-gradient(90deg, #ff2d95, #ffd700); color: #000; font-size: 20px; font-weight: bold; padding: 10px; border-radius: 5px;');
+console.log('%c DAVE SAYS: It\\'s not about dancing well. It\\'s about dancing ANYWAY. ', 'background: linear-gradient(90deg, #ff2d95, #ffd700); color: #000; font-size: 16px; font-weight: bold; padding: 10px; border-radius: 5px;');
 </script>
 
 </body>
