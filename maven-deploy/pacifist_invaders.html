@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacifist Invaders - Maven Company</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        /* Maven Portal Back Button */
+        .back-btn {
+            position: fixed; top: 16px; left: 16px; z-index: 10;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.5); border-radius: 10px;
+            padding: 8px 16px; font-family: 'Inter', system-ui, sans-serif;
+            font-size: 14px; font-weight: 500; color: #1e3a5f;
+            text-decoration: none; cursor: pointer;
+            transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.95); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+        #gameContainer {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background: linear-gradient(to bottom, #0a0a2e 0%, #1a1a4e 100%);
+            border: 3px solid #0ff;
+            box-shadow: 0 0 20px #0ff, inset 0 0 50px rgba(0, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        #player {
+            position: absolute;
+            bottom: 5%;
+            width: 6.25%;
+            height: 5%;
+            background: linear-gradient(to top, #0f0, #0a0);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transition: left 0.05s linear;
+            box-shadow: 0 0 10px #0f0;
+        }
+
+        .bullet {
+            position: absolute;
+            width: 4px;
+            height: 15px;
+            background: #0ff;
+            box-shadow: 0 0 10px #0ff;
+            border-radius: 2px;
+        }
+
+        .letter {
+            position: absolute;
+            font-size: 48px;
+            font-weight: bold;
+            color: #f0f;
+            text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+            cursor: default;
+            transition: transform 0.1s;
+        }
+
+        /* Melodramatic crash animation */
+        .letter.crashing {
+            animation: crashToEarth 2s forwards;
+        }
+
+        @keyframes crashToEarth {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(1.3) rotate(15deg);
+                color: #ff0;
+                text-shadow: 0 0 30px #ff0;
+            }
+            40% {
+                transform: scale(1.1) rotate(-10deg) translateY(50px);
+            }
+            60% {
+                transform: scale(0.9) rotate(20deg) translateY(150px);
+            }
+            80% {
+                transform: scale(0.7) rotate(-5deg) translateY(350px);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0.3) rotate(360deg) translateY(500px);
+                opacity: 0;
+            }
+        }
+
+        /* Speech bubble */
+        .speech-bubble {
+            position: absolute;
+            background: #fff;
+            color: #000;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            max-width: 200px;
+            text-align: center;
+            z-index: 50;
+            animation: bubblePop 0.3s ease-out, bubbleFloat 3s ease-in-out infinite 0.3s;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #fff transparent transparent;
+        }
+
+        @keyframes bubblePop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Tiny people */
+        .tiny-person {
+            position: absolute;
+            bottom: 8%;
+            font-size: 20px;
+            z-index: 60;
+            animation: walkIn 2s ease-out forwards;
+        }
+
+        .tiny-person.from-left {
+            left: -30px;
+            animation: walkInLeft 2s ease-out forwards;
+        }
+
+        .tiny-person.from-right {
+            right: -30px;
+            animation: walkInRight 2s ease-out forwards;
+        }
+
+        @keyframes walkInLeft {
+            0% { left: -30px; }
+            100% { left: 15%; }
+        }
+
+        @keyframes walkInRight {
+            0% { right: -30px; }
+            100% { right: 15%; }
+        }
+
+        .tiny-person .person-bubble {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffeb3b;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: personBubbleAppear 0.5s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+
+        .tiny-person .person-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: #ffeb3b transparent transparent;
+        }
+
+        @keyframes personBubbleAppear {
+            0% { opacity: 0; transform: translateX(-50%) scale(0); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1); }
+        }
+
+        /* Walking animation for person emoji */
+        .tiny-person span {
+            display: inline-block;
+            animation: walking 0.3s infinite alternate;
+        }
+
+        @keyframes walking {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-3px) rotate(5deg); }
+        }
+
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            color: #0ff;
+            font-size: 20px;
+            text-shadow: 0 0 5px #0ff;
+        }
+
+        #guiltMeter {
+            color: #f00;
+            text-shadow: 0 0 5px #f00;
+        }
+
+        #gameOver, #victory {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            display: none;
+            z-index: 100;
+        }
+
+        #gameOver h1 {
+            font-size: 48px;
+            color: #f00;
+            text-shadow: 0 0 20px #f00;
+            margin-bottom: 20px;
+        }
+
+        #victory h1 {
+            font-size: 36px;
+            color: #ff6600;
+            text-shadow: 0 0 20px #ff6600;
+            margin-bottom: 20px;
+        }
+
+        #victory .subtitle {
+            font-size: 24px;
+            color: #ff0;
+            margin-bottom: 20px;
+        }
+
+        #gameOver p, #victory p {
+            font-size: 20px;
+            color: #0ff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: transparent;
+            color: #0ff;
+            border: 2px solid #0ff;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #0ff;
+            color: #000;
+            box-shadow: 0 0 20px #0ff;
+        }
+
+        #startScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            z-index: 100;
+        }
+
+        #startScreen h1 {
+            font-size: 60px;
+            color: #f0f;
+            text-shadow: 0 0 20px #f0f;
+            margin-bottom: 10px;
+            letter-spacing: 15px;
+        }
+
+        #startScreen h2 {
+            font-size: 20px;
+            color: #0ff;
+            margin-bottom: 10px;
+        }
+
+        #startScreen h3 {
+            font-size: 16px;
+            color: #ff6;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        #startScreen .controls {
+            font-size: 16px;
+            color: #888;
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+
+        #lives {
+            display: flex;
+            gap: 10px;
+        }
+
+        .life {
+            width: 20px;
+            height: 15px;
+            background: linear-gradient(to top, #0f0, #0a0);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        /* Pacifist indicator */
+        .pacifist-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            background: #4CAF50;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .letter:hover .pacifist-badge {
+            opacity: 1;
+        }
+
+        /* Ground/Earth at bottom */
+        #ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5%;
+            background: linear-gradient(to bottom, #2d5016 0%, #1a3009 100%);
+            border-top: 2px solid #4a7023;
+        }
+
+        /* Mobile Controls */
+        #mobileControls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            padding: 0 20px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .mobile-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.2);
+            border: 3px solid #0ff;
+            color: #0ff;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .mobile-btn:active, .mobile-btn.active {
+            background: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        }
+
+        .move-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        #fireBtn {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 0, 100, 0.2);
+            border-color: #f06;
+            color: #f06;
+            box-shadow: 0 0 15px rgba(255, 0, 100, 0.3);
+        }
+
+        #fireBtn:active, #fireBtn.active {
+            background: rgba(255, 0, 100, 0.5);
+            box-shadow: 0 0 25px rgba(255, 0, 100, 0.6);
+        }
+
+        /* Responsive scaling */
+        @media (max-width: 850px) {
+            body {
+                flex-direction: column;
+                padding-bottom: 120px;
+            }
+
+            #gameContainer {
+                width: 95vw;
+                max-width: 800px;
+                height: calc(95vw * 0.75);
+                max-height: 600px;
+                transform-origin: top center;
+            }
+
+            #mobileControls {
+                display: flex;
+            }
+
+            #startScreen .controls {
+                display: none;
+            }
+
+            #startScreen h1 {
+                font-size: 10vw;
+                letter-spacing: 2vw;
+            }
+
+            #startScreen h2 {
+                font-size: 4vw;
+            }
+
+            .letter {
+                font-size: 6vw !important;
+            }
+
+            #hud {
+                font-size: 3vw;
+            }
+
+            #gameOver h1, #victory h1 {
+                font-size: 6vw;
+            }
+
+            #gameOver p, #victory p {
+                font-size: 3vw;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 4vw;
+            }
+
+            #player {
+                width: 6vw !important;
+                height: 4vw !important;
+            }
+
+            .speech-bubble {
+                font-size: 10px;
+                padding: 6px 10px;
+                max-width: 120px;
+            }
+
+            .tiny-person {
+                font-size: 16px;
+            }
+
+            .tiny-person .person-bubble {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .mobile-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            #fireBtn {
+                width: 75px;
+                height: 75px;
+            }
+        }
+
+        @media (max-height: 700px) and (max-width: 850px) {
+            #gameContainer {
+                height: 55vh;
+                width: calc(55vh * 1.33);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-btn">&larr; Portal</a>
+
+    <div id="gameContainer">
+        <div id="hud">
+            <div id="guiltMeter">GUILT: <span id="guilt">0</span></div>
+            <div id="lives"></div>
+            <div>VICTIMS: <span id="victims">0</span></div>
+        </div>
+
+        <div id="startScreen">
+            <h1>JACOB</h1>
+            <h2>THE PACIFIST INVADERS</h2>
+            <h3>They come in peace... but do you?</h3>
+            <button onclick="startGame()">START GAME</button>
+            <div class="controls">
+                <p>Arrow Keys or A/D to move</p>
+                <p>SPACE to shoot (but why would you?)</p>
+            </div>
+        </div>
+
+        <div id="gameOver">
+            <h1>GAME OVER</h1>
+            <p>The invaders peacefully descended to Earth.</p>
+            <p>They just wanted to say hello.</p>
+            <button onclick="startGame()">TRY AGAIN</button>
+        </div>
+
+        <div id="victory">
+            <h1>YOU... WON?</h1>
+            <div class="subtitle">But at what cost?</div>
+            <p>You destroyed <span id="victoryVictims">0</span> peaceful beings.</p>
+            <p>They never fired a single shot.</p>
+            <p>They had families.</p>
+            <button onclick="startGame()">LIVE WITH YOUR CHOICES</button>
+        </div>
+
+        <div id="ground"></div>
+        <div id="player"></div>
+    </div>
+
+    <!-- Mobile Controls -->
+    <div id="mobileControls">
+        <div class="move-buttons">
+            <div class="mobile-btn" id="leftBtn">&#9664;</div>
+            <div class="mobile-btn" id="rightBtn">&#9654;</div>
+        </div>
+        <div class="mobile-btn" id="fireBtn">FIRE</div>
+    </div>
+
+    <script>
+        // 70s Retro Sound System using Web Audio API
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        const sounds = {
+            shoot: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.1);
+            },
+
+            sadFall: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 1.5);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 1.5);
+            },
+
+            gasp: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.1);
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.3);
+            },
+
+            sadTrombone: () => {
+                if (!audioCtx) return;
+                const notes = [200, 190, 180, 130];
+                notes.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.4);
+                    gain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.4);
+                    gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + i * 0.4 + 0.05);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + i * 0.4 + 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i * 0.4 + 0.4);
+                    osc.start(audioCtx.currentTime + i * 0.4);
+                    osc.stop(audioCtx.currentTime + i * 0.4 + 0.4);
+                });
+            },
+
+            start: () => {
+                if (!audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.2);
+            }
+        };
+
+        const guiltMessages = [
+            "YOU SHOT HIM!!",
+            "WHY?! WHY DID YOU DO THAT?!",
+            "He didn't do anything to you!",
+            "HE HAD A FAMILY!",
+            "We came in PEACE!",
+            "NOOOOOO!!!",
+            "He was my friend...",
+            "We never fired at you!",
+            "What is WRONG with you?!",
+            "He just wanted to wave hello!",
+            "MONSTER!",
+            "We're PACIFISTS!",
+            "He was 3 days from retirement!",
+            "That was my brother!",
+            "Why are humans like this?!"
+        ];
+
+        const tinyPeopleMessages = [
+            "What did you DO?!",
+            "Why would you do that?",
+            "They were peaceful!",
+            "What were you thinking?!",
+            "I saw everything!",
+            "That was murder!",
+            "They never hurt anyone!",
+            "How could you?!"
+        ];
+
+        const game = {
+            running: false,
+            guilt: 0,
+            victims: 0,
+            lives: 3,
+            playerX: 375,
+            playerSpeed: 8,
+            bullets: [],
+            letters: [],
+            letterDirection: 1,
+            letterSpeed: 0.5,
+            dropAmount: 20,
+            lastShot: 0,
+            shootCooldown: 250,
+            keys: {},
+            speechBubbles: [],
+            tinyPeople: []
+        };
+
+        const container = document.getElementById('gameContainer');
+        const player = document.getElementById('player');
+        const guiltEl = document.getElementById('guilt');
+        const victimsEl = document.getElementById('victims');
+        const livesEl = document.getElementById('lives');
+
+        function toPercent(val, max) {
+            return (val / max * 100) + '%';
+        }
+
+        function createStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        function createLetters() {
+            const word = 'JACOB';
+            const colors = ['#ff0080', '#ff00ff', '#8000ff', '#0080ff', '#00ffff'];
+            const startX = 150;
+            const spacing = 100;
+            game.letters = [];
+            for (let row = 0; row < 3; row++) {
+                for (let i = 0; i < word.length; i++) {
+                    const letter = document.createElement('div');
+                    letter.className = 'letter';
+                    letter.textContent = word[i];
+                    letter.style.color = colors[i];
+                    letter.style.textShadow = `0 0 10px ${colors[i]}, 0 0 20px ${colors[i]}`;
+                    const badge = document.createElement('div');
+                    badge.className = 'pacifist-badge';
+                    badge.textContent = '\u262e Pacifist';
+                    letter.appendChild(badge);
+                    const x = startX + i * spacing;
+                    const y = 80 + row * 60;
+                    letter.style.left = toPercent(x, 800);
+                    letter.style.top = toPercent(y, 600);
+                    container.appendChild(letter);
+                    game.letters.push({ element: letter, x, y, width: 40, height: 48, alive: true, char: word[i] });
+                }
+            }
+        }
+
+        function updateLives() {
+            livesEl.innerHTML = '';
+            for (let i = 0; i < game.lives; i++) {
+                const life = document.createElement('div');
+                life.className = 'life';
+                livesEl.appendChild(life);
+            }
+        }
+
+        function updatePlayer() {
+            if (game.keys['ArrowLeft'] || game.keys['KeyA']) game.playerX = Math.max(0, game.playerX - game.playerSpeed);
+            if (game.keys['ArrowRight'] || game.keys['KeyD']) game.playerX = Math.min(750, game.playerX + game.playerSpeed);
+            player.style.left = toPercent(game.playerX, 800);
+        }
+
+        function shoot() {
+            const now = Date.now();
+            if (now - game.lastShot < game.shootCooldown) return;
+            game.lastShot = now;
+            sounds.shoot();
+            const bullet = document.createElement('div');
+            bullet.className = 'bullet';
+            bullet.style.left = toPercent(game.playerX + 23, 800);
+            bullet.style.bottom = '10%';
+            container.appendChild(bullet);
+            game.bullets.push({ element: bullet, x: game.playerX + 23, y: 540 });
+        }
+
+        function showSpeechBubble(excludeLetter) {
+            const aliveLetters = game.letters.filter(l => l.alive && l !== excludeLetter);
+            if (aliveLetters.length === 0) return;
+            const speaker = aliveLetters[Math.floor(Math.random() * aliveLetters.length)];
+            const message = guiltMessages[Math.floor(Math.random() * guiltMessages.length)];
+            const bubble = document.createElement('div');
+            bubble.className = 'speech-bubble';
+            bubble.textContent = message;
+            let bubbleX = Math.max(10, Math.min(speaker.x - 30, 640));
+            let bubbleY = Math.max(10, Math.min(speaker.y - 60, 500));
+            bubble.style.left = toPercent(bubbleX, 800);
+            bubble.style.top = toPercent(bubbleY, 600);
+            container.appendChild(bubble);
+            game.speechBubbles.push(bubble);
+            setTimeout(() => { bubble.remove(); game.speechBubbles = game.speechBubbles.filter(b => b !== bubble); }, 3000);
+        }
+
+        function spawnTinyPeople() {
+            const person1 = document.createElement('div');
+            person1.className = 'tiny-person from-left';
+            person1.innerHTML = '<span>\ud83d\udeb6</span>';
+            const bubble1 = document.createElement('div');
+            bubble1.className = 'person-bubble';
+            bubble1.textContent = tinyPeopleMessages[Math.floor(Math.random() * tinyPeopleMessages.length)];
+            person1.appendChild(bubble1);
+            container.appendChild(person1);
+            game.tinyPeople.push(person1);
+            setTimeout(() => {
+                const person2 = document.createElement('div');
+                person2.className = 'tiny-person from-right';
+                person2.innerHTML = '<span>\ud83d\udeb6\u200d\u2640\ufe0f</span>';
+                const bubble2 = document.createElement('div');
+                bubble2.className = 'person-bubble';
+                bubble2.textContent = tinyPeopleMessages[Math.floor(Math.random() * tinyPeopleMessages.length)];
+                person2.appendChild(bubble2);
+                container.appendChild(person2);
+                game.tinyPeople.push(person2);
+            }, 500);
+            setTimeout(() => { game.tinyPeople.forEach(p => p.remove()); game.tinyPeople = []; }, 5000);
+        }
+
+        function updateBullets() {
+            game.bullets = game.bullets.filter(bullet => {
+                bullet.y -= 10;
+                bullet.element.style.bottom = toPercent(600 - bullet.y, 600);
+                if (bullet.y < 0) { bullet.element.remove(); return false; }
+                for (const letter of game.letters) {
+                    if (!letter.alive) continue;
+                    if (bullet.x > letter.x && bullet.x < letter.x + letter.width && bullet.y > letter.y && bullet.y < letter.y + letter.height) {
+                        letter.alive = false;
+                        letter.element.classList.add('crashing');
+                        sounds.sadFall();
+                        sounds.gasp();
+                        game.guilt += 100;
+                        game.victims++;
+                        guiltEl.textContent = game.guilt;
+                        victimsEl.textContent = game.victims;
+                        setTimeout(() => showSpeechBubble(letter), 300);
+                        setTimeout(() => showSpeechBubble(letter), 800);
+                        if (game.victims % 3 === 1) setTimeout(() => spawnTinyPeople(), 500);
+                        setTimeout(() => letter.element.remove(), 2000);
+                        bullet.element.remove();
+                        if (game.letters.every(l => !l.alive)) setTimeout(() => victory(), 2500);
+                        return false;
+                    }
+                }
+                return true;
+            });
+        }
+
+        function updateLetters() {
+            let hitEdge = false, hitBottom = false;
+            for (const letter of game.letters) {
+                if (!letter.alive) continue;
+                letter.x += game.letterSpeed * game.letterDirection;
+                if (letter.x <= 10 || letter.x >= 750) hitEdge = true;
+                if (letter.y >= 480) hitBottom = true;
+            }
+            if (hitEdge) {
+                game.letterDirection *= -1;
+                for (const letter of game.letters) { if (!letter.alive) continue; letter.y += game.dropAmount; letter.element.style.top = toPercent(letter.y, 600); }
+            }
+            for (const letter of game.letters) { if (!letter.alive) continue; letter.element.style.left = toPercent(letter.x, 800); }
+            if (hitBottom) gameOver();
+        }
+
+        function gameOver() {
+            game.running = false;
+            document.getElementById('gameOver').style.display = 'block';
+        }
+
+        function victory() {
+            game.running = false;
+            sounds.sadTrombone();
+            document.getElementById('victoryVictims').textContent = game.victims;
+            document.getElementById('victory').style.display = 'block';
+        }
+
+        function startGame() {
+            initAudio();
+            sounds.start();
+            game.running = true;
+            game.guilt = 0;
+            game.victims = 0;
+            game.lives = 3;
+            game.playerX = 375;
+            game.letterDirection = 1;
+            game.letterSpeed = 0.5;
+            guiltEl.textContent = '0';
+            victimsEl.textContent = '0';
+            updateLives();
+            game.bullets.forEach(b => b.element.remove());
+            game.letters.forEach(l => l.element.remove());
+            game.speechBubbles.forEach(b => b.remove());
+            game.tinyPeople.forEach(p => p.remove());
+            game.bullets = [];
+            game.speechBubbles = [];
+            game.tinyPeople = [];
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('victory').style.display = 'none';
+            createLetters();
+            if (!game.loopStarted) { game.loopStarted = true; gameLoop(); }
+        }
+
+        function gameLoop() {
+            if (game.running) {
+                updatePlayer();
+                updateBullets();
+                updateLetters();
+                if (game.keys['Space']) shoot();
+            }
+            requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener('keydown', (e) => { game.keys[e.code] = true; if (['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault(); });
+        document.addEventListener('keyup', (e) => { game.keys[e.code] = false; });
+
+        const leftBtn = document.getElementById('leftBtn');
+        const rightBtn = document.getElementById('rightBtn');
+        const fireBtn = document.getElementById('fireBtn');
+        function handleTouchStart(key, btn) { return function(e) { e.preventDefault(); game.keys[key] = true; btn.classList.add('active'); }; }
+        function handleTouchEnd(key, btn) { return function(e) { e.preventDefault(); game.keys[key] = false; btn.classList.remove('active'); }; }
+        leftBtn.addEventListener('touchstart', handleTouchStart('ArrowLeft', leftBtn));
+        leftBtn.addEventListener('touchend', handleTouchEnd('ArrowLeft', leftBtn));
+        leftBtn.addEventListener('touchcancel', handleTouchEnd('ArrowLeft', leftBtn));
+        rightBtn.addEventListener('touchstart', handleTouchStart('ArrowRight', rightBtn));
+        rightBtn.addEventListener('touchend', handleTouchEnd('ArrowRight', rightBtn));
+        rightBtn.addEventListener('touchcancel', handleTouchEnd('ArrowRight', rightBtn));
+        fireBtn.addEventListener('touchstart', handleTouchStart('Space', fireBtn));
+        fireBtn.addEventListener('touchend', handleTouchEnd('Space', fireBtn));
+        fireBtn.addEventListener('touchcancel', handleTouchEnd('Space', fireBtn));
+        document.addEventListener('touchmove', (e) => { if (game.running) e.preventDefault(); }, { passive: false });
+
+        createStars();
+    </script>
+</body>
+</html>
