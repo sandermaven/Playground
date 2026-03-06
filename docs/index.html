@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bassie's Yoni Massage — Amsterdam Oud-Zuid | Dutch Hockey Team Manager</title>
-<meta name="description" content="Professional yoni massage, tantric massage & sensual bodywork in Amsterdam Oud-Zuid by Bassie — accredited practitioner & manager of the Dutch men's hockey team.">
+<meta name="description" content="Professional yoni massage, tantric massage & sensual bodywork in Amsterdam Oud-Zuid by Bassie — accredited practitioner & manager of the Dutch men's hockey team. Yes, really.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -49,6 +49,7 @@ a:hover{color:var(--orange-dark)}
 .text-center{text-align:center}
 .subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-light);font-size:1.15rem;margin-bottom:2rem}
 .divider{width:60px;height:2px;background:var(--orange);margin:1.5rem auto}
+.joke{font-size:.85rem;color:var(--text-light);font-style:italic;opacity:.8;margin-top:.5rem}
 
 /* ── Fade-in animation ────────────────────────────── */
 .fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
@@ -69,7 +70,6 @@ a:hover{color:var(--orange-dark)}
 .navbar .container{display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--orange-dark);font-weight:500;display:flex;align-items:center;gap:8px}
 .nav-logo span{color:var(--orange)}
-.nav-logo .hockey-icon{font-size:1.2rem}
 .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
 .nav-links a{font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text);font-weight:500}
 .nav-links a:hover{color:var(--orange)}
@@ -98,13 +98,20 @@ a:hover{color:var(--orange-dark)}
 /* ── About ────────────────────────────────────────── */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-image{border-radius:16px;overflow:hidden;aspect-ratio:3/4;position:relative}
-.about-image img{width:100%;height:100%;object-fit:cover;display:block}
+.about-image img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .about-image::after{content:'';position:absolute;inset:0;border:1px solid var(--orange);border-radius:16px;margin:-8px;pointer-events:none}
+.about-image .photo-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:var(--white);padding:20px 16px 12px;font-size:.78rem;font-style:italic;text-align:center}
 .about-text .highlight{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--orange);border-left:3px solid var(--orange);padding-left:20px;margin:1.5rem 0}
 .credential-badges{display:flex;flex-wrap:wrap;gap:10px;margin:1.5rem 0}
 .credential-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--orange),var(--orange-dark));color:var(--white);padding:6px 14px;border-radius:50px;font-size:.8rem;font-weight:500;letter-spacing:.02em}
 .credential-badge.hockey{background:linear-gradient(135deg,var(--dutch-blue),var(--dutch-blue-light))}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ── Fun Facts Banner ─────────────────────────────── */
+.fun-facts{background:var(--orange);color:var(--white);padding:24px 0;overflow:hidden;position:relative}
+.fun-facts-track{display:flex;gap:48px;animation:marquee 25s linear infinite;white-space:nowrap}
+.fun-facts-track span{font-size:.9rem;font-weight:500;display:inline-flex;align-items:center;gap:8px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── Services ─────────────────────────────────────── */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:3rem}
@@ -114,6 +121,7 @@ a:hover{color:var(--orange-dark)}
 .service-card h3{color:var(--orange-dark)}
 .service-card p{color:var(--text-light);font-size:.92rem;margin-bottom:1.2rem}
 .service-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--orange);font-weight:600}
+.service-card .service-joke{font-size:.78rem;color:var(--text-light);font-style:italic;margin-top:.8rem;opacity:.7}
 
 /* ── What to Expect ───────────────────────────────── */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:3rem}
@@ -125,9 +133,9 @@ a:hover{color:var(--orange-dark)}
 /* ── Hockey Schedule ─────────────────────────────── */
 .schedule-wrapper{margin-top:3rem}
 .schedule-block{margin-bottom:2.5rem}
-.schedule-block-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.schedule-block-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .schedule-block-title .venue-tag{font-family:'DM Sans',sans-serif;font-size:.7rem;background:var(--dutch-blue);color:var(--white);padding:3px 10px;border-radius:50px;font-weight:500;letter-spacing:.03em;text-transform:uppercase}
-.match-row{display:grid;grid-template-columns:120px 1fr 80px;gap:16px;align-items:center;padding:14px 20px;border-radius:12px;margin-bottom:6px;font-size:.9rem;transition:background .3s}
+.match-row{display:grid;grid-template-columns:120px 1fr 100px;gap:16px;align-items:center;padding:14px 20px;border-radius:12px;margin-bottom:6px;font-size:.9rem;transition:background .3s}
 .match-row:nth-child(even){background:rgba(232,93,4,.04)}
 .match-row:hover{background:rgba(232,93,4,.08)}
 .match-date{font-weight:600;color:var(--text);font-size:.82rem}
@@ -138,6 +146,7 @@ a:hover{color:var(--orange-dark)}
 .match-result{text-align:right;font-weight:600;color:var(--field-green);font-size:.85rem}
 .match-result.upcoming{color:var(--dutch-blue);font-weight:400;font-style:italic}
 .match-result.loss{color:#c1121f}
+.match-comment{font-size:.72rem;color:rgba(255,255,255,.5);font-style:italic;grid-column:1/-1;padding:0 20px 4px;margin-top:-8px}
 .schedule-legend{display:flex;gap:20px;justify-content:center;margin-top:2rem;font-size:.8rem;color:var(--text-light)}
 .schedule-legend span{display:inline-flex;align-items:center;gap:6px}
 .schedule-legend .dot-win{width:8px;height:8px;border-radius:50%;background:var(--field-green)}
@@ -148,7 +157,7 @@ a:hover{color:var(--orange-dark)}
 .worldcup-banner p{margin:0;font-size:.95rem;opacity:.9}
 
 @media(max-width:600px){
-  .match-row{grid-template-columns:90px 1fr 60px;gap:8px;padding:10px 12px;font-size:.82rem}
+  .match-row{grid-template-columns:90px 1fr 70px;gap:8px;padding:10px 12px;font-size:.82rem}
 }
 
 /* ── Testimonials ─────────────────────────────────── */
@@ -188,6 +197,7 @@ a:hover{color:var(--orange-dark)}
 .footer{background:#1a1a2e;color:var(--cream);padding:40px 0;text-align:center;font-size:.85rem}
 .footer a{color:var(--orange-light)}
 .footer-disclaimer{color:rgba(250,246,241,.5);margin-top:12px;font-size:.78rem}
+.footer-joke{color:rgba(250,246,241,.35);font-size:.72rem;font-style:italic;margin-top:8px}
 
 /* ── WhatsApp float ───────────────────────────────── */
 .whatsapp-float{position:fixed;bottom:24px;right:24px;z-index:999;width:60px;height:60px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s;cursor:pointer}
@@ -205,7 +215,7 @@ a:hover{color:var(--orange-dark)}
 <!-- ═══ Navbar ═══ -->
 <nav class="navbar" id="navbar">
   <div class="container">
-    <a href="#hero" class="nav-logo"><span class="hockey-icon">&#127954;</span> Bassie<span>'</span>s</a>
+    <a href="#hero" class="nav-logo">&#127954; Bassie<span>'</span>s</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" onclick="closeNav()">About</a></li>
       <li><a href="#services" onclick="closeNav()">Services</a></li>
@@ -227,23 +237,40 @@ a:hover{color:var(--orange-dark)}
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge"><span class="dot"></span> Accredited Practitioner & Dutch Hockey Team Manager</div>
-      <h1>Reconnect with Your Body Through <em>Sacred Touch</em></h1>
-      <p class="subtitle">Professional yoni massage & tantric bodywork by Bassie — from the hockey pitch to the healing room, in the heart of Amsterdam Oud-Zuid</p>
+      <h1>From Hockey Sticks to <em>Healing Hands</em></h1>
+      <p class="subtitle">Professional yoni massage & tantric bodywork by Bassie — the only person in Amsterdam who can give you a penalty corner AND a deep tissue release. Based in Oud-Zuid.</p>
       <div class="hero-buttons">
         <a href="#contact" class="btn btn-primary">Book Your Session</a>
         <a href="#schedule" class="btn btn-outline" style="border-color:var(--white);color:var(--white)">Match Schedule 2026</a>
       </div>
     </div>
   </div>
-  <div class="scroll-hint">scroll <span>&#8595;</span></div>
+  <div class="scroll-hint">scroll down (no hockey balls will fly at you) <span>&#8595;</span></div>
 </section>
+
+<!-- ═══ Fun Facts Marquee ═══ -->
+<div class="fun-facts">
+  <div class="fun-facts-track">
+    <span>&#127954; Only hockey manager in the world who also does yoni massage</span>
+    <span>&#10024; "Best hands in Dutch hockey" — the players (and clients)</span>
+    <span>&#129505; 12+ years of healing touch & 0 red cards</span>
+    <span>&#127942; Trained in Amsterdam & Bali (not on the hockey pitch, that would be weird)</span>
+    <span>&#128170; Can release your tension AND motivate 18 elite athletes before breakfast</span>
+    <span>&#127954; Only hockey manager in the world who also does yoni massage</span>
+    <span>&#10024; "Best hands in Dutch hockey" — the players (and clients)</span>
+    <span>&#129505; 12+ years of healing touch & 0 red cards</span>
+    <span>&#127942; Trained in Amsterdam & Bali (not on the hockey pitch, that would be weird)</span>
+    <span>&#128170; Can release your tension AND motivate 18 elite athletes before breakfast</span>
+  </div>
+</div>
 
 <!-- ═══ About ═══ -->
 <section class="section" id="about">
   <div class="container">
     <div class="about-grid fade-in">
       <div class="about-image">
-        <img src="https://picsum.photos/seed/warmportrait/600/800" alt="Bassie — practitioner & hockey team manager" loading="lazy">
+        <img src="images/bassie.jpg" alt="Bassie — accredited practitioner & Dutch men's hockey team manager, looking sharp in a suit because managing a national team requires looking the part" loading="lazy">
+        <div class="photo-caption">Yes, this is the face of someone who manages elite hockey AND sacred bodywork. Multitasking king.</div>
       </div>
       <div class="about-text">
         <h2>Meet Bassie</h2>
@@ -252,10 +279,11 @@ a:hover{color:var(--orange-dark)}
           <span class="credential-badge">Accredited Practitioner</span>
           <span class="credential-badge hockey">&#127954; Dutch Men's Hockey Team Manager</span>
         </div>
-        <p>Bassie brings a unique blend of athletic discipline and healing intuition. As an accredited bodywork practitioner and manager of the Netherlands men's national hockey team, she understands the body like few others — from elite sport performance to deep somatic healing.</p>
-        <div class="highlight">"Whether on the hockey pitch or in the treatment room, I believe in the power of presence, trust, and the body's extraordinary ability to heal."</div>
-        <p>With over twelve years of experience in tantric bodywork and somatic healing, combined with her role supporting the Dutch hockey squad through FIH Pro League and World Cup campaigns, Bassie brings a grounded, professional approach to every session. Trained in Amsterdam and Bali in tantric massage, trauma-informed touch, and breathwork, she combines ancient wisdom with athletic insight.</p>
-        <p>Her practice in Oud-Zuid is a warm, private sanctuary designed for your complete comfort and confidentiality. Whether you are exploring this work for the first time or deepening an existing practice, she meets you exactly where you are — with warmth, respect, and zero judgement.</p>
+        <p>By day, Bassie manages the Netherlands men's national hockey team through FIH Pro League campaigns and World Cup glory. By slightly-later-in-the-day, he's Amsterdam's most trusted yoni massage practitioner. It's a career combination that literally nobody else on Earth has, and frankly, we think that's beautiful.</p>
+        <div class="highlight">"Whether I'm screaming tactical instructions at hockey players or whispering 'breathe deeply' in a candlelit room — it's all about presence, trust, and reading the body. The dress code is just different."</div>
+        <p>As an accredited bodywork practitioner with over twelve years of experience, Bassie brings the same discipline, focus, and attention to detail that keeps the Dutch hockey squad at the top of world rankings. Trained in Amsterdam and Bali in tantric massage, trauma-informed touch, and breathwork, he combines ancient wisdom with the strategic mind of someone who has to figure out penalty corner variations for a living.</p>
+        <p>His practice in Oud-Zuid is a warm, private sanctuary designed for your complete comfort and confidentiality. Think of it as the opposite of a hockey stadium — no shouting, no astroturf burns, and absolutely no referees. Just warmth, respect, and zero judgement.</p>
+        <p class="joke">(Fun fact: Bassie is the only person in the Netherlands who has both a KNHB team pass and a massage table. His Google Calendar is... something.)</p>
       </div>
     </div>
   </div>
@@ -265,36 +293,40 @@ a:hover{color:var(--orange-dark)}
 <section class="section section-alt" id="services">
   <div class="container text-center">
     <h2 class="fade-in">Services & Treatments</h2>
-    <p class="subtitle fade-in">Each session is tailored to your body, your boundaries, and your intentions</p>
+    <p class="subtitle fade-in">Each session is tailored to your body, your boundaries, and your intentions — not your hockey position</p>
     <div class="services-grid">
       <div class="service-card fade-in">
         <div class="service-icon">&#10047;</div>
         <h3>Yoni Massage</h3>
         <p>A deeply nurturing treatment focused on releasing tension held in the pelvic area. Through gentle, intuitive touch and breathwork, this session supports emotional release, increased sensitivity, and a profound sense of embodiment.</p>
         <div class="service-price">from &#8364;120 / 60 min</div>
+        <div class="service-joke">No hockey sticks involved. We checked.</div>
       </div>
       <div class="service-card fade-in">
         <div class="service-icon">&#10043;</div>
         <h3>Full-Body Sensual Massage</h3>
         <p>A slow, flowing full-body treatment using warm oils and mindful touch. Designed to calm the nervous system, awaken the senses, and bring you into deep presence with your body. Ideal for stress relief and reconnection.</p>
         <div class="service-price">from &#8364;120 / 60 min</div>
+        <div class="service-joke">More relaxing than watching NED score 7 against Pakistan. Almost.</div>
       </div>
       <div class="service-card fade-in">
         <div class="service-icon">&#9672;</div>
         <h3>Tantric Massage</h3>
         <p>Combining breathwork, energy work, and full-body touch, this holistic session moves energy through the body to dissolve blockages. A transformative experience that integrates the physical, emotional, and spiritual.</p>
         <div class="service-price">from &#8364;180 / 90 min</div>
+        <div class="service-joke">Think of it as a penalty corner for your chakras.</div>
       </div>
       <div class="service-card fade-in">
         <div class="service-icon">&#10086;</div>
         <h3>Couples Introduction</h3>
         <p>A guided session for couples who wish to deepen their intimate connection. Learn conscious touch techniques, communication skills, and breathwork practices you can continue at home together.</p>
         <div class="service-price">from &#8364;240 / 120 min</div>
+        <div class="service-joke">Better teamwork than the Dutch midfield. (Don't tell the players.)</div>
       </div>
     </div>
     <p style="margin-top:2.5rem;color:var(--text-light);font-size:.9rem" class="fade-in">
       <strong>Duration options:</strong> 60 min — &#8364;120 &nbsp;·&nbsp; 90 min — &#8364;180 &nbsp;·&nbsp; 120 min — &#8364;240<br>
-      All sessions include intake conversation, breathwork, and aftercare.
+      All sessions include intake conversation, breathwork, and aftercare. Halftime oranges not included (but tea is).
     </p>
   </div>
 </section>
@@ -303,27 +335,27 @@ a:hover{color:var(--orange-dark)}
 <section class="section" id="expect">
   <div class="container text-center">
     <h2 class="fade-in">What to Expect</h2>
-    <p class="subtitle fade-in">Your comfort and safety come first — always</p>
+    <p class="subtitle fade-in">Your comfort and safety come first — unlike in hockey, where the ball comes first</p>
     <div class="steps">
       <div class="step fade-in">
         <div class="step-number">1</div>
         <h3>Intake & Intention</h3>
-        <p>We begin with a warm cup of tea and a private conversation about your intentions, boundaries, and any questions. Nothing happens without your explicit consent.</p>
+        <p>We begin with a warm cup of tea and a private conversation about your intentions, boundaries, and any questions. Think of it as a pre-match briefing, but with chamomile and no whiteboards.</p>
       </div>
       <div class="step fade-in">
         <div class="step-number">2</div>
         <h3>Breathwork & Relaxation</h3>
-        <p>Guided breathing exercises help you arrive in your body, calm your nervous system, and create space for deeper sensation and presence.</p>
+        <p>Guided breathing exercises help you arrive in your body and calm your nervous system. Bassie uses the same breathing techniques he teaches hockey players before big games — minus the "COME ON BOYS, LET'S GO!" part.</p>
       </div>
       <div class="step fade-in">
         <div class="step-number">3</div>
         <h3>The Session</h3>
-        <p>Using warm oils and intuitive touch, the massage unfolds at your pace. You are always in control — we communicate throughout and you can pause or stop at any moment.</p>
+        <p>Using warm oils and intuitive touch, the massage unfolds at your pace. You are always in control — like a midfielder who decides the tempo. You can pause or stop at any moment, no questions asked.</p>
       </div>
       <div class="step fade-in">
         <div class="step-number">4</div>
         <h3>Integration & Aftercare</h3>
-        <p>After the session, you have time to rest. We close with a brief reflection and I share personalised aftercare guidance for the days ahead.</p>
+        <p>After the session, you have time to rest. We close with a brief reflection and personalised aftercare guidance. It's basically a post-match analysis, but for your soul.</p>
       </div>
     </div>
   </div>
@@ -334,7 +366,7 @@ a:hover{color:var(--orange-dark)}
   <div class="container">
     <div class="text-center">
       <h2 class="fade-in" style="color:var(--orange-light)">&#127954; Netherlands Men's Hockey — 2026 Schedule</h2>
-      <p class="subtitle fade-in" style="color:rgba(255,255,255,.7)">Follow the Dutch squad managed by Bassie through FIH Pro League & World Cup 2026</p>
+      <p class="subtitle fade-in" style="color:rgba(255,255,255,.7)">Follow Bassie's squad through FIH Pro League & World Cup 2026 — come for the massage, stay for the match results</p>
     </div>
 
     <div class="schedule-wrapper fade-in">
@@ -345,23 +377,26 @@ a:hover{color:var(--orange-dark)}
         <div class="match-row">
           <div class="match-date">9 Dec 2025</div>
           <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">PAK</span></div>
-          <div class="match-result">5 – 2</div>
+          <div class="match-result">5 – 2 &#128170;</div>
         </div>
         <div class="match-row">
           <div class="match-date">10 Dec 2025</div>
           <div class="match-teams"><span class="team">ARG</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
           <div class="match-result loss">1 – 1 (SO)</div>
         </div>
+        <div class="match-comment">Shootouts. Bassie's least favourite thing after clients who cancel last minute.</div>
         <div class="match-row">
           <div class="match-date">12 Dec 2025</div>
           <div class="match-teams"><span class="team">PAK</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
-          <div class="match-result">3 – 7</div>
+          <div class="match-result">3 – 7 &#128293;</div>
         </div>
+        <div class="match-comment">Seven goals. Bassie was so happy he offered free massages to the whole team. (He didn't.)</div>
         <div class="match-row">
           <div class="match-date">13 Dec 2025</div>
           <div class="match-teams"><span class="team">ARG</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
           <div class="match-result loss">3 – 2</div>
         </div>
+        <div class="match-comment">Argentina's revenge. Bassie needed a massage himself after this one.</div>
       </div>
 
       <!-- Spain Block -->
@@ -370,33 +405,36 @@ a:hover{color:var(--orange-dark)}
         <div class="match-row">
           <div class="match-date">5 Feb 2026</div>
           <div class="match-teams"><span class="team">ESP</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
-          <div class="match-result">3 – 4</div>
+          <div class="match-result">3 – 4 &#127881;</div>
         </div>
         <div class="match-row">
           <div class="match-date">6 Feb 2026</div>
           <div class="match-teams"><span class="team">ENG</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
           <div class="match-result loss">2 – 2 (SO)</div>
         </div>
+        <div class="match-comment">England and shootouts. Name a more stressful duo. (Answer: scheduling hockey and massage clients.)</div>
         <div class="match-row">
           <div class="match-date">8 Feb 2026</div>
           <div class="match-teams"><span class="team">ESP</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
-          <div class="match-result">2 – 3</div>
+          <div class="match-result">2 – 3 &#128076;</div>
         </div>
         <div class="match-row">
           <div class="match-date">9 Feb 2026</div>
           <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">ENG</span></div>
           <div class="match-result loss">2 – 2 (SO)</div>
         </div>
+        <div class="match-comment">England won ANOTHER shootout. Bassie's stress levels: needs his own tantric massage.</div>
       </div>
 
       <!-- Rotterdam Block -->
       <div class="schedule-block">
-        <div class="schedule-block-title">June 2026 — Home <span class="venue-tag">HC Rotterdam</span></div>
+        <div class="schedule-block-title">June 2026 — Home &#127968; <span class="venue-tag">HC Rotterdam</span></div>
         <div class="match-row">
           <div class="match-date">13 Jun 2026</div>
           <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">GER</span></div>
           <div class="match-result upcoming">10:00</div>
         </div>
+        <div class="match-comment">Classic rivalry. Massage appointments available after 16:00 that day.</div>
         <div class="match-row">
           <div class="match-date">14 Jun 2026</div>
           <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">IND</span></div>
@@ -412,6 +450,7 @@ a:hover{color:var(--orange-dark)}
           <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">IND</span></div>
           <div class="match-result upcoming">08:00</div>
         </div>
+        <div class="match-comment">8 AM start. Even the hockey ball is still sleeping.</div>
       </div>
 
       <!-- Belgium Block -->
@@ -422,6 +461,7 @@ a:hover{color:var(--orange-dark)}
           <div class="match-teams"><span class="team">BEL</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
           <div class="match-result upcoming">15:00</div>
         </div>
+        <div class="match-comment">NED vs BEL. Like the frietjes debate, but with hockey sticks.</div>
         <div class="match-row">
           <div class="match-date">26 Jun 2026</div>
           <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">AUS</span></div>
@@ -444,7 +484,8 @@ a:hover{color:var(--orange-dark)}
       <div class="worldcup-banner fade-in">
         <h3>&#127942; FIH Hockey World Cup 2026</h3>
         <p><strong>15 – 30 August 2026</strong> &nbsp;·&nbsp; Wagener Stadium, Amsterdam & Belfius Hockey Arena, Wavre<br>
-        The Netherlands co-hosts the Men's & Women's World Cup. Pool draw revealed 17 March. Stay tuned for match details!</p>
+        The Netherlands co-hosts the Men's & Women's World Cup. Pool draw revealed 17 March.<br>
+        <em style="font-size:.82rem;opacity:.7">Massage practice will be closed during the World Cup. Bassie will be too busy yelling and looking stressed.</em></p>
       </div>
 
     </div>
@@ -455,21 +496,21 @@ a:hover{color:var(--orange-dark)}
 <section class="section section-alt" id="testimonials">
   <div class="container text-center">
     <h2 class="fade-in">What Clients Say</h2>
-    <p class="subtitle fade-in">Shared with permission — names changed for privacy</p>
+    <p class="subtitle fade-in">Shared with permission — names changed for privacy (the hockey team has their own reviews elsewhere)</p>
     <div class="testimonials-grid">
       <div class="testimonial fade-in">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>I was incredibly nervous before my first session, but Bassie immediately put me at ease. Her warmth and professionalism are extraordinary. I left feeling lighter, more connected to myself, and genuinely at peace. This experience has been transformative for my relationship with my own body.</p>
+        <p>I was incredibly nervous before my first session, but Bassie immediately put me at ease. His warmth and professionalism are extraordinary. I left feeling lighter, more connected to myself, and genuinely at peace. Also, he told me about the NED vs PAK 7-3 match and his excitement was adorable.</p>
         <div class="testimonial-author">— Sophie, 34</div>
       </div>
       <div class="testimonial fade-in">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>After years of feeling disconnected, one session with Bassie changed everything. She creates the safest space imaginable. There was no pressure, no judgement — just pure, healing presence. I've been back three times now, and each session reveals something new.</p>
+        <p>After years of feeling disconnected, one session with Bassie changed everything. He creates the safest space imaginable. There was no pressure, no judgement — just pure, healing presence. The man literally manages a national sports team AND does this. Legend.</p>
         <div class="testimonial-author">— Marieke, 41</div>
       </div>
       <div class="testimonial fade-in">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>My partner and I did the couples session and it was eye-opening. Bassie taught us how to truly communicate through touch. The tools she gave us have deepened our intimacy beyond what we thought possible. We can't recommend this enough.</p>
+        <p>My partner and I did the couples session and it was eye-opening. Bassie taught us how to truly communicate through touch. He compared it to passing drills in hockey and somehow... it made sense? The tools he gave us have deepened our intimacy beyond what we thought possible.</p>
         <div class="testimonial-author">— Anna & Lotte, 29 & 31</div>
       </div>
     </div>
@@ -480,43 +521,51 @@ a:hover{color:var(--orange-dark)}
 <section class="section" id="faq">
   <div class="container text-center">
     <h2 class="fade-in">Frequently Asked Questions</h2>
-    <p class="subtitle fade-in">Everything you need to know before your first visit</p>
+    <p class="subtitle fade-in">Everything you need to know before your first visit (yes, the hockey thing is real)</p>
     <div class="faq-list fade-in">
       <div class="faq-item">
         <button class="faq-question">Is this a sexual service?</button>
-        <div class="faq-answer"><p>No. Yoni massage is a professional form of somatic bodywork focused on healing, relaxation, and body awareness. While the work involves intimate touch, it is therapeutic in nature and conducted with clear boundaries, consent, and professionalism at all times. This practice is fully legal in the Netherlands.</p></div>
+        <div class="faq-answer"><p>No. Yoni massage is a professional form of somatic bodywork focused on healing, relaxation, and body awareness. While the work involves intimate touch, it is therapeutic in nature and conducted with clear boundaries, consent, and professionalism at all times. This practice is fully legal in the Netherlands. Bassie approaches this with the same professionalism he brings to managing an elite sports team — which is to say, very seriously indeed.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Wait, you actually manage the Dutch hockey team?</button>
+        <div class="faq-answer"><p>Yes, really! Bassie is the accredited manager of the Netherlands men's national field hockey team. FIH Pro League, World Cup qualifiers, the whole thing. It's an unusual career combination, but it turns out that understanding the body at an elite athletic level gives you extraordinary insight into healing bodywork. Also, it makes for great dinner party conversation.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">I'm nervous — is that normal?</button>
-        <div class="faq-answer"><p>Absolutely. Most clients feel some nerves before their first session. That's completely natural and nothing to be ashamed of. We always start with a conversation and breathwork, and you set the pace. There is never any pressure to go beyond your comfort zone.</p></div>
+        <div class="faq-answer"><p>Absolutely. Most clients feel some nerves before their first session. That's completely natural. We always start with a conversation and breathwork, and you set the pace. If it helps, imagine that Bassie is way more nervous before a NED vs Belgium match than you are right now. There is never any pressure to go beyond your comfort zone.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">How does Bassie manage hockey and her practice?</button>
-        <div class="faq-answer"><p>Bassie schedules her massage practice around the hockey calendar. During FIH Pro League away blocks and the World Cup, sessions may be limited or unavailable. Home blocks in the Netherlands actually complement her schedule well, and she often has full availability between tournament windows. Check the schedule section or get in touch for current availability.</p></div>
+        <button class="faq-question">How does Bassie manage hockey and the massage practice?</button>
+        <div class="faq-answer"><p>With a very colourful Google Calendar and excellent time management. During FIH Pro League away blocks and the World Cup, massage sessions may be limited or unavailable (he'll be in Argentina, Spain, or Belgium yelling supportive things at hockey players). Home blocks in the Netherlands actually complement his schedule well. Check the schedule section or get in touch for current availability.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Will Bassie talk about hockey during my session?</button>
+        <div class="faq-answer"><p>Only if you want him to! The treatment room is a sacred, hockey-free zone (unless you bring it up, in which case he might get a little excited). During your session, Bassie is 100% focused on your body, your breath, and your healing. The hockey brain switches off. Mostly.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">How do you ensure discretion and privacy?</button>
-        <div class="faq-answer"><p>Your privacy is paramount. My practice is in a private, residential setting with a separate entrance. I never share client information, and no records are kept beyond what is needed for scheduling. You're welcome to use a first name only.</p></div>
+        <div class="faq-answer"><p>Your privacy is paramount. The practice is in a private, residential setting with a separate entrance. No client information is ever shared, and no records are kept beyond what is needed for scheduling. You're welcome to use a first name only. (Bassie has experience keeping things confidential — try managing hockey team tactics without leaks.)</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">What about hygiene and safety?</button>
-        <div class="faq-answer"><p>I maintain the highest hygiene standards. All linens are freshly laundered for each client, I use only high-quality organic oils, and the treatment room is thoroughly cleaned between sessions. I follow strict hand hygiene protocols and use medical-grade gloves when appropriate.</p></div>
+        <div class="faq-answer"><p>The highest standards. All linens are freshly laundered for each client, only high-quality organic oils are used, and the treatment room is thoroughly cleaned between sessions. Strict hand hygiene protocols and medical-grade gloves when appropriate. Bassie maintains the same hygiene standards he expects from a world-class sports facility.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">What should I do to prepare?</button>
-        <div class="faq-answer"><p>Arrive freshly showered and avoid heavy meals or alcohol beforehand. Wear comfortable clothing. Most importantly, come with an open mind and no expectations — every body and every session is different.</p></div>
+        <div class="faq-answer"><p>Arrive freshly showered and avoid heavy meals or alcohol beforehand. Wear comfortable clothing. Most importantly, come with an open mind and no expectations — every body and every session is different. Unlike hockey, there is no warm-up drill required.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">Do you work with men or only women?</button>
-        <div class="faq-answer"><p>My yoni massage practice is exclusively for women and people with vulvas. The couples introduction session is open to all gender combinations. If you're looking for bodywork as a man, I'm happy to refer you to a trusted colleague.</p></div>
+        <div class="faq-answer"><p>The yoni massage practice is exclusively for women and people with vulvas. The couples introduction session is open to all gender combinations. If you're looking for bodywork as a man, Bassie is happy to refer you to a trusted colleague. (He already has enough men in his life — there are 18 of them on the hockey team.)</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">Can I stop the session at any time?</button>
-        <div class="faq-answer"><p>Yes — always. You are in complete control throughout the entire session. You can pause, adjust, or stop at any point, no questions asked. Your boundaries are sacred and will always be respected without exception.</p></div>
+        <div class="faq-answer"><p>Yes — always. You are in complete control throughout the entire session. You can pause, adjust, or stop at any point, no questions asked. Think of yourself as the referee — your whistle, your rules. Your boundaries are sacred and will always be respected without exception.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">What is your cancellation policy?</button>
-        <div class="faq-answer"><p>I ask for at least 24 hours' notice for cancellations or rescheduling. Late cancellations (under 24 hours) may be charged at 50% of the session fee. No-shows are charged the full amount. I understand that life happens — just communicate openly and we'll find a solution.</p></div>
+        <div class="faq-answer"><p>At least 24 hours' notice for cancellations or rescheduling. Late cancellations (under 24 hours) may be charged at 50% of the session fee. No-shows are charged the full amount. Bassie understands that life happens — just communicate openly and he'll find a solution. He deals with last-minute hockey schedule changes all the time, so he gets it.</p></div>
       </div>
     </div>
   </div>
@@ -527,7 +576,7 @@ a:hover{color:var(--orange-dark)}
   <div class="container">
     <div class="text-center">
       <h2 class="fade-in">Book Your Session</h2>
-      <p class="subtitle fade-in">By appointment only · Tuesday–Saturday · 10:00–20:00</p>
+      <p class="subtitle fade-in">By appointment only · Tuesday–Saturday · 10:00–20:00 (match days may vary — check the schedule!)</p>
     </div>
     <div class="contact-grid">
       <div class="contact-info fade-in">
@@ -535,32 +584,35 @@ a:hover{color:var(--orange-dark)}
         <div class="contact-detail">
           <div>
             <strong>WhatsApp (preferred)</strong>
-            <a href="https://wa.me/31612345678">+31 6 12 34 56 78</a>
+            <a href="https://wa.me/31612345678">+31 6 12 34 56 78</a><br>
+            <span style="font-size:.8rem;color:var(--text-light);font-style:italic">Faster response than a Dutch counter-attack</span>
           </div>
         </div>
         <div class="contact-detail">
           <div>
             <strong>Location</strong>
             Amsterdam Oud-Zuid<br>
-            Near Vondelpark (exact address shared upon booking)
+            Near Vondelpark (exact address shared upon booking)<br>
+            <span style="font-size:.8rem;color:var(--text-light);font-style:italic">Easier to find than an open player on the wing</span>
           </div>
         </div>
         <div class="contact-detail">
           <div>
             <strong>Hours</strong>
             Tuesday–Saturday: 10:00–20:00<br>
-            Sunday & Monday: Closed<br>
-            <em style="font-size:.82rem;color:var(--orange)">Limited availability during hockey tournament blocks</em>
+            Sunday & Monday: Closed (even Bassie needs rest)<br>
+            <em style="font-size:.82rem;color:var(--orange)">Limited availability during hockey tournament blocks — check the schedule above!</em>
           </div>
         </div>
         <div class="contact-detail">
           <div>
             <strong>Languages</strong>
-            Nederlands & English
+            Nederlands & English<br>
+            <span style="font-size:.8rem;color:var(--text-light);font-style:italic">(Also speaks fluent Hockey Referee, but hopefully that won't be needed)</span>
           </div>
         </div>
         <div style="margin-top:1.5rem">
-          <a href="https://wa.me/31612345678?text=Hello%20Bassie%2C%20I%20would%20like%20to%20book%20a%20session." class="btn btn-whatsapp">
+          <a href="https://wa.me/31612345678?text=Hello%20Bassie%2C%20I%20would%20like%20to%20book%20a%20session.%20(I%20also%20support%20the%20Dutch%20hockey%20team!)" class="btn btn-whatsapp">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Chat on WhatsApp
           </a>
@@ -575,7 +627,7 @@ a:hover{color:var(--orange-dark)}
       <div class="fade-in">
         <form class="contact-form" id="contactForm">
           <div class="form-group">
-            <label for="name">Your name (or first name only)</label>
+            <label for="name">Your name (or first name only — we're discreet like that)</label>
             <input type="text" id="name" name="name" required placeholder="e.g. Sophie">
           </div>
           <div class="form-group">
@@ -583,24 +635,25 @@ a:hover{color:var(--orange-dark)}
             <input type="email" id="email" name="email" required placeholder="your@email.com">
           </div>
           <div class="form-group">
-            <label for="service">Interested in</label>
+            <label for="service">What are you interested in?</label>
             <select id="service" name="service">
               <option value="">Select a treatment…</option>
               <option value="yoni">Yoni Massage</option>
               <option value="fullbody">Full-Body Sensual Massage</option>
               <option value="tantric">Tantric Massage</option>
               <option value="couples">Couples Introduction</option>
+              <option value="hockey">I just want hockey tickets (wrong form, but we respect the hustle)</option>
             </select>
           </div>
           <div class="form-group">
             <label for="message">Your message</label>
-            <textarea id="message" name="message" rows="4" placeholder="Tell me a little about what you're looking for, or ask any questions…"></textarea>
+            <textarea id="message" name="message" rows="4" placeholder="Tell me what you're looking for, ask questions, or share your favourite Dutch hockey player (optional but appreciated)…"></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
         </form>
         <div class="form-success" id="formSuccess">
-          <h3>Thank you &#10022;</h3>
-          <p>Your message has been received. I'll get back to you within 24 hours — usually much sooner. Looking forward to connecting with you.</p>
+          <h3>Message Received! &#10022;</h3>
+          <p>Bassie will get back to you within 24 hours — usually much sooner (unless the Dutch are playing, in which case give him until the final whistle).</p>
           <p style="margin:0"><em>— Bassie</em></p>
         </div>
       </div>
@@ -615,6 +668,7 @@ a:hover{color:var(--orange-dark)}
     <p>Amsterdam Oud-Zuid &nbsp;·&nbsp; <a href="https://wa.me/31612345678">+31 6 12 34 56 78</a> &nbsp;·&nbsp; Tuesday–Saturday 10:00–20:00</p>
     <p style="margin-top:8px;font-size:.82rem;color:rgba(250,246,241,.6)">Accredited Practitioner &nbsp;·&nbsp; Manager, Netherlands Men's National Hockey Team</p>
     <p class="footer-disclaimer" style="margin-top:16px">&#169; 2026 Bassie's Yoni Massage. All rights reserved.<br>This website is intended for adults (18+) only. Professional somatic bodywork, fully legal in the Netherlands.<br>KVK registration pending.</p>
+    <p class="footer-joke">No hockey balls were harmed in the making of this website. Bassie's Google Calendar, however, will never recover.</p>
   </div>
 </footer>
 
