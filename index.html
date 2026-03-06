@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bassie's Yoni Massage — Amsterdam Oud-Zuid</title>
-<meta name="description" content="Professional yoni massage, tantric massage & sensual bodywork in Amsterdam Oud-Zuid. Experience deep relaxation, reconnection and healing touch by Bassie.">
+<title>Bassie's Yoni Massage — Amsterdam Oud-Zuid | Dutch Hockey Team Manager</title>
+<meta name="description" content="Professional yoni massage, tantric massage & sensual bodywork in Amsterdam Oud-Zuid by Bassie — accredited practitioner & manager of the Dutch men's hockey team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -12,40 +12,43 @@
 /* ── Reset & Base ─────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{font-family:'DM Sans',sans-serif;color:#3a2e2a;background:#faf6f1;line-height:1.7;font-size:16px;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;color:#2a2a2a;background:#faf6f1;line-height:1.7;font-size:16px;overflow-x:hidden}
 
-/* ── Palette ──────────────────────────────────────── */
+/* ── Palette (Dutch Hockey Orange) ───────────────── */
 :root{
   --cream:#faf6f1;
   --cream-dark:#f0e8dc;
-  --terracotta:#b5563e;
-  --terracotta-light:#c8735d;
-  --terracotta-dark:#8e3f2b;
+  --orange:#e85d04;
+  --orange-light:#f48c06;
+  --orange-dark:#c44002;
+  --dutch-blue:#21468b;
+  --dutch-blue-light:#2d5aa0;
   --gold:#c9a84c;
   --gold-muted:#d4b76a;
-  --rose:#d4a0a0;
-  --rose-light:#e8c7c7;
-  --text:#3a2e2a;
-  --text-light:#6b5d57;
+  --field-green:#2d6a4f;
+  --field-green-light:#40916c;
+  --text:#2a2a2a;
+  --text-light:#5a5a5a;
   --white:#fff;
 }
 
 /* ── Typography ───────────────────────────────────── */
-h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--terracotta-dark)}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--orange-dark)}
 h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.15;letter-spacing:-0.02em}
 h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.2;margin-bottom:1rem}
 h3{font-size:clamp(1.2rem,2.5vw,1.6rem);margin-bottom:.5rem}
 p{margin-bottom:1rem}
-a{color:var(--terracotta);text-decoration:none;transition:color .3s}
-a:hover{color:var(--gold)}
+a{color:var(--orange);text-decoration:none;transition:color .3s}
+a:hover{color:var(--orange-dark)}
 
 /* ── Utility ──────────────────────────────────────── */
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 .section{padding:80px 0}
 .section-alt{background:var(--cream-dark)}
+.section-dark{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:var(--cream)}
 .text-center{text-align:center}
 .subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-light);font-size:1.15rem;margin-bottom:2rem}
-.divider{width:60px;height:2px;background:var(--gold);margin:1.5rem auto}
+.divider{width:60px;height:2px;background:var(--orange);margin:1.5rem auto}
 
 /* ── Fade-in animation ────────────────────────────── */
 .fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
@@ -53,10 +56,10 @@ a:hover{color:var(--gold)}
 
 /* ── Buttons ──────────────────────────────────────── */
 .btn{display:inline-block;padding:14px 36px;border-radius:50px;font-size:.95rem;font-weight:500;letter-spacing:.03em;cursor:pointer;transition:all .35s;border:none;text-align:center}
-.btn-primary{background:var(--terracotta);color:var(--white)}
-.btn-primary:hover{background:var(--terracotta-dark);color:var(--white)}
-.btn-outline{border:1.5px solid var(--terracotta);color:var(--terracotta);background:transparent}
-.btn-outline:hover{background:var(--terracotta);color:var(--white)}
+.btn-primary{background:var(--orange);color:var(--white)}
+.btn-primary:hover{background:var(--orange-dark);color:var(--white)}
+.btn-outline{border:1.5px solid var(--orange);color:var(--orange);background:transparent}
+.btn-outline:hover{background:var(--orange);color:var(--white)}
 .btn-whatsapp{background:#25d366;color:var(--white);display:inline-flex;align-items:center;gap:8px}
 .btn-whatsapp:hover{background:#1fba59;color:var(--white)}
 
@@ -64,11 +67,12 @@ a:hover{color:var(--gold)}
 .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .4s}
 .navbar.scrolled{background:rgba(250,246,241,.97);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.06);padding:10px 0}
 .navbar .container{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--terracotta-dark);font-weight:500}
-.nav-logo span{color:var(--gold)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--orange-dark);font-weight:500;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--orange)}
+.nav-logo .hockey-icon{font-size:1.2rem}
 .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
 .nav-links a{font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text);font-weight:500}
-.nav-links a:hover{color:var(--terracotta)}
+.nav-links a:hover{color:var(--orange)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .nav-toggle span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
 
@@ -79,51 +83,87 @@ a:hover{color:var(--gold)}
 }
 
 /* ── Hero ─────────────────────────────────────────── */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#3a2e2a 0%,#5a3d33 40%,#6b4537 100%)}
-.hero-overlay{position:absolute;inset:0;background:url('https://picsum.photos/seed/silkwarm/1400/900') center/cover;opacity:.25;mix-blend-mode:luminosity}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#e85d04 0%,#c44002 40%,#9d0208 100%)}
+.hero-overlay{position:absolute;inset:0;background:url('https://picsum.photos/seed/hockeyfield/1400/900') center/cover;opacity:.2;mix-blend-mode:luminosity}
+.hero-pattern{position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.03) 20px,rgba(255,255,255,.03) 40px);pointer-events:none}
 .hero-content{position:relative;z-index:2;color:var(--cream);max-width:700px;padding:120px 0 80px}
-.hero h1{color:var(--cream);margin-bottom:.5rem}
+.hero h1{color:var(--white);margin-bottom:.5rem}
 .hero h1 em{font-style:italic;color:var(--gold-muted)}
-.hero .subtitle{color:var(--rose-light);margin-bottom:2.5rem;font-size:1.25rem}
+.hero .subtitle{color:rgba(255,255,255,.85);margin-bottom:2.5rem;font-size:1.25rem}
 .hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:8px 20px;font-size:.85rem;color:var(--white);margin-bottom:1.5rem}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--gold-muted);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* ── About ────────────────────────────────────────── */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-image{border-radius:16px;overflow:hidden;aspect-ratio:3/4;position:relative}
 .about-image img{width:100%;height:100%;object-fit:cover;display:block}
-.about-image::after{content:'';position:absolute;inset:0;border:1px solid var(--gold-muted);border-radius:16px;margin:-8px;pointer-events:none}
-.about-text .highlight{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--terracotta);border-left:3px solid var(--gold);padding-left:20px;margin:1.5rem 0}
+.about-image::after{content:'';position:absolute;inset:0;border:1px solid var(--orange);border-radius:16px;margin:-8px;pointer-events:none}
+.about-text .highlight{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--orange);border-left:3px solid var(--orange);padding-left:20px;margin:1.5rem 0}
+.credential-badges{display:flex;flex-wrap:wrap;gap:10px;margin:1.5rem 0}
+.credential-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--orange),var(--orange-dark));color:var(--white);padding:6px 14px;border-radius:50px;font-size:.8rem;font-weight:500;letter-spacing:.02em}
+.credential-badge.hockey{background:linear-gradient(135deg,var(--dutch-blue),var(--dutch-blue-light))}
 @media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:32px}}
 
 /* ── Services ─────────────────────────────────────── */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:3rem}
-.service-card{background:var(--white);border-radius:16px;padding:36px 28px;text-align:center;transition:transform .4s,box-shadow .4s;border:1px solid rgba(201,168,76,.15)}
+.service-card{background:var(--white);border-radius:16px;padding:36px 28px;text-align:center;transition:transform .4s,box-shadow .4s;border:1px solid rgba(232,93,4,.12)}
 .service-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
 .service-icon{font-size:2.5rem;margin-bottom:1rem}
-.service-card h3{color:var(--terracotta-dark)}
+.service-card h3{color:var(--orange-dark)}
 .service-card p{color:var(--text-light);font-size:.92rem;margin-bottom:1.2rem}
-.service-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);font-weight:600}
+.service-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--orange);font-weight:600}
 
 /* ── What to Expect ───────────────────────────────── */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:3rem}
 .step{text-align:center;padding:24px}
-.step-number{width:48px;height:48px;border-radius:50%;background:var(--terracotta);color:var(--white);display:inline-flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:1rem}
+.step-number{width:48px;height:48px;border-radius:50%;background:var(--orange);color:var(--white);display:inline-flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:1rem}
 .step h3{font-size:1.1rem}
 .step p{color:var(--text-light);font-size:.9rem}
 
+/* ── Hockey Schedule ─────────────────────────────── */
+.schedule-wrapper{margin-top:3rem}
+.schedule-block{margin-bottom:2.5rem}
+.schedule-block-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.schedule-block-title .venue-tag{font-family:'DM Sans',sans-serif;font-size:.7rem;background:var(--dutch-blue);color:var(--white);padding:3px 10px;border-radius:50px;font-weight:500;letter-spacing:.03em;text-transform:uppercase}
+.match-row{display:grid;grid-template-columns:120px 1fr 80px;gap:16px;align-items:center;padding:14px 20px;border-radius:12px;margin-bottom:6px;font-size:.9rem;transition:background .3s}
+.match-row:nth-child(even){background:rgba(232,93,4,.04)}
+.match-row:hover{background:rgba(232,93,4,.08)}
+.match-date{font-weight:600;color:var(--text);font-size:.82rem}
+.match-teams{display:flex;align-items:center;gap:8px}
+.match-teams .vs{color:var(--text-light);font-size:.75rem;text-transform:uppercase;font-weight:600}
+.match-teams .team{font-weight:500}
+.match-teams .team.ned{color:var(--orange)}
+.match-result{text-align:right;font-weight:600;color:var(--field-green);font-size:.85rem}
+.match-result.upcoming{color:var(--dutch-blue);font-weight:400;font-style:italic}
+.match-result.loss{color:#c1121f}
+.schedule-legend{display:flex;gap:20px;justify-content:center;margin-top:2rem;font-size:.8rem;color:var(--text-light)}
+.schedule-legend span{display:inline-flex;align-items:center;gap:6px}
+.schedule-legend .dot-win{width:8px;height:8px;border-radius:50%;background:var(--field-green)}
+.schedule-legend .dot-loss{width:8px;height:8px;border-radius:50%;background:#c1121f}
+.schedule-legend .dot-upcoming{width:8px;height:8px;border-radius:50%;background:var(--dutch-blue)}
+.worldcup-banner{background:linear-gradient(135deg,var(--orange) 0%,var(--orange-dark) 100%);color:var(--white);border-radius:16px;padding:32px;text-align:center;margin-top:2rem}
+.worldcup-banner h3{color:var(--white);font-size:1.4rem;margin-bottom:.5rem}
+.worldcup-banner p{margin:0;font-size:.95rem;opacity:.9}
+
+@media(max-width:600px){
+  .match-row{grid-template-columns:90px 1fr 60px;gap:8px;padding:10px 12px;font-size:.82rem}
+}
+
 /* ── Testimonials ─────────────────────────────────── */
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:3rem}
-.testimonial{background:var(--white);border-radius:16px;padding:32px;position:relative;border:1px solid rgba(201,168,76,.12)}
-.testimonial::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--rose-light);position:absolute;top:12px;left:20px;line-height:1}
+.testimonial{background:var(--white);border-radius:16px;padding:32px;position:relative;border:1px solid rgba(232,93,4,.1)}
+.testimonial::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:4rem;color:rgba(232,93,4,.15);position:absolute;top:12px;left:20px;line-height:1}
 .testimonial p{font-style:italic;color:var(--text-light);padding-top:2rem;margin-bottom:1rem;font-size:.95rem}
-.testimonial-author{font-weight:600;color:var(--terracotta);font-size:.9rem}
-.stars{color:var(--gold);letter-spacing:2px;margin-bottom:.5rem}
+.testimonial-author{font-weight:600;color:var(--orange);font-size:.9rem}
+.stars{color:var(--orange-light);letter-spacing:2px;margin-bottom:.5rem}
 
 /* ── FAQ ──────────────────────────────────────────── */
 .faq-list{max-width:750px;margin:3rem auto 0}
-.faq-item{border-bottom:1px solid var(--rose-light);padding:0}
-.faq-question{width:100%;background:none;border:none;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--terracotta-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left}
-.faq-question::after{content:'+';font-size:1.5rem;color:var(--gold);transition:transform .3s;flex-shrink:0;margin-left:16px}
+.faq-item{border-bottom:1px solid rgba(232,93,4,.15);padding:0}
+.faq-question{width:100%;background:none;border:none;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--orange-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left}
+.faq-question::after{content:'+';font-size:1.5rem;color:var(--orange);transition:transform .3s;flex-shrink:0;margin-left:16px}
 .faq-item.open .faq-question::after{transform:rotate(45deg)}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;padding:0 0}
 .faq-item.open .faq-answer{max-height:300px;padding:0 0 20px}
@@ -137,16 +177,16 @@ a:hover{color:var(--gold)}
 .contact-form{display:flex;flex-direction:column;gap:16px}
 .form-group{display:flex;flex-direction:column;gap:6px}
 .form-group label{font-size:.85rem;font-weight:500;color:var(--text-light)}
-.form-group input,.form-group textarea,.form-group select{padding:12px 16px;border:1.5px solid var(--rose-light);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;background:var(--white);color:var(--text);transition:border-color .3s;resize:vertical}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--terracotta)}
-.form-success{display:none;text-align:center;padding:32px;background:var(--white);border-radius:16px;border:1px solid var(--gold-muted)}
+.form-group input,.form-group textarea,.form-group select{padding:12px 16px;border:1.5px solid rgba(232,93,4,.2);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;background:var(--white);color:var(--text);transition:border-color .3s;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--orange)}
+.form-success{display:none;text-align:center;padding:32px;background:var(--white);border-radius:16px;border:1px solid var(--orange)}
 .form-success.show{display:block}
-.form-success h3{color:var(--terracotta);margin-bottom:.5rem}
+.form-success h3{color:var(--orange);margin-bottom:.5rem}
 @media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
 
 /* ── Footer ───────────────────────────────────────── */
-.footer{background:#3a2e2a;color:var(--cream);padding:40px 0;text-align:center;font-size:.85rem}
-.footer a{color:var(--gold-muted)}
+.footer{background:#1a1a2e;color:var(--cream);padding:40px 0;text-align:center;font-size:.85rem}
+.footer a{color:var(--orange-light)}
 .footer-disclaimer{color:rgba(250,246,241,.5);margin-top:12px;font-size:.78rem}
 
 /* ── WhatsApp float ───────────────────────────────── */
@@ -156,7 +196,7 @@ a:hover{color:var(--gold)}
 
 /* ── Scroll indicator ─────────────────────────────── */
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:var(--cream);opacity:.6;animation:bounce 2s infinite;font-size:.8rem;text-align:center;letter-spacing:.1em}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:var(--white);opacity:.6;animation:bounce 2s infinite;font-size:.8rem;text-align:center;letter-spacing:.1em}
 .scroll-hint span{display:block;margin-top:4px;font-size:1.2rem}
 </style>
 </head>
@@ -165,11 +205,11 @@ a:hover{color:var(--gold)}
 <!-- ═══ Navbar ═══ -->
 <nav class="navbar" id="navbar">
   <div class="container">
-    <a href="#hero" class="nav-logo">Bassie<span>'</span>s</a>
+    <a href="#hero" class="nav-logo"><span class="hockey-icon">&#127954;</span> Bassie<span>'</span>s</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" onclick="closeNav()">About</a></li>
       <li><a href="#services" onclick="closeNav()">Services</a></li>
-      <li><a href="#expect" onclick="closeNav()">What to Expect</a></li>
+      <li><a href="#schedule" onclick="closeNav()">Hockey</a></li>
       <li><a href="#testimonials" onclick="closeNav()">Reviews</a></li>
       <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
       <li><a href="#contact" class="btn btn-primary" style="padding:10px 24px;font-size:.82rem" onclick="closeNav()">Book Now</a></li>
@@ -183,13 +223,15 @@ a:hover{color:var(--gold)}
 <!-- ═══ Hero ═══ -->
 <section class="hero" id="hero">
   <div class="hero-overlay"></div>
+  <div class="hero-pattern"></div>
   <div class="container">
     <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Accredited Practitioner & Dutch Hockey Team Manager</div>
       <h1>Reconnect with Your Body Through <em>Sacred Touch</em></h1>
-      <p class="subtitle">Professional yoni massage & tantric bodywork in the heart of Amsterdam Oud-Zuid</p>
+      <p class="subtitle">Professional yoni massage & tantric bodywork by Bassie — from the hockey pitch to the healing room, in the heart of Amsterdam Oud-Zuid</p>
       <div class="hero-buttons">
         <a href="#contact" class="btn btn-primary">Book Your Session</a>
-        <a href="#services" class="btn btn-outline" style="border-color:var(--cream);color:var(--cream)">Explore Services</a>
+        <a href="#schedule" class="btn btn-outline" style="border-color:var(--white);color:var(--white)">Match Schedule 2026</a>
       </div>
     </div>
   </div>
@@ -201,15 +243,19 @@ a:hover{color:var(--gold)}
   <div class="container">
     <div class="about-grid fade-in">
       <div class="about-image">
-        <img src="https://picsum.photos/seed/warmportrait/600/800" alt="Bassie — practitioner" loading="lazy">
+        <img src="https://picsum.photos/seed/warmportrait/600/800" alt="Bassie — practitioner & hockey team manager" loading="lazy">
       </div>
       <div class="about-text">
         <h2>Meet Bassie</h2>
         <div class="divider" style="margin:1rem 0"></div>
-        <p>With over twelve years of experience in tantric bodywork and somatic healing, I've dedicated my practice to creating a safe, nurturing space where women can reconnect with their bodies, release stored tension, and rediscover pleasure without shame.</p>
-        <div class="highlight">"I believe every woman deserves to feel fully at home in her body — honoured, safe, and free."</div>
-        <p>Trained in Amsterdam and Bali in tantric massage, trauma-informed touch, and breathwork, I combine ancient wisdom with a modern, professional approach. My practice in Oud-Zuid is a warm, private sanctuary designed for your complete comfort and confidentiality.</p>
-        <p>Whether you are exploring this work for the first time or deepening an existing practice, I meet you exactly where you are — with warmth, respect, and zero judgement.</p>
+        <div class="credential-badges">
+          <span class="credential-badge">Accredited Practitioner</span>
+          <span class="credential-badge hockey">&#127954; Dutch Men's Hockey Team Manager</span>
+        </div>
+        <p>Bassie brings a unique blend of athletic discipline and healing intuition. As an accredited bodywork practitioner and manager of the Netherlands men's national hockey team, she understands the body like few others — from elite sport performance to deep somatic healing.</p>
+        <div class="highlight">"Whether on the hockey pitch or in the treatment room, I believe in the power of presence, trust, and the body's extraordinary ability to heal."</div>
+        <p>With over twelve years of experience in tantric bodywork and somatic healing, combined with her role supporting the Dutch hockey squad through FIH Pro League and World Cup campaigns, Bassie brings a grounded, professional approach to every session. Trained in Amsterdam and Bali in tantric massage, trauma-informed touch, and breathwork, she combines ancient wisdom with athletic insight.</p>
+        <p>Her practice in Oud-Zuid is a warm, private sanctuary designed for your complete comfort and confidentiality. Whether you are exploring this work for the first time or deepening an existing practice, she meets you exactly where you are — with warmth, respect, and zero judgement.</p>
       </div>
     </div>
   </div>
@@ -222,32 +268,32 @@ a:hover{color:var(--gold)}
     <p class="subtitle fade-in">Each session is tailored to your body, your boundaries, and your intentions</p>
     <div class="services-grid">
       <div class="service-card fade-in">
-        <div class="service-icon">✿</div>
+        <div class="service-icon">&#10047;</div>
         <h3>Yoni Massage</h3>
         <p>A deeply nurturing treatment focused on releasing tension held in the pelvic area. Through gentle, intuitive touch and breathwork, this session supports emotional release, increased sensitivity, and a profound sense of embodiment.</p>
-        <div class="service-price">from €120 / 60 min</div>
+        <div class="service-price">from &#8364;120 / 60 min</div>
       </div>
       <div class="service-card fade-in">
-        <div class="service-icon">❋</div>
+        <div class="service-icon">&#10043;</div>
         <h3>Full-Body Sensual Massage</h3>
         <p>A slow, flowing full-body treatment using warm oils and mindful touch. Designed to calm the nervous system, awaken the senses, and bring you into deep presence with your body. Ideal for stress relief and reconnection.</p>
-        <div class="service-price">from €120 / 60 min</div>
+        <div class="service-price">from &#8364;120 / 60 min</div>
       </div>
       <div class="service-card fade-in">
-        <div class="service-icon">◈</div>
+        <div class="service-icon">&#9672;</div>
         <h3>Tantric Massage</h3>
         <p>Combining breathwork, energy work, and full-body touch, this holistic session moves energy through the body to dissolve blockages. A transformative experience that integrates the physical, emotional, and spiritual.</p>
-        <div class="service-price">from €180 / 90 min</div>
+        <div class="service-price">from &#8364;180 / 90 min</div>
       </div>
       <div class="service-card fade-in">
-        <div class="service-icon">❦</div>
+        <div class="service-icon">&#10086;</div>
         <h3>Couples Introduction</h3>
         <p>A guided session for couples who wish to deepen their intimate connection. Learn conscious touch techniques, communication skills, and breathwork practices you can continue at home together.</p>
-        <div class="service-price">from €240 / 120 min</div>
+        <div class="service-price">from &#8364;240 / 120 min</div>
       </div>
     </div>
     <p style="margin-top:2.5rem;color:var(--text-light);font-size:.9rem" class="fade-in">
-      <strong>Duration options:</strong> 60 min — €120 &nbsp;·&nbsp; 90 min — €180 &nbsp;·&nbsp; 120 min — €240<br>
+      <strong>Duration options:</strong> 60 min — &#8364;120 &nbsp;·&nbsp; 90 min — &#8364;180 &nbsp;·&nbsp; 120 min — &#8364;240<br>
       All sessions include intake conversation, breathwork, and aftercare.
     </p>
   </div>
@@ -283,6 +329,128 @@ a:hover{color:var(--gold)}
   </div>
 </section>
 
+<!-- ═══ Hockey Schedule ═══ -->
+<section class="section section-dark" id="schedule">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="fade-in" style="color:var(--orange-light)">&#127954; Netherlands Men's Hockey — 2026 Schedule</h2>
+      <p class="subtitle fade-in" style="color:rgba(255,255,255,.7)">Follow the Dutch squad managed by Bassie through FIH Pro League & World Cup 2026</p>
+    </div>
+
+    <div class="schedule-wrapper fade-in">
+
+      <!-- Argentina Block -->
+      <div class="schedule-block">
+        <div class="schedule-block-title">December 2025 — Argentina <span class="venue-tag">Santiago del Estero</span></div>
+        <div class="match-row">
+          <div class="match-date">9 Dec 2025</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">PAK</span></div>
+          <div class="match-result">5 – 2</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">10 Dec 2025</div>
+          <div class="match-teams"><span class="team">ARG</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result loss">1 – 1 (SO)</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">12 Dec 2025</div>
+          <div class="match-teams"><span class="team">PAK</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result">3 – 7</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">13 Dec 2025</div>
+          <div class="match-teams"><span class="team">ARG</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result loss">3 – 2</div>
+        </div>
+      </div>
+
+      <!-- Spain Block -->
+      <div class="schedule-block">
+        <div class="schedule-block-title">February 2026 — Spain <span class="venue-tag">Valencia</span></div>
+        <div class="match-row">
+          <div class="match-date">5 Feb 2026</div>
+          <div class="match-teams"><span class="team">ESP</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result">3 – 4</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">6 Feb 2026</div>
+          <div class="match-teams"><span class="team">ENG</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result loss">2 – 2 (SO)</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">8 Feb 2026</div>
+          <div class="match-teams"><span class="team">ESP</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result">2 – 3</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">9 Feb 2026</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">ENG</span></div>
+          <div class="match-result loss">2 – 2 (SO)</div>
+        </div>
+      </div>
+
+      <!-- Rotterdam Block -->
+      <div class="schedule-block">
+        <div class="schedule-block-title">June 2026 — Home <span class="venue-tag">HC Rotterdam</span></div>
+        <div class="match-row">
+          <div class="match-date">13 Jun 2026</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">GER</span></div>
+          <div class="match-result upcoming">10:00</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">14 Jun 2026</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">IND</span></div>
+          <div class="match-result upcoming">10:00</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">20 Jun 2026</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">GER</span></div>
+          <div class="match-result upcoming">09:30</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">21 Jun 2026</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">IND</span></div>
+          <div class="match-result upcoming">08:00</div>
+        </div>
+      </div>
+
+      <!-- Belgium Block -->
+      <div class="schedule-block">
+        <div class="schedule-block-title">June 2026 — Away <span class="venue-tag">Wavre, Belgium</span></div>
+        <div class="match-row">
+          <div class="match-date">24 Jun 2026</div>
+          <div class="match-teams"><span class="team">BEL</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result upcoming">15:00</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">26 Jun 2026</div>
+          <div class="match-teams"><span class="team ned">NED</span> <span class="vs">vs</span> <span class="team">AUS</span></div>
+          <div class="match-result upcoming">15:00</div>
+        </div>
+        <div class="match-row">
+          <div class="match-date">27 Jun 2026</div>
+          <div class="match-teams"><span class="team">BEL</span> <span class="vs">vs</span> <span class="team ned">NED</span></div>
+          <div class="match-result upcoming">13:00</div>
+        </div>
+      </div>
+
+      <div class="schedule-legend">
+        <span><span class="dot-win"></span> Win</span>
+        <span><span class="dot-loss"></span> Loss / SO Loss</span>
+        <span><span class="dot-upcoming"></span> Upcoming</span>
+      </div>
+
+      <!-- World Cup Banner -->
+      <div class="worldcup-banner fade-in">
+        <h3>&#127942; FIH Hockey World Cup 2026</h3>
+        <p><strong>15 – 30 August 2026</strong> &nbsp;·&nbsp; Wagener Stadium, Amsterdam & Belfius Hockey Arena, Wavre<br>
+        The Netherlands co-hosts the Men's & Women's World Cup. Pool draw revealed 17 March. Stay tuned for match details!</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ═══ Testimonials ═══ -->
 <section class="section section-alt" id="testimonials">
   <div class="container text-center">
@@ -290,17 +458,17 @@ a:hover{color:var(--gold)}
     <p class="subtitle fade-in">Shared with permission — names changed for privacy</p>
     <div class="testimonials-grid">
       <div class="testimonial fade-in">
-        <div class="stars">★★★★★</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p>I was incredibly nervous before my first session, but Bassie immediately put me at ease. Her warmth and professionalism are extraordinary. I left feeling lighter, more connected to myself, and genuinely at peace. This experience has been transformative for my relationship with my own body.</p>
         <div class="testimonial-author">— Sophie, 34</div>
       </div>
       <div class="testimonial fade-in">
-        <div class="stars">★★★★★</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p>After years of feeling disconnected, one session with Bassie changed everything. She creates the safest space imaginable. There was no pressure, no judgement — just pure, healing presence. I've been back three times now, and each session reveals something new.</p>
         <div class="testimonial-author">— Marieke, 41</div>
       </div>
       <div class="testimonial fade-in">
-        <div class="stars">★★★★★</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p>My partner and I did the couples session and it was eye-opening. Bassie taught us how to truly communicate through touch. The tools she gave us have deepened our intimacy beyond what we thought possible. We can't recommend this enough.</p>
         <div class="testimonial-author">— Anna & Lotte, 29 & 31</div>
       </div>
@@ -321,6 +489,10 @@ a:hover{color:var(--gold)}
       <div class="faq-item">
         <button class="faq-question">I'm nervous — is that normal?</button>
         <div class="faq-answer"><p>Absolutely. Most clients feel some nerves before their first session. That's completely natural and nothing to be ashamed of. We always start with a conversation and breathwork, and you set the pace. There is never any pressure to go beyond your comfort zone.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How does Bassie manage hockey and her practice?</button>
+        <div class="faq-answer"><p>Bassie schedules her massage practice around the hockey calendar. During FIH Pro League away blocks and the World Cup, sessions may be limited or unavailable. Home blocks in the Netherlands actually complement her schedule well, and she often has full availability between tournament windows. Check the schedule section or get in touch for current availability.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-question">How do you ensure discretion and privacy?</button>
@@ -377,7 +549,8 @@ a:hover{color:var(--gold)}
           <div>
             <strong>Hours</strong>
             Tuesday–Saturday: 10:00–20:00<br>
-            Sunday & Monday: Closed
+            Sunday & Monday: Closed<br>
+            <em style="font-size:.82rem;color:var(--orange)">Limited availability during hockey tournament blocks</em>
           </div>
         </div>
         <div class="contact-detail">
@@ -394,7 +567,7 @@ a:hover{color:var(--gold)}
         </div>
         <div style="margin-top:1.5rem">
           <a href="https://maps.google.com/?q=Amsterdam+Oud-Zuid+Vondelpark" target="_blank" rel="noopener" style="color:var(--text-light);font-size:.9rem;text-decoration:underline">
-            View area on Google Maps ↗
+            View area on Google Maps &#8599;
           </a>
         </div>
       </div>
@@ -426,7 +599,7 @@ a:hover{color:var(--gold)}
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
         </form>
         <div class="form-success" id="formSuccess">
-          <h3>Thank you ✦</h3>
+          <h3>Thank you &#10022;</h3>
           <p>Your message has been received. I'll get back to you within 24 hours — usually much sooner. Looking forward to connecting with you.</p>
           <p style="margin:0"><em>— Bassie</em></p>
         </div>
@@ -438,9 +611,10 @@ a:hover{color:var(--gold)}
 <!-- ═══ Footer ═══ -->
 <footer class="footer">
   <div class="container">
-    <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:8px">Bassie<span style="color:var(--gold-muted)">'</span>s Yoni Massage</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:8px">&#127954; Bassie<span style="color:var(--orange-light)">'</span>s Yoni Massage</p>
     <p>Amsterdam Oud-Zuid &nbsp;·&nbsp; <a href="https://wa.me/31612345678">+31 6 12 34 56 78</a> &nbsp;·&nbsp; Tuesday–Saturday 10:00–20:00</p>
-    <p class="footer-disclaimer" style="margin-top:16px">© 2026 Bassie's Yoni Massage. All rights reserved.<br>This website is intended for adults (18+) only. Professional somatic bodywork, fully legal in the Netherlands.<br>KVK registration pending.</p>
+    <p style="margin-top:8px;font-size:.82rem;color:rgba(250,246,241,.6)">Accredited Practitioner &nbsp;·&nbsp; Manager, Netherlands Men's National Hockey Team</p>
+    <p class="footer-disclaimer" style="margin-top:16px">&#169; 2026 Bassie's Yoni Massage. All rights reserved.<br>This website is intended for adults (18+) only. Professional somatic bodywork, fully legal in the Netherlands.<br>KVK registration pending.</p>
   </div>
 </footer>
 
