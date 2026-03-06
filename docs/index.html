@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bassie's Yoni Massage — Amsterdam Oud-Zuid</title>
+<meta name="description" content="Professional yoni massage, tantric massage & sensual bodywork in Amsterdam Oud-Zuid. Experience deep relaxation, reconnection and healing touch by Bassie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'DM Sans',sans-serif;color:#3a2e2a;background:#faf6f1;line-height:1.7;font-size:16px;overflow-x:hidden}
+
+/* ── Palette ──────────────────────────────────────── */
+:root{
+  --cream:#faf6f1;
+  --cream-dark:#f0e8dc;
+  --terracotta:#b5563e;
+  --terracotta-light:#c8735d;
+  --terracotta-dark:#8e3f2b;
+  --gold:#c9a84c;
+  --gold-muted:#d4b76a;
+  --rose:#d4a0a0;
+  --rose-light:#e8c7c7;
+  --text:#3a2e2a;
+  --text-light:#6b5d57;
+  --white:#fff;
+}
+
+/* ── Typography ───────────────────────────────────── */
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--terracotta-dark)}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.15;letter-spacing:-0.02em}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.2;margin-bottom:1rem}
+h3{font-size:clamp(1.2rem,2.5vw,1.6rem);margin-bottom:.5rem}
+p{margin-bottom:1rem}
+a{color:var(--terracotta);text-decoration:none;transition:color .3s}
+a:hover{color:var(--gold)}
+
+/* ── Utility ──────────────────────────────────────── */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-alt{background:var(--cream-dark)}
+.text-center{text-align:center}
+.subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-light);font-size:1.15rem;margin-bottom:2rem}
+.divider{width:60px;height:2px;background:var(--gold);margin:1.5rem auto}
+
+/* ── Fade-in animation ────────────────────────────── */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ── Buttons ──────────────────────────────────────── */
+.btn{display:inline-block;padding:14px 36px;border-radius:50px;font-size:.95rem;font-weight:500;letter-spacing:.03em;cursor:pointer;transition:all .35s;border:none;text-align:center}
+.btn-primary{background:var(--terracotta);color:var(--white)}
+.btn-primary:hover{background:var(--terracotta-dark);color:var(--white)}
+.btn-outline{border:1.5px solid var(--terracotta);color:var(--terracotta);background:transparent}
+.btn-outline:hover{background:var(--terracotta);color:var(--white)}
+.btn-whatsapp{background:#25d366;color:var(--white);display:inline-flex;align-items:center;gap:8px}
+.btn-whatsapp:hover{background:#1fba59;color:var(--white)}
+
+/* ── Navbar ───────────────────────────────────────── */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .4s}
+.navbar.scrolled{background:rgba(250,246,241,.97);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.06);padding:10px 0}
+.navbar .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--terracotta-dark);font-weight:500}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links a{font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text);font-weight:500}
+.nav-links a:hover{color:var(--terracotta)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+
+@media(max-width:768px){
+  .nav-links{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:var(--cream);flex-direction:column;padding:80px 40px 40px;gap:24px;transition:right .4s;box-shadow:-4px 0 30px rgba(0,0,0,.1)}
+  .nav-links.open{right:0}
+  .nav-toggle{display:flex}
+}
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#3a2e2a 0%,#5a3d33 40%,#6b4537 100%)}
+.hero-overlay{position:absolute;inset:0;background:url('https://picsum.photos/seed/silkwarm/1400/900') center/cover;opacity:.25;mix-blend-mode:luminosity}
+.hero-content{position:relative;z-index:2;color:var(--cream);max-width:700px;padding:120px 0 80px}
+.hero h1{color:var(--cream);margin-bottom:.5rem}
+.hero h1 em{font-style:italic;color:var(--gold-muted)}
+.hero .subtitle{color:var(--rose-light);margin-bottom:2.5rem;font-size:1.25rem}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+
+/* ── About ────────────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-image{border-radius:16px;overflow:hidden;aspect-ratio:3/4;position:relative}
+.about-image img{width:100%;height:100%;object-fit:cover;display:block}
+.about-image::after{content:'';position:absolute;inset:0;border:1px solid var(--gold-muted);border-radius:16px;margin:-8px;pointer-events:none}
+.about-text .highlight{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--terracotta);border-left:3px solid var(--gold);padding-left:20px;margin:1.5rem 0}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ── Services ─────────────────────────────────────── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:3rem}
+.service-card{background:var(--white);border-radius:16px;padding:36px 28px;text-align:center;transition:transform .4s,box-shadow .4s;border:1px solid rgba(201,168,76,.15)}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.service-icon{font-size:2.5rem;margin-bottom:1rem}
+.service-card h3{color:var(--terracotta-dark)}
+.service-card p{color:var(--text-light);font-size:.92rem;margin-bottom:1.2rem}
+.service-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);font-weight:600}
+
+/* ── What to Expect ───────────────────────────────── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:3rem}
+.step{text-align:center;padding:24px}
+.step-number{width:48px;height:48px;border-radius:50%;background:var(--terracotta);color:var(--white);display:inline-flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:1rem}
+.step h3{font-size:1.1rem}
+.step p{color:var(--text-light);font-size:.9rem}
+
+/* ── Testimonials ─────────────────────────────────── */
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:3rem}
+.testimonial{background:var(--white);border-radius:16px;padding:32px;position:relative;border:1px solid rgba(201,168,76,.12)}
+.testimonial::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--rose-light);position:absolute;top:12px;left:20px;line-height:1}
+.testimonial p{font-style:italic;color:var(--text-light);padding-top:2rem;margin-bottom:1rem;font-size:.95rem}
+.testimonial-author{font-weight:600;color:var(--terracotta);font-size:.9rem}
+.stars{color:var(--gold);letter-spacing:2px;margin-bottom:.5rem}
+
+/* ── FAQ ──────────────────────────────────────────── */
+.faq-list{max-width:750px;margin:3rem auto 0}
+.faq-item{border-bottom:1px solid var(--rose-light);padding:0}
+.faq-question{width:100%;background:none;border:none;padding:20px 0;font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--terracotta-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left}
+.faq-question::after{content:'+';font-size:1.5rem;color:var(--gold);transition:transform .3s;flex-shrink:0;margin-left:16px}
+.faq-item.open .faq-question::after{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;padding:0 0}
+.faq-item.open .faq-answer{max-height:300px;padding:0 0 20px}
+.faq-answer p{color:var(--text-light);font-size:.93rem;margin:0}
+
+/* ── Contact ──────────────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:3rem}
+.contact-info h3{margin-bottom:1rem}
+.contact-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:1.2rem;color:var(--text-light);font-size:.93rem}
+.contact-detail strong{color:var(--text);display:block;margin-bottom:2px}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.85rem;font-weight:500;color:var(--text-light)}
+.form-group input,.form-group textarea,.form-group select{padding:12px 16px;border:1.5px solid var(--rose-light);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;background:var(--white);color:var(--text);transition:border-color .3s;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--terracotta)}
+.form-success{display:none;text-align:center;padding:32px;background:var(--white);border-radius:16px;border:1px solid var(--gold-muted)}
+.form-success.show{display:block}
+.form-success h3{color:var(--terracotta);margin-bottom:.5rem}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+
+/* ── Footer ───────────────────────────────────────── */
+.footer{background:#3a2e2a;color:var(--cream);padding:40px 0;text-align:center;font-size:.85rem}
+.footer a{color:var(--gold-muted)}
+.footer-disclaimer{color:rgba(250,246,241,.5);margin-top:12px;font-size:.78rem}
+
+/* ── WhatsApp float ───────────────────────────────── */
+.whatsapp-float{position:fixed;bottom:24px;right:24px;z-index:999;width:60px;height:60px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s;cursor:pointer}
+.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.5)}
+.whatsapp-float svg{width:32px;height:32px;fill:#fff}
+
+/* ── Scroll indicator ─────────────────────────────── */
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:var(--cream);opacity:.6;animation:bounce 2s infinite;font-size:.8rem;text-align:center;letter-spacing:.1em}
+.scroll-hint span{display:block;margin-top:4px;font-size:1.2rem}
+</style>
+</head>
+<body>
+
+<!-- ═══ Navbar ═══ -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#hero" class="nav-logo">Bassie<span>'</span>s</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#services" onclick="closeNav()">Services</a></li>
+      <li><a href="#expect" onclick="closeNav()">What to Expect</a></li>
+      <li><a href="#testimonials" onclick="closeNav()">Reviews</a></li>
+      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
+      <li><a href="#contact" class="btn btn-primary" style="padding:10px 24px;font-size:.82rem" onclick="closeNav()">Book Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1>Reconnect with Your Body Through <em>Sacred Touch</em></h1>
+      <p class="subtitle">Professional yoni massage & tantric bodywork in the heart of Amsterdam Oud-Zuid</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Book Your Session</a>
+        <a href="#services" class="btn btn-outline" style="border-color:var(--cream);color:var(--cream)">Explore Services</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll <span>&#8595;</span></div>
+</section>
+
+<!-- ═══ About ═══ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid fade-in">
+      <div class="about-image">
+        <img src="https://picsum.photos/seed/warmportrait/600/800" alt="Bassie — practitioner" loading="lazy">
+      </div>
+      <div class="about-text">
+        <h2>Meet Bassie</h2>
+        <div class="divider" style="margin:1rem 0"></div>
+        <p>With over twelve years of experience in tantric bodywork and somatic healing, I've dedicated my practice to creating a safe, nurturing space where women can reconnect with their bodies, release stored tension, and rediscover pleasure without shame.</p>
+        <div class="highlight">"I believe every woman deserves to feel fully at home in her body — honoured, safe, and free."</div>
+        <p>Trained in Amsterdam and Bali in tantric massage, trauma-informed touch, and breathwork, I combine ancient wisdom with a modern, professional approach. My practice in Oud-Zuid is a warm, private sanctuary designed for your complete comfort and confidentiality.</p>
+        <p>Whether you are exploring this work for the first time or deepening an existing practice, I meet you exactly where you are — with warmth, respect, and zero judgement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Services ═══ -->
+<section class="section section-alt" id="services">
+  <div class="container text-center">
+    <h2 class="fade-in">Services & Treatments</h2>
+    <p class="subtitle fade-in">Each session is tailored to your body, your boundaries, and your intentions</p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">✿</div>
+        <h3>Yoni Massage</h3>
+        <p>A deeply nurturing treatment focused on releasing tension held in the pelvic area. Through gentle, intuitive touch and breathwork, this session supports emotional release, increased sensitivity, and a profound sense of embodiment.</p>
+        <div class="service-price">from €120 / 60 min</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">❋</div>
+        <h3>Full-Body Sensual Massage</h3>
+        <p>A slow, flowing full-body treatment using warm oils and mindful touch. Designed to calm the nervous system, awaken the senses, and bring you into deep presence with your body. Ideal for stress relief and reconnection.</p>
+        <div class="service-price">from €120 / 60 min</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">◈</div>
+        <h3>Tantric Massage</h3>
+        <p>Combining breathwork, energy work, and full-body touch, this holistic session moves energy through the body to dissolve blockages. A transformative experience that integrates the physical, emotional, and spiritual.</p>
+        <div class="service-price">from €180 / 90 min</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">❦</div>
+        <h3>Couples Introduction</h3>
+        <p>A guided session for couples who wish to deepen their intimate connection. Learn conscious touch techniques, communication skills, and breathwork practices you can continue at home together.</p>
+        <div class="service-price">from €240 / 120 min</div>
+      </div>
+    </div>
+    <p style="margin-top:2.5rem;color:var(--text-light);font-size:.9rem" class="fade-in">
+      <strong>Duration options:</strong> 60 min — €120 &nbsp;·&nbsp; 90 min — €180 &nbsp;·&nbsp; 120 min — €240<br>
+      All sessions include intake conversation, breathwork, and aftercare.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ What to Expect ═══ -->
+<section class="section" id="expect">
+  <div class="container text-center">
+    <h2 class="fade-in">What to Expect</h2>
+    <p class="subtitle fade-in">Your comfort and safety come first — always</p>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-number">1</div>
+        <h3>Intake & Intention</h3>
+        <p>We begin with a warm cup of tea and a private conversation about your intentions, boundaries, and any questions. Nothing happens without your explicit consent.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">2</div>
+        <h3>Breathwork & Relaxation</h3>
+        <p>Guided breathing exercises help you arrive in your body, calm your nervous system, and create space for deeper sensation and presence.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">3</div>
+        <h3>The Session</h3>
+        <p>Using warm oils and intuitive touch, the massage unfolds at your pace. You are always in control — we communicate throughout and you can pause or stop at any moment.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">4</div>
+        <h3>Integration & Aftercare</h3>
+        <p>After the session, you have time to rest. We close with a brief reflection and I share personalised aftercare guidance for the days ahead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Testimonials ═══ -->
+<section class="section section-alt" id="testimonials">
+  <div class="container text-center">
+    <h2 class="fade-in">What Clients Say</h2>
+    <p class="subtitle fade-in">Shared with permission — names changed for privacy</p>
+    <div class="testimonials-grid">
+      <div class="testimonial fade-in">
+        <div class="stars">★★★★★</div>
+        <p>I was incredibly nervous before my first session, but Bassie immediately put me at ease. Her warmth and professionalism are extraordinary. I left feeling lighter, more connected to myself, and genuinely at peace. This experience has been transformative for my relationship with my own body.</p>
+        <div class="testimonial-author">— Sophie, 34</div>
+      </div>
+      <div class="testimonial fade-in">
+        <div class="stars">★★★★★</div>
+        <p>After years of feeling disconnected, one session with Bassie changed everything. She creates the safest space imaginable. There was no pressure, no judgement — just pure, healing presence. I've been back three times now, and each session reveals something new.</p>
+        <div class="testimonial-author">— Marieke, 41</div>
+      </div>
+      <div class="testimonial fade-in">
+        <div class="stars">★★★★★</div>
+        <p>My partner and I did the couples session and it was eye-opening. Bassie taught us how to truly communicate through touch. The tools she gave us have deepened our intimacy beyond what we thought possible. We can't recommend this enough.</p>
+        <div class="testimonial-author">— Anna & Lotte, 29 & 31</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="section" id="faq">
+  <div class="container text-center">
+    <h2 class="fade-in">Frequently Asked Questions</h2>
+    <p class="subtitle fade-in">Everything you need to know before your first visit</p>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <button class="faq-question">Is this a sexual service?</button>
+        <div class="faq-answer"><p>No. Yoni massage is a professional form of somatic bodywork focused on healing, relaxation, and body awareness. While the work involves intimate touch, it is therapeutic in nature and conducted with clear boundaries, consent, and professionalism at all times. This practice is fully legal in the Netherlands.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">I'm nervous — is that normal?</button>
+        <div class="faq-answer"><p>Absolutely. Most clients feel some nerves before their first session. That's completely natural and nothing to be ashamed of. We always start with a conversation and breathwork, and you set the pace. There is never any pressure to go beyond your comfort zone.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do you ensure discretion and privacy?</button>
+        <div class="faq-answer"><p>Your privacy is paramount. My practice is in a private, residential setting with a separate entrance. I never share client information, and no records are kept beyond what is needed for scheduling. You're welcome to use a first name only.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What about hygiene and safety?</button>
+        <div class="faq-answer"><p>I maintain the highest hygiene standards. All linens are freshly laundered for each client, I use only high-quality organic oils, and the treatment room is thoroughly cleaned between sessions. I follow strict hand hygiene protocols and use medical-grade gloves when appropriate.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What should I do to prepare?</button>
+        <div class="faq-answer"><p>Arrive freshly showered and avoid heavy meals or alcohol beforehand. Wear comfortable clothing. Most importantly, come with an open mind and no expectations — every body and every session is different.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you work with men or only women?</button>
+        <div class="faq-answer"><p>My yoni massage practice is exclusively for women and people with vulvas. The couples introduction session is open to all gender combinations. If you're looking for bodywork as a man, I'm happy to refer you to a trusted colleague.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I stop the session at any time?</button>
+        <div class="faq-answer"><p>Yes — always. You are in complete control throughout the entire session. You can pause, adjust, or stop at any point, no questions asked. Your boundaries are sacred and will always be respected without exception.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What is your cancellation policy?</button>
+        <div class="faq-answer"><p>I ask for at least 24 hours' notice for cancellations or rescheduling. Late cancellations (under 24 hours) may be charged at 50% of the session fee. No-shows are charged the full amount. I understand that life happens — just communicate openly and we'll find a solution.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Contact & Booking ═══ -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="fade-in">Book Your Session</h2>
+      <p class="subtitle fade-in">By appointment only · Tuesday–Saturday · 10:00–20:00</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <h3>Get in Touch</h3>
+        <div class="contact-detail">
+          <div>
+            <strong>WhatsApp (preferred)</strong>
+            <a href="https://wa.me/31612345678">+31 6 12 34 56 78</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div>
+            <strong>Location</strong>
+            Amsterdam Oud-Zuid<br>
+            Near Vondelpark (exact address shared upon booking)
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div>
+            <strong>Hours</strong>
+            Tuesday–Saturday: 10:00–20:00<br>
+            Sunday & Monday: Closed
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div>
+            <strong>Languages</strong>
+            Nederlands & English
+          </div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <a href="https://wa.me/31612345678?text=Hello%20Bassie%2C%20I%20would%20like%20to%20book%20a%20session." class="btn btn-whatsapp">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+        <div style="margin-top:1.5rem">
+          <a href="https://maps.google.com/?q=Amsterdam+Oud-Zuid+Vondelpark" target="_blank" rel="noopener" style="color:var(--text-light);font-size:.9rem;text-decoration:underline">
+            View area on Google Maps ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Your name (or first name only)</label>
+            <input type="text" id="name" name="name" required placeholder="e.g. Sophie">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="service">Interested in</label>
+            <select id="service" name="service">
+              <option value="">Select a treatment…</option>
+              <option value="yoni">Yoni Massage</option>
+              <option value="fullbody">Full-Body Sensual Massage</option>
+              <option value="tantric">Tantric Massage</option>
+              <option value="couples">Couples Introduction</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Your message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell me a little about what you're looking for, or ask any questions…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3>Thank you ✦</h3>
+          <p>Your message has been received. I'll get back to you within 24 hours — usually much sooner. Looking forward to connecting with you.</p>
+          <p style="margin:0"><em>— Bassie</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:8px">Bassie<span style="color:var(--gold-muted)">'</span>s Yoni Massage</p>
+    <p>Amsterdam Oud-Zuid &nbsp;·&nbsp; <a href="https://wa.me/31612345678">+31 6 12 34 56 78</a> &nbsp;·&nbsp; Tuesday–Saturday 10:00–20:00</p>
+    <p class="footer-disclaimer" style="margin-top:16px">© 2026 Bassie's Yoni Massage. All rights reserved.<br>This website is intended for adults (18+) only. Professional somatic bodywork, fully legal in the Netherlands.<br>KVK registration pending.</p>
+  </div>
+</footer>
+
+<!-- ═══ WhatsApp Float ═══ -->
+<a href="https://wa.me/31612345678?text=Hello%20Bassie%2C%20I%20would%20like%20to%20book%20a%20session." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ── Navbar scroll ──────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── Mobile nav ─────────────────────────────── */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+function closeNav() { navLinks.classList.remove('open'); }
+
+/* ── Fade-in on scroll ──────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ── FAQ accordion ──────────────────────────── */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ── Contact form ───────────────────────────── */
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+});
+</script>
+</body>
+</html>
