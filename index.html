@@ -95,7 +95,9 @@ a:hover{color:var(--gold-light)}
 /* ── Hero ─────────────────────────────────────── */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--black)}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,.08) 0%,transparent 60%)}
-.hero-grid{position:relative;z-index:2;padding:140px 0 100px}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;position:relative;z-index:2;padding:140px 0 100px}
+.hero-portrait{flex-shrink:0}
+.hero-portrait img{width:320px;border-radius:8px;border:2px solid rgba(201,168,76,.3);box-shadow:0 12px 50px rgba(0,0,0,.5);object-fit:cover;aspect-ratio:16/9}
 .hero h1{color:var(--cream);margin-bottom:.5rem}
 .hero h1 em{font-style:italic;color:var(--gold)}
 .hero .subtitle{color:var(--text-muted);margin-bottom:2rem;font-size:1.2rem}
@@ -105,7 +107,7 @@ a:hover{color:var(--gold-light)}
 .hero-social-proof{display:flex;gap:24px;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(201,168,76,.15)}
 .hero-social-proof .proof-item{font-size:.82rem;color:var(--text-muted)}
 .hero-social-proof .proof-number{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);font-weight:600}
-@media(max-width:768px){.hero-grid{grid-template-columns:1fr;gap:30px;text-align:center}.hero-social-proof{justify-content:center}}
+@media(max-width:768px){.hero-grid{grid-template-columns:1fr;gap:30px;text-align:center}.hero-social-proof{justify-content:center}.hero-portrait{order:-1;text-align:center}.hero-portrait img{width:280px}}
 
 /* ── Marquee ──────────────────────────────────── */
 .marquee{background:var(--charcoal);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);padding:16px 0;overflow:hidden}
@@ -301,6 +303,9 @@ a:hover{color:var(--gold-light)}
           <div class="proof-item"><span class="proof-number">12+</span> years experience</div>
           <div class="proof-item"><span class="proof-number">100%</span> 5-star reviews</div>
         </div>
+      </div>
+      <div class="hero-portrait">
+        <img src="https://www.altii.de/wp-content/uploads/2023/07/Bas-NieuweWeme-Aegon-AM_ngb0-fhd-1536x864.jpg" alt="Bas Nieuwe Weme">
       </div>
     </div>
   </div>
