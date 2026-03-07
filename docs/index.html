@@ -86,7 +86,13 @@ a:hover{color:var(--orange-dark)}
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#e85d04 0%,#c44002 40%,#9d0208 100%)}
 .hero-overlay{position:absolute;inset:0;background:url('https://picsum.photos/seed/hockeyfield/1400/900') center/cover;opacity:.2;mix-blend-mode:luminosity}
 .hero-pattern{position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.03) 20px,rgba(255,255,255,.03) 40px);pointer-events:none}
+.hero-inner{display:flex;align-items:center;gap:40px}
 .hero-content{position:relative;z-index:2;color:var(--cream);max-width:700px;padding:120px 0 80px}
+.hero-shrug{position:relative;z-index:2;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero-shrug img{width:180px;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.3);transform:rotate(3deg);transition:transform .4s}
+.hero-shrug img:hover{transform:rotate(-2deg) scale(1.05)}
+.hero-shrug .shrug-caption{color:rgba(255,255,255,.7);font-size:.75rem;font-style:italic;text-align:center;max-width:180px}
+@media(max-width:768px){.hero-inner{flex-direction:column-reverse;gap:20px}.hero-shrug img{width:120px}}
 .hero h1{color:var(--white);margin-bottom:.5rem}
 .hero h1 em{font-style:italic;color:var(--gold-muted)}
 .hero .subtitle{color:rgba(255,255,255,.85);margin-bottom:2.5rem;font-size:1.25rem}
@@ -235,13 +241,19 @@ a:hover{color:var(--orange-dark)}
   <div class="hero-overlay"></div>
   <div class="hero-pattern"></div>
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Accredited Practitioner & Dutch Hockey Team Manager</div>
-      <h1>From Hockey Sticks to <em>Healing Hands</em></h1>
-      <p class="subtitle">Professional yoni massage & tantric bodywork by Bassie — the only person in Amsterdam who can give you a penalty corner AND a deep tissue release. Based in Oud-Zuid.</p>
-      <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">Book Your Session</a>
-        <a href="#schedule" class="btn btn-outline" style="border-color:var(--white);color:var(--white)">Match Schedule 2026</a>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="dot"></span> Accredited Practitioner & Dutch Hockey Team Manager</div>
+        <h1>From Hockey Sticks to <em>Healing Hands</em></h1>
+        <p class="subtitle">Professional yoni massage & tantric bodywork by Bassie — the only person in Amsterdam who can give you a penalty corner AND a deep tissue release. Based in Oud-Zuid.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Book Your Session</a>
+          <a href="#schedule" class="btn btn-outline" style="border-color:var(--white);color:var(--white)">Match Schedule 2026</a>
+        </div>
+      </div>
+      <div class="hero-shrug">
+        <img src="https://media.istockphoto.com/id/1462282409/vector/cartoon-man-shrugging-shoulders.jpg?s=612x612&w=is&k=20&c=OguwUL8dZ9Z3h5Xt7tesaSOYq5ZemwuOrfuTUTlcVlY=" alt="Cartoon man shrugging — yes, he really does both jobs">
+        <div class="shrug-caption">"Hockey manager AND yoni masseuse? Yes. Don't ask how."</div>
       </div>
     </div>
   </div>
